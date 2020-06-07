@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const TestResultSchema = new mongoose.Schema({
   testResult: {
     type: String,
-    required: true,
   },
 });
 

@@ -25,6 +25,10 @@
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
+    ],
+    "/appl/end": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ]
   }
 }
