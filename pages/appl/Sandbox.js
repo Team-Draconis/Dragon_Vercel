@@ -84,7 +84,9 @@ export default function SandBox() {
     output = await fetch("/api/testRunner", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({}),
+      body: JSON.stringify({
+        testResult: "someCodes",
+      }),
     }).then((res) =>
       res.json().then((res) => {
         setTestResult(res.data);
