@@ -7,11 +7,15 @@ export default async (req, res) => {
     case "POST":
       try {
         // async function testExec() {
+        console.log("trying to post");
+
         const { stdout, stderr } = await exec("yarn test");
+        console.log(typeof stderr);
         res.status(200).json({ data: stderr });
         // }
         // testExec();
       } catch (error) {
+        console.log("error caught");
         res.status(400).json({ success: false });
       }
       break;
