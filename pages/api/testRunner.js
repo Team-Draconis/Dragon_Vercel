@@ -13,7 +13,7 @@ export default async (req, res) => {
         // const { stdout, stderr } = await exec("yarn test");
         // console.log(typeof stderr);
         // res.status(200).json({ data: stderr });
-        res.status(200).json({ message: success });
+        res.status(200).json({ message: "success" });
         // }
         // testExec();
       } catch (error) {
