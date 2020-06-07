@@ -26,21 +26,30 @@ export default async (req, res) => {
     case "POST":
       try {
         console.log(req.body, "Code in API Folder");
-        let result;
-        await exec("yarn test", (error, stdout, stderr) => {
+        // let result;
+        // await exec("yarn test", (error, stdout, stderr) => {
+        //   if (error) {
+        //     console.log(`error: ${error.message}`);
+        //     return;
+        //   }
+        //   if (stderr) {
+        //     result = stderr;
+
+        //     console.log(`stderr: ${stderr}`);
+        //   }
+        //   console.log(`stdout: ${stdout}`);
+        //   res.status(200).json({ data: result });
+        // });
+
+        let result = await exec("yarn test", (error, stdout, stderr) => {
           if (error) {
             console.log(`error: ${error.message}`);
             return;
           }
           if (stderr) {
-            result = `${stderr}`;
-            console.log(`stderr: ${stderr}`);
+            res.status(200).json({ data: stderr });
           }
-          console.log(`stdout: ${stdout}`);
-          res.status(200).json({ data: result });
         });
-
-        // res.status(200).json({ data: "message" });
       } catch (error) {
         res.status(400).json({ success: false });
       }
