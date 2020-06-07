@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Sample() {
+function ToggleMessage() {
   const [display, setDisplay] = useState("none");
   const toggle = () => {
     display === "none" ? setDisplay("block") : setDisplay("none");
@@ -16,4 +16,4 @@ function Sample() {
   );
 }
 
-export default Sample;
+export default ToggleMessage;

@@ -84,7 +84,12 @@ export default function SandBox() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({}),
-    }).then((res) => res.json().then((res) => setTestResult(res.data)));
+    }).then((res) =>
+      res.json().then((res) => {
+        setTestResult(res.data);
+        console.log("#####", res.data);
+      })
+    );
   };
 
   //   fetch("/api/testRunner", {
