@@ -39,7 +39,7 @@ export default async (req, res) => {
             console.log(`stderr: ${stderr}`);
           }
           console.log(`stdout: ${stdout}`);
-          await res.status(200).json({ data: result });
+          await res.status(200).send({ data: result });
         });
 
         //   exec("yarn test", async (error, stdout, stderr) => {
