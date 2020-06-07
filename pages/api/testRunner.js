@@ -3,6 +3,7 @@ const exec = util.promisify(require("child_process").exec);
 
 export default async (req, res) => {
   const { method } = req;
+  console.log(method);
   switch (method) {
     case "POST":
       try {
