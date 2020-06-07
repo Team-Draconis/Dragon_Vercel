@@ -43,19 +43,19 @@ export default async (req, res) => {
         //   console.log(`stdout: ${stdout}`);
         //   await res.status(200).send({ data: result });
         // });
-
-        exec("yarn test", async (error, stdout, stderr) => {
-          if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-          }
-          if (stderr) {
-            req.body.testResult = stderr;
-            console.log(req.body);
-            let testResult = await TestResult.create(req.body);
-            res.status(201).json({ message: "Yah it is saved to database" });
-          }
-        });
+        res.status(201).json({ data: "We are not running any function" });
+        // exec("yarn test", async (error, stdout, stderr) => {
+        //   if (error) {
+        //     console.log(`error: ${error.message}`);
+        //     return;
+        //   }
+        //   if (stderr) {
+        //     req.body.testResult = stderr;
+        //     console.log(req.body);
+        //     let testResult = await TestResult.create(req.body);
+        //     res.status(201).json({ message: "Yah it is saved to database" });
+        //   }
+        // });
       } catch (error) {
         res.status(400).json({ success: false });
       }
