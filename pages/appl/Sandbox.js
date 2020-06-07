@@ -89,7 +89,7 @@ export default function SandBox() {
       }),
     }).then((res) =>
       res.json().then((res) => {
-        setTestResult(res.data);
+        setTestResult(res.data.testResult);
         console.log("#####", res.data);
       })
     );

@@ -29,46 +29,33 @@ export default async (req, res) => {
 
     case "POST":
       try {
-        // let result;
-        // exec("yarn test", async (error, stdout, stderr) => {
-        //   if (error) {
-        //     console.log(`error: ${error.message}`);
-        //     return;
-        //   }
-        //   if (stderr) {
-        //     result = await stderr;
-
-        //     console.log(`stderr: ${stderr}`);
-        //   }
-        //   console.log(`stdout: ${stdout}`);
-        //   await res.status(200).send({ data: result });
-        // });
-
-        exec("yarn test2", async (error, stdout, stderr) => {
+        let result;
+        exec("yarn test", async (error, stdout, stderr) => {
           if (error) {
             console.log(`error: ${error.message}`);
             return;
           }
           if (stderr) {
-            req.body.testResult = stderr;
-            console.log(req.body);
-            let testResult = await TestResult.create(req.body);
-            res.status(201).json({ message: "Yah it is saved to database" });
+            result = await stderr;
+
+            console.log(`stderr: ${stderr}`);
           }
+          console.log(`stdout: ${stdout}`);
+          await res.status(200).send({ data: result });
         });
 
-        // exec("yarn test", async (error, stdout, stderr) => {
-        //   if (error) {
-        //     console.log(`error: ${error.message}`);
-        //     return;
-        //   }
-        //   if (stderr) {
-        //     req.body.testResult = stderr;
-        //     console.log(req.body);
-        //     let testResult = await TestResult.create(req.body);
-        //     res.status(201).json({ message: "Yah it is saved to database" });
-        //   }
-        // });
+        //   exec("yarn test", async (error, stdout, stderr) => {
+        //     if (error) {
+        //       console.log(`error: ${error.message}`);
+        //       return;
+        //     }
+        //     if (stderr) {
+        //       req.body.testResult = stderr;
+        //       console.log(req.body);
+        //       let testResult = await TestResult.create(req.body);
+        //       res.status(201).json({ data: testResult });
+        //     }
+        //   });
       } catch (error) {
         res.status(400).json({ success: false });
       }
