@@ -8,7 +8,7 @@
     "start": "next start",
     "export": "next build && next export",
     "test": "react-scripts test --watchAll=false",
-    "test2": "cd ../../ && react-scripts test"
+    "test2": "node nodeFilefortesting.js"
   },
   "dependencies": {
     "@babel/standalone": "^7.10.2",
