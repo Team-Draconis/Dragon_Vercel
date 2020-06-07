@@ -10,8 +10,8 @@ export default async (req, res) => {
         // async function testExec() {
         console.log("trying to post");
 
-        // const { stdout, stderr } = await exec("yarn test");
-        // console.log(typeof stderr);
+        const { stdout, stderr } = await exec("yarn test");
+        console.log(stderr);
         // res.status(200).json({ data: stderr });
         res.status(200).json({ message: "success" });
         // }
