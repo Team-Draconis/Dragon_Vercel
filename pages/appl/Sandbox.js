@@ -80,6 +80,7 @@ export default function SandBox() {
 
   let output;
   const runTest = async (res, req) => {
+    console.log("in runTest");
     output = await fetch("/api/testRunner", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
