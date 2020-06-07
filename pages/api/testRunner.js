@@ -44,7 +44,6 @@ export default async (req, res) => {
         //   await res.status(200).send({ data: result });
         // });
 
-        res.status(201).json({ message: "Yah,it is posted" });
         exec("yarn test", async (error, stdout, stderr) => {
           if (error) {
             console.log(`error: ${error.message}`);
@@ -54,7 +53,7 @@ export default async (req, res) => {
             req.body.testResult = stderr;
             console.log(req.body);
             let testResult = await TestResult.create(req.body);
-            res.status(201).json({ data: testResult });
+            res.status(201).json({ message: "Yah it is saved to database" });
           }
         });
       } catch (error) {
