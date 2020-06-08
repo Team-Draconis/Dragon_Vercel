@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // import Sandbox from "./Sandbox";
 // import Link from "next/link";
 // import Sandbox from "./appl/Sandbox";
+import GithubLogin from "./appl/login";
 import NavBar from "./NavBar";
 
 class Index extends Component {
@@ -21,11 +22,12 @@ class Index extends Component {
         </h4>
         <h4>Applicant login information, email address and password</h4>
         {/* <form action="/appl/info"> */}
-        <form>
+        {/* <form>
           Name: <input type="text" name="fname" /> <br />
           Email: <input type="text" name="femail" /> <br />
           <input onClick={handleSubmit} type="submit" />
-        </form>
+        </form> */}
+        <GithubLogin />
         <a href="/appl/splash" className="card">
           <h3>Go to the splash page</h3>
         </a>

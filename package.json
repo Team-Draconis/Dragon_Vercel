@@ -31,6 +31,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "^3.4.1",
+    "react-social-login": "^3.4.7",
     "semantic-ui-react": "^0.88.2",
     "util": "^0.12.3"
   },

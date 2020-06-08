@@ -39,7 +39,7 @@ export default async (req, res) => {
           res.status(200).json({ data: "message" });
           // result = stdout;
         });
-
+        
         // res.status(200).json({ data: result });
       } catch (error) {
         res.status(400).json({ success: false });
