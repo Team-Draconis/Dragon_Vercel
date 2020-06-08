@@ -8,7 +8,11 @@
     "start": "next start",
     "export": "next build && next export",
     "test": "react-scripts test --watchAll=false",
+<<<<<<< HEAD
     "test2": "node nodeFilefortesting.js"
+=======
+    "test2": "cd ../../ && react-scripts test"
+>>>>>>> 909bbd403faa2ee68f1934e759c9f157d5959411
   },
   "dependencies": {
     "@babel/standalone": "^7.10.2",
@@ -31,6 +35,10 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "^3.4.1",
+<<<<<<< HEAD
+=======
+    "react-social-login": "^3.4.7",
+>>>>>>> 909bbd403faa2ee68f1934e759c9f157d5959411
     "semantic-ui-react": "^0.88.2",
     "util": "^0.12.3"
   },
