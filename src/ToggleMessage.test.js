@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import ToggleMessage from "./ToggleMessage";
+// import ToggleMessage from "./ToggleMessage";
 import "@testing-library/jest-dom/extend-expect";
 
 test("Render ToggleMessage component and check if it has text:'Want to buy a new car?'", () => {

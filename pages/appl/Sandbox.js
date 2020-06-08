@@ -110,7 +110,7 @@ export default function SandBox() {
   //       console.log(error); // add more detail error later
   //     });
   // };
-
+  console.log(codeInput)
   return (
     <div className="app">
       <input type="text" onChange={onEmailChange} value={email} />
