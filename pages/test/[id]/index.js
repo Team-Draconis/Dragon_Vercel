@@ -6,12 +6,6 @@ import Link from "next/link";
 import Router from "next/router";
 import "../../appl/styles.scss";
 
-TestResult.getInitialProps = async ({ query: { id } }) => {
-  const res = await fetch(`https://dragon-tester.now.sh/api/${id}/`);
-  const { data } = await res.json();
-  return { testResult: data };
-};
-
 const TestResult = ({ testResult }) => {
   console.log("Test result passed back to company", testResult);
   let editor = null;
@@ -24,23 +18,34 @@ const TestResult = ({ testResult }) => {
   const run = () => {
     editor.run(testResult.codes);
   };
-  return (
-    <div>
-      <h1> Here is the candidate's test result</h1>
-      <p>{testResult.candidate_email}</p>
-      <p>{testResult.city}</p>
-      <div className="app">
-        <div className="split-view">
-          <div className="code-editor">
-            <textarea value={testResult.codes} />
+
+  if (testResult) {
+    return (
+      <div>
+        <h1> Here is the candidate's test result</h1>
+        <p>{testResult.candidate_email}</p>
+        <p>{testResult.city}</p>
+        <div className="app">
+          <div className="split-view">
+            <div className="code-editor">
+              <textarea value={testResult.codes} />
+            </div>
+            <div className="preview" ref={el} />
           </div>
-          <div className="preview" ref={el} />
+          <button onClick={runCode}>Run</button>
         </div>
-        <button onClick={runCode}>Run</button>
+        <p>{testResult.testResult}</p>
       </div>
-      <p>{testResult.testResult}</p>
-    </div>
-  );
+    );
+  } else {
+    return <p>Loading</p>;
+  }
+};
+
+TestResult.getInitialProps = async ({ query: { id } }) => {
+  const res = await fetch(`https://dragon-tester.now.sh/api/${id}/`);
+  const { data } = await res.json();
+  return { testResult: data };
 };
 
 export default TestResult;
