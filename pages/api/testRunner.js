@@ -29,14 +29,9 @@ export default async (req, res) => {
 
     case "POST":
       try {
-<<<<<<< HEAD
-        let result;
-        exec("yarn test", async (error, stdout, stderr) => {
-=======
         console.log(req.body, "Code in API Folder");
-        // let result;
+         let result;
         exec("yarn test", (error, stdout, stderr) => {
->>>>>>> 909bbd403faa2ee68f1934e759c9f157d5959411
           if (error) {
             console.log(`error: ${error.message}`);
             return;
@@ -47,7 +42,6 @@ export default async (req, res) => {
             console.log(`stderr: ${stderr}`);
           }
           console.log(`stdout: ${stdout}`);
-<<<<<<< HEAD
           await res.status(200).send({ data: result });
         });
 
@@ -63,13 +57,6 @@ export default async (req, res) => {
         //       res.status(201).json({ data: testResult });
         //     }
         //   });
-=======
-          res.status(200).json({ data: "message" });
-          // result = stdout;
-        });
-        
-        // res.status(200).json({ data: result });
->>>>>>> 909bbd403faa2ee68f1934e759c9f157d5959411
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -77,15 +64,10 @@ export default async (req, res) => {
 
     case "GET":
       try {
-<<<<<<< HEAD
         const testResults = await TestResult.find()
           .limit(1)
           .sort({ $natural: -1 });
         res.status(200).json({ data: testResults });
-=======
-        console.log(req.body, "Code in API Folder");
-        res.status(200).json({ success: true });
->>>>>>> 909bbd403faa2ee68f1934e759c9f157d5959411
       } catch (error) {
         res.status(400).json({ success: false });
       }

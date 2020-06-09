@@ -25,7 +25,7 @@ class Index extends Component {
           Email: <input type="text" name="femail" /> <br />
           <input onClick={handleSubmit} type="submit" />
         </form> */}
-        <GithubLogin />
+        {/* <GithubLogin /> */}
         <a href="/appl/splash" className="card">
           <h3>Go to the splash page</h3>
         </a>
