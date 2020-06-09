@@ -6,14 +6,13 @@ import debounce from "debounce";
 import Link from "next/link";
 import Router from "next/router";
 import TestResult from "../test/[id]";
+import ToggleMessage from "../../src/ToggleMessage";
 
 // default code
-const code = `import x from 'x';
-// edit this example
-function Greet() {
-  return <span>Hello World!</span>
+const code = `function Codes() {
+  return (<div><p>Hello World!</p><button>Click</button></div>)
 }
-<Greet />
+<Codes />
 `;
 export default function SandBox() {
   const [codeInput, setCodeInput] = useState(code);
@@ -55,6 +54,7 @@ export default function SandBox() {
         candidate_email: email,
         codes: codeInput,
         city: city,
+        testResult: "Here comes test result",
       }),
     })
       .then((res) => {
@@ -78,22 +78,24 @@ export default function SandBox() {
 
   const result = "test result";
 
-  let output;
   const runTest = async (req, res) => {
-    console.log("in runTest");
-    output = await fetch("/api/testRunner", {
+    await fetch("/api/testRunner", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        testResult: "someCodes",
+        testResult: codeInput,
       }),
     }).then((res) =>
       res.json().then((res) => {
-        setTestResult(res.data.testResult);
-        console.log("#####", res.data);
+        setTestResult(res.data);
       })
     );
   };
+
+  // const runTest = () => {
+  //   const result = exec("yarn test");
+  //   console.log("%%%%", result);
+  // };
 
   //   fetch("/api/testRunner", {
   //     method: "POST",

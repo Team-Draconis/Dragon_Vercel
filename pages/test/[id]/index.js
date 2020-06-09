@@ -7,6 +7,7 @@ import Router from "next/router";
 import "../../appl/styles.scss";
 
 const TestResult = ({ testResult }) => {
+  console.log("Test result passed back to company", testResult);
   let editor = null;
   const el = useRef(null);
   const runCode = () => {
@@ -32,6 +33,7 @@ const TestResult = ({ testResult }) => {
         </div>
         <button onClick={runCode}>Run</button>
       </div>
+      <p>{testResult.testResult}</p>
     </div>
   );
 };

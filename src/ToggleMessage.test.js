@@ -1,11 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import ToggleMessage from "./ToggleMessage";
 import "@testing-library/jest-dom/extend-expect";
+import Codes from "../tester";
 
-test("Render ToggleMessage component and check if it has text:'Want to buy a new car?'", () => {
-  const { getByText } = render(<ToggleMessage />);
-
-  const linkElement = getByText(/Want to buy a new car?/i);
+test("Render Codes component and check if it has text:'Hello World!'", () => {
+  const { getByText } = render(<Codes />);
+  const linkElement = getByText(/Hello World!/i);
   expect(linkElement).toBeInTheDocument();
 });

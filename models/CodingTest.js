@@ -14,6 +14,10 @@ const CodeTestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  testResult: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports =

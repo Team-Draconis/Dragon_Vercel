@@ -3,6 +3,7 @@
 const { exec } = require("child_process");
 import TestResult from "../../models/TestResult";
 import dbConnect from "../../utils/dbConnect";
+const fs = require("fs");
 
 dbConnect();
 
@@ -29,33 +30,41 @@ export default async (req, res) => {
 
     case "POST":
       try {
-        let result;
-        exec("yarn test", async (error, stdout, stderr) => {
-          if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-          }
-          if (stderr) {
-            result = await stderr;
+        console.log("when push the run button, the req.body", req.body);
 
-            console.log(`stderr: ${stderr}`);
+        fs.writeFileSync(
+          "./tester.js",
+          `import React from 'react'; ${req.body.testResult} export default Codes`
+        );
+
+        console.log("File should be saved");
+
+        let result;
+        exec("yarn test", async (error, command, stdout) => {
+          if (error) {
+            result = error;
           }
-          console.log(`stdout: ${stdout}`);
+
+          if (stdout) {
+            result = await stdout;
+            console.log("The stdout is consoled", stdout);
+          }
+
           await res.status(200).send({ data: result });
         });
 
-        //   exec("yarn test", async (error, stdout, stderr) => {
-        //     if (error) {
-        //       console.log(`error: ${error.message}`);
-        //       return;
-        //     }
-        //     if (stderr) {
-        //       req.body.testResult = stderr;
-        //       console.log(req.body);
-        //       let testResult = await TestResult.create(req.body);
-        //       res.status(201).json({ data: testResult });
-        //     }
-        //   });
+        // exec("yarn test", async (error, stdout, stderr) => {
+        //   if (error) {
+        //     console.log(`error: ${error.message}`);
+        //     return;
+        //   }
+        //   if (stderr) {
+        //     req.body.testResult = stderr;
+        //     console.log(req.body);
+        //     let testResult = await TestResult.create(req.body);
+        //     res.status(201).json({ data: testResult });
+        //   }
+        // });
       } catch (error) {
         res.status(400).json({ success: false });
       }

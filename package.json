@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "export": "next build && next export",
+    "export": "next build",
     "test": "react-scripts test --watchAll=false",
-    "test2": "node nodeFilefortesting.js"
+    "test2": "node nodeFilefortesting.js",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@babel/standalone": "^7.10.2",
@@ -18,6 +19,8 @@
     "@zeit/next-sass": "^1.0.1",
     "acorn": "^7.2.0",
     "bcryptjs": "^2.4.3",
+    "browserify": "^16.5.1",
+    "browserify-exec": "^0.0.2",
     "debounce": "^1.2.0",
     "escodegen": "^1.14.2",
     "express": "^4.17.1",
@@ -39,5 +42,14 @@
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.3"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
+  "parserOptions": {
+    "sourceType": "module"
   }
 }
