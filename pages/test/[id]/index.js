@@ -21,9 +21,8 @@ const TestResult = ({ testResult }) => {
   return (
     <div>
       <h1> Here is the candidate's test result</h1>
-      <p>{testResult.candidate_email}</p>
+      {/* <p>{testResult.candidate_email}</p> */}
       <p>{testResult.city}</p>
-
       <div className="app">
         <div className="split-view">
           <div className="code-editor">
