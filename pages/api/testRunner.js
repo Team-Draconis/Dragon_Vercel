@@ -31,7 +31,7 @@ export default async (req, res) => {
       try {
         console.log(req.body, "Code in API Folder");
          let result;
-        exec("yarn test", (error, stdout, stderr) => {
+        exec("yarn test", async (error, stdout, stderr) => {
           if (error) {
             console.log(`error: ${error.message}`);
             return;
