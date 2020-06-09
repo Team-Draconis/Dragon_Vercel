@@ -15,11 +15,9 @@ class Index extends Component {
       <div>
         <NavBar />
         <h3>Applicant Login page</h3>
-        <h4>
-          This is where the app will launch. From here the default action will
-          be for applicants to login, from the NavBar companies can log in
-        </h4>
-        <h4>Applicant login information, email address and password</h4>
+        <h4>Welcome to Dragon Tester where you can display your skills. At Dragon Tester you can anonomously take a react coding test and have it be reviewed by leading companies around the globe. Based on the location you choose, local companies will review your results and reach out to you if they are interested.</h4>
+        <h4>We bypass recruiters and algorithms which may introduce unconscious bias and allow your skill to open doors. We retain only your email address and location preference. Feel free to take the tests multiple times and look for jobs across the globe.</h4>        
+ 
         {/* <form action="/appl/info"> */}
         <form>
           Name: <input type="text" name="fname" /> <br />

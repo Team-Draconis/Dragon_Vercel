@@ -7,6 +7,7 @@ export default function Info() {
       <h3>Basic info page</h3>
       <h4>This page will contain the forms for submitting your email address and city preference</h4>
       <h4>We may also want to allow the user to select a difficulty setting for the test</h4>
+      <h4>Part of the MVP is a user profile. We should allow the User to review their previous tests and delete them as needed.</h4>      
       <a href="/appl/Sandbox" className="card">
         <h3>Go to code test</h3>
       </a>
