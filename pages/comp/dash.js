@@ -6,22 +6,24 @@ import { useState } from "react";
 const Dashboard = ({ testResults }) => {
   let temp;
   let city;
-  let tempResults
-  const [newResults,setNewResults]=useState(testResults)
-  const [view,setView] = useState(true)
-  
+  let tempResults;
+  const [newResults, setNewResults] = useState(testResults);
+  const [view, setView] = useState(true);
+
   const onCityChange = ({ target: { value } }) => {
     city = value;
   };
 
   const handleSubmit = () => {
-    tempResults = testResults.filter((el) => { return el.city === city});
-    setNewResults(tempResults)
-    setView(false)
+    tempResults = testResults.filter((el) => {
+      return el.city === city;
+    });
+    setNewResults(tempResults);
+    setView(false);
   };
   const handleReset = () => {
-    setView(true)
-  }
+    setView(true);
+  };
   if (testResults && view) {
     return (
       <div>
@@ -29,7 +31,7 @@ const Dashboard = ({ testResults }) => {
         <button onClick={handleSubmit}>Submit</button>
         <button onClick={handleReset}>Reset</button>
         <h1>Coding Test Report</h1>
-        <div id = "list">
+        <div id="list">
           {testResults.map((testResult) => {
             return (
               <div key={testResult._id}>
@@ -62,7 +64,7 @@ const Dashboard = ({ testResults }) => {
         <button onClick={handleReset}>Reset</button>
 
         <h1>Coding Test Report</h1>
-        <div id = "list">
+        <div id="list">
           {newResults.map((testResult) => {
             return (
               <div key={testResult._id}>
@@ -87,12 +89,11 @@ const Dashboard = ({ testResults }) => {
         </div>
       </div>
     );
-
   }
 };
 
 Dashboard.getInitialProps = async () => {
-  const res = await fetch("http://localhost:3000/api/codetest");
+  const res = await fetch("https://dragon-tester.now.sh/api/codetest");
   const { data } = await res.json();
   return { testResults: data };
 };
