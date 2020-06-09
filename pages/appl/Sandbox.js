@@ -1,15 +1,12 @@
 import "./styles.module.scss";
 import React, { useEffect, useState, useRef } from "react";
-import ReactDOM from "react-dom";
 import { createEditor } from "../../utils/editor";
-import debounce from "debounce";
 import Link from "next/link";
 import Router from "next/router";
-import TestResult from "../test/[id]";
-import ToggleMessage from "../../src/ToggleMessage";
 
 // default code
 const code = `function Codes() {
+// there should be a paragraph with text "Hello World!"
   return (<div><p>Hello World!</p><button>Click</button></div>)
 }
 <Codes />
@@ -27,10 +24,6 @@ export default function SandBox() {
     editor.run(codeInput);
     run(codeInput);
   };
-  const onCodeChange = ({ target: { value } }) => {
-    setCodeInput(value);
-  };
-
   const onEmailChange = ({ target: { value } }) => {
     setEmail(value);
   };
@@ -66,18 +59,6 @@ export default function SandBox() {
       });
   };
 
-  const Test = () => {
-    const expect = `import x from 'x';\n// edit this example\nfunction Greet() {\n  return <span>Hello World!</span>\n}\n<Greet />`;
-    if (codeInput.includes(expect)) {
-      return testResult;
-    }
-    console.log(codeInput);
-    console.log(expect);
-    return testResult;
-  };
-
-  const result = "test result";
-
   const runTest = async (req, res) => {
     await fetch("/api/testRunner", {
       method: "POST",
@@ -91,27 +72,6 @@ export default function SandBox() {
       })
     );
   };
-
-  // const runTest = () => {
-  //   const result = exec("yarn test");
-  //   console.log("%%%%", result);
-  // };
-
-  //   fetch("/api/testRunner", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //
-  //     }),
-  //   })
-  //     .then((res) => {
-  //       // Do a fast client-side transition to the already prefetched dashboard page
-  //       if (res.ok) Router.push("/appl/end");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error); // add more detail error later
-  //     });
-  // };
 
   return (
     <div className="app">
