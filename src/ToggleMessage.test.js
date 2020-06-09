@@ -52,4 +52,5 @@ test("After clicking toggle message twice, 'Call +11 22 33 44 now!' should not b
 
   const text = queryByTestId("text");
   expect(text).not.toBeInTheDocument();
+
 });
