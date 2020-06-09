@@ -1,4 +1,4 @@
-import NavBar from "../NavBar";
+import NavBar from "../src/NavBar";
 export default function Report() {
   const handleSubmit = (e) => {
     console.log(e);
@@ -10,9 +10,9 @@ export default function Report() {
       <h3>Applicant Register page</h3>
       <h4>New Applicant's will register here</h4>
       {/* <form action="/appl/info"> */}
-      <form >
-        Name: <input type="text" name="fname"/> <br/>
-        Email: <input type="text" name="femail"/> <br/>
+      <form>
+        Name: <input type="text" name="fname" /> <br />
+        Email: <input type="text" name="femail" /> <br />
         <input onClick={handleSubmit} type="submit" />
       </form>
 
