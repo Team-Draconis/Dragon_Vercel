@@ -63,44 +63,16 @@ export default function SandBox() {
     await fetch("/api/testRunner", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-<<<<<<< HEAD
-      body: JSON.stringify({}),
-    }).then((res) =>
-      res.json().then((res) => {
-        setTestResult(res.data);
-        console.log("#####", res.data);
-=======
       body: JSON.stringify({
         testResult: codeInput,
       }),
     }).then((res) =>
       res.json().then((res) => {
         setTestResult(res.data);
->>>>>>> fb85f50787e925dee66dd72334d18f82dd9d319b
       })
     );
   };
 
-<<<<<<< HEAD
-  //   fetch("/api/testRunner", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //
-  //     }),
-  //   })
-  //     .then((res) => {
-  //       // Do a fast client-side transition to the already prefetched dashboard page
-  //       if (res.ok) Router.push("/appl/end");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error); // add more detail error later
-  //     });
-  // };
-  console.log(codeInput)
-
-=======
->>>>>>> fb85f50787e925dee66dd72334d18f82dd9d319b
   return (
     <div className="app">
       <input type="text" onChange={onEmailChange} value={email} />

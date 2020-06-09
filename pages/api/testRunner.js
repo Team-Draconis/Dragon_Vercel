@@ -11,30 +11,8 @@ export default async (req, res) => {
   const { method } = req;
   console.log(method);
   switch (method) {
-    // case "POST":
-    //   try {
-    //     // async function testExec() {
-    //     console.log("trying to post");
-
-    //     const { stdout, stderr } = await exec("yarn test");
-    //     console.log(stderr);
-    //     // res.status(200).json({ data: stderr });
-    //     res.status(200).json({ message: "success" });
-    //     // }
-    //     // testExec();
-    //   } catch (error) {
-    //     console.log("error caught");
-    //     res.status(400).json({ message: "Failure" });
-    //   }
-    //   break;
-
-    case "POST":
+      case "POST":
       try {
-<<<<<<< HEAD
-        console.log(req.body, "Code in API Folder");
-         let result;
-        exec("yarn test", async (error, stdout, stderr) => {
-=======
         console.log("when push the run button, the req.body", req.body);
 
         fs.writeFileSync(
@@ -42,11 +20,8 @@ export default async (req, res) => {
           `import React from 'react'; ${req.body.testResult} export default Codes`
         );
 
-        console.log("File should be saved");
-
         let result;
         exec("yarn test", async (error, command, stdout) => {
->>>>>>> fb85f50787e925dee66dd72334d18f82dd9d319b
           if (error) {
             result = error;
           }
