@@ -1,19 +1,15 @@
 import "./styles.module.scss";
 import React, { useEffect, useState, useRef } from "react";
-import ReactDOM from "react-dom";
 import { createEditor } from "../../utils/editor";
-import debounce from "debounce";
 import Link from "next/link";
 import Router from "next/router";
-import TestResult from "../test/[id]";
 
 // default code
-const code = `import x from 'x';
-// edit this example
-function Greet() {
-  return <span>Hello World!</span>
+const code = `function Codes() {
+// there should be a paragraph with text "Hello World!"
+  return (<div><p>Hello World!</p><button>Click</button></div>)
 }
-<Greet />
+<Codes />
 `;
 export default function SandBox() {
   const [codeInput, setCodeInput] = useState(code);
@@ -28,10 +24,6 @@ export default function SandBox() {
     editor.run(codeInput);
     run(codeInput);
   };
-  const onCodeChange = ({ target: { value } }) => {
-    setCodeInput(value);
-  };
-
   const onEmailChange = ({ target: { value } }) => {
     setEmail(value);
   };
@@ -55,6 +47,7 @@ export default function SandBox() {
         candidate_email: email,
         codes: codeInput,
         city: city,
+        testResult: "Here comes test result",
       }),
     })
       .then((res) => {
@@ -66,33 +59,29 @@ export default function SandBox() {
       });
   };
 
-  const Test = () => {
-    const expect = `import x from 'x';\n// edit this example\nfunction Greet() {\n  return <span>Hello World!</span>\n}\n<Greet />`;
-    if (codeInput.includes(expect)) {
-      return testResult;
-    }
-    console.log(codeInput);
-    console.log(expect);
-    return testResult;
-  };
-
-  const result = "test result";
-
-  let output;
   const runTest = async (req, res) => {
-    console.log("in runTest");
-    output = await fetch("/api/testRunner", {
+    await fetch("/api/testRunner", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+<<<<<<< HEAD
       body: JSON.stringify({}),
     }).then((res) =>
       res.json().then((res) => {
         setTestResult(res.data);
         console.log("#####", res.data);
+=======
+      body: JSON.stringify({
+        testResult: codeInput,
+      }),
+    }).then((res) =>
+      res.json().then((res) => {
+        setTestResult(res.data);
+>>>>>>> fb85f50787e925dee66dd72334d18f82dd9d319b
       })
     );
   };
 
+<<<<<<< HEAD
   //   fetch("/api/testRunner", {
   //     method: "POST",
   //     headers: { "Content-Type": "application/json" },
@@ -110,6 +99,8 @@ export default function SandBox() {
   // };
   console.log(codeInput)
 
+=======
+>>>>>>> fb85f50787e925dee66dd72334d18f82dd9d319b
   return (
     <div className="app">
       <input type="text" onChange={onEmailChange} value={email} />
@@ -127,7 +118,7 @@ export default function SandBox() {
       <button onClick={runCode}>Run</button>
 
       <button onClick={handleSubmit}>Submit</button>
-      <Link href="/appl/report"><a>Review Results</a></Link>
+      <Link href="/appl/report">Review Results</Link>
       <Link href="/">
         <button>Go Back To Home</button>
       </Link>
