@@ -1,5 +1,3 @@
-// const util = require("util");
-// const exec = util.promisify(require("child_process").exec);
 const { exec } = require("child_process");
 import TestResult from "../../models/TestResult";
 import dbConnect from "../../utils/dbConnect";
@@ -11,34 +9,12 @@ export default async (req, res) => {
   const { method } = req;
   console.log(method);
   switch (method) {
-    // case "POST":
-    //   try {
-    //     // async function testExec() {
-    //     console.log("trying to post");
-
-    //     const { stdout, stderr } = await exec("yarn test");
-    //     console.log(stderr);
-    //     // res.status(200).json({ data: stderr });
-    //     res.status(200).json({ message: "success" });
-    //     // }
-    //     // testExec();
-    //   } catch (error) {
-    //     console.log("error caught");
-    //     res.status(400).json({ message: "Failure" });
-    //   }
-    //   break;
-
     case "POST":
       try {
-        console.log("when push the run button, the req.body", req.body);
-
         fs.writeFileSync(
           "./tester.js",
           `import React from 'react'; ${req.body.testResult} export default Codes`
         );
-
-        console.log("File should be saved");
-
         let result;
         exec("yarn test", async (error, command, stdout) => {
           if (error) {
