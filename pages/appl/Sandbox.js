@@ -84,19 +84,10 @@ export default function SandBox() {
     output = await fetch("/api/testRunner", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-<<<<<<< HEAD
-      body: JSON.stringify({
-        testResult: "someCodes",
-      }),
-    }).then((res) =>
-      res.json().then((res) => {
-        setTestResult(res.data.testResult);
-=======
       body: JSON.stringify({}),
     }).then((res) =>
       res.json().then((res) => {
         setTestResult(res.data);
->>>>>>> 909bbd403faa2ee68f1934e759c9f157d5959411
         console.log("#####", res.data);
       })
     );
@@ -117,11 +108,8 @@ export default function SandBox() {
   //       console.log(error); // add more detail error later
   //     });
   // };
-<<<<<<< HEAD
   console.log(codeInput)
-=======
 
->>>>>>> 909bbd403faa2ee68f1934e759c9f157d5959411
   return (
     <div className="app">
       <input type="text" onChange={onEmailChange} value={email} />
