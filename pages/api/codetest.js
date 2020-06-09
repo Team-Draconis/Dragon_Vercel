@@ -1,6 +1,8 @@
 import dbConnect from "../../utils/dbConnect";
 import CodingTest from "../../models/CodingTest";
 const { exec } = require("child_process");
+const fs = require("fs");
+
 dbConnect();
 
 // for register
@@ -18,9 +20,9 @@ export default async (req, res) => {
 
     case "POST":
       try {
-        console.log(
-          "####REQ BODY WHEN POST CODES Before excute commands",
-          req.body
+        fs.writeFileSync(
+          "./tester.js",
+          `import React from 'react'; ${req.body.codes} export default Codes`
         );
         exec("yarn test", async (error, stdout, stderr) => {
           if (error) {
@@ -29,7 +31,6 @@ export default async (req, res) => {
           }
           if (stderr) {
             req.body.testResult = stderr;
-            console.log("####REQ BODY WHEN POST CODES", req.body);
             let codeTest = await CodingTest.create(req.body);
             res.status(201).json({ data: codeTest });
           }
