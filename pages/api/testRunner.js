@@ -7,7 +7,7 @@ dbConnect();
 
 export default async (req, res) => {
   const { method } = req;
-  console.log(method,req.cookies  );
+  console.log(method, req.cookies);
   switch (method) {
     case "POST":
       try {
@@ -28,19 +28,6 @@ export default async (req, res) => {
 
           await res.status(200).send({ data: result });
         });
-
-        // exec("yarn test", async (error, stdout, stderr) => {
-        //   if (error) {
-        //     console.log(`error: ${error.message}`);
-        //     return;
-        //   }
-        //   if (stderr) {
-        //     req.body.testResult = stderr;
-        //     console.log(req.body);
-        //     let testResult = await TestResult.create(req.body);
-        //     res.status(201).json({ data: testResult });
-        //   }
-        // });
       } catch (error) {
         res.status(400).json({ success: false });
       }
