@@ -26,10 +26,54 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
+<<<<<<< HEAD
     "/index": [
+=======
+    "/appl/Sandbox": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
+    "/appl/end": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/appl/info": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
+    "/appl/splash": [
+>>>>>>> aa4c46d163e4efafc573d1572b520103e011014b
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
+<<<<<<< HEAD
+    "/test/[id]": [
+=======
+    "/comp/dash": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/comp/login": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
+    "/index": [
+>>>>>>> aa4c46d163e4efafc573d1572b520103e011014b
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
+    "/next/dist/pages/_error": [
+      "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
     "/test/[id]": [

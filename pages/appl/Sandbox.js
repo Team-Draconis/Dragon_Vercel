@@ -40,7 +40,6 @@ export default function SandBox() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-
     fetch("/api/codetest", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
