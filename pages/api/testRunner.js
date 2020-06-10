@@ -1,5 +1,3 @@
-// const util = require("util");
-// const exec = util.promisify(require("child_process").exec);
 const { exec } = require("child_process");
 import TestResult from "../../models/TestResult";
 import dbConnect from "../../utils/dbConnect";
@@ -11,15 +9,20 @@ export default async (req, res) => {
   const { method } = req;
   console.log(method,req.cookies  );
   switch (method) {
+<<<<<<< HEAD
       case "POST":
+=======
+    case "POST":
+>>>>>>> 0296ea85c6f34e48a9029662811f81f0f16a9b72
       try {
-        console.log("when push the run button, the req.body", req.body);
-
         fs.writeFileSync(
           "./tester.js",
           `import React from 'react'; ${req.body.testResult} export default Codes`
         );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0296ea85c6f34e48a9029662811f81f0f16a9b72
         let result;
         exec("yarn test", async (error, command, stdout) => {
           if (error) {

@@ -8,6 +8,7 @@
     "start": "next start",
     "export": "next build",
     "test": "react-scripts test --watchAll=false",
+    "test:fetch": "react-scripts test --env=jsdom-fourteen",
     "test2": "node nodeFilefortesting.js",
     "heroku-postbuild": "npm run build"
   },
