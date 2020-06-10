@@ -15,7 +15,7 @@ export default function Splash() {
         </Typography>
       </Box>
       <Box align="center" m={10}>
-        <Link href="/comp/dash">
+        <Link href="/dash">
           <Button variant="contained" color="primary">
             Go to dashboard
           </Button>
