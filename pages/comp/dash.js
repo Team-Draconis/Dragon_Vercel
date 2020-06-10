@@ -1,13 +1,13 @@
 import fetch from "isomorphic-unfetch";
-import { Card } from "semantic-ui-react";
+import { Card, Button } from "semantic-ui-react";
 import Link from "next/link";
 import { useState } from "react";
 import NavBar from "../src/NavBar";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
+// import Typography from "@material-ui/core/Typography";
+// import Container from "@material-ui/core/Container";
+// import Button from "@material-ui/core/Button";
 // import Card from "@material-ui/core/Card";
-import Box from "@material-ui/core/Box";
+// import Box from "@material-ui/core/Box";
 
 const Dashboard = ({ testResults }) => {
   let temp;
@@ -54,9 +54,7 @@ const Dashboard = ({ testResults }) => {
                     </Card.Content>
                     <Card.Content extra>
                       <Link href={`/test/${testResult._id}`}>
-                        <Button variant="contained" color="primary">
-                          View Codes
-                        </Button>
+                        <Button primary>View Codes</Button>
                       </Link>
                     </Card.Content>
                   </Card>
@@ -90,9 +88,7 @@ const Dashboard = ({ testResults }) => {
                   </Card.Content>
                   <Card.Content extra>
                     <Link href={`/test/${testResult._id}`}>
-                      <Button variant="contained" color="primary">
-                        View Codes
-                      </Button>
+                      <Button primary>View Codes</Button>
                     </Link>
                   </Card.Content>
                 </Card>

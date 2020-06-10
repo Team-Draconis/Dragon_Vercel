@@ -34,7 +34,7 @@ export default function NavBar() {
           <Link href="/">
             <Button color="inherit">Home</Button>
           </Link>
-          <Link href="/appl/login">
+          <Link href="/appl/SignIn">
             <Button color="inherit">Login</Button>
           </Link>
           <Link href="/comp/login">
