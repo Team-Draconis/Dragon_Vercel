@@ -7,22 +7,14 @@ dbConnect();
 
 export default async (req, res) => {
   const { method } = req;
-  console.log(method,req.cookies  );
+  console.log(method, req.cookies);
   switch (method) {
-<<<<<<< HEAD
-      case "POST":
-=======
     case "POST":
->>>>>>> 0296ea85c6f34e48a9029662811f81f0f16a9b72
       try {
         fs.writeFileSync(
           "./tester.js",
           `import React from 'react'; ${req.body.testResult} export default Codes`
         );
-<<<<<<< HEAD
-
-=======
->>>>>>> 0296ea85c6f34e48a9029662811f81f0f16a9b72
         let result;
         exec("yarn test", async (error, command, stdout) => {
           if (error) {
@@ -36,19 +28,6 @@ export default async (req, res) => {
 
           await res.status(200).send({ data: result });
         });
-
-        // exec("yarn test", async (error, stdout, stderr) => {
-        //   if (error) {
-        //     console.log(`error: ${error.message}`);
-        //     return;
-        //   }
-        //   if (stderr) {
-        //     req.body.testResult = stderr;
-        //     console.log(req.body);
-        //     let testResult = await TestResult.create(req.body);
-        //     res.status(201).json({ data: testResult });
-        //   }
-        // });
       } catch (error) {
         res.status(400).json({ success: false });
       }

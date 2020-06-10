@@ -1,5 +1,5 @@
-import NavBar from "../NavBar";
-import useSWR from "swr";
+import NavBar from "../src//NavBar";
+// import useSWR from "swr";
 
 export default function Splash() {
   // const { data, revalidate } = useSWR("../api/me", async function (args) {

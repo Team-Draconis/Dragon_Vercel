@@ -5,6 +5,7 @@ import { createEditor } from "../../../utils/editor";
 import Link from "next/link";
 import Router from "next/router";
 import "../../appl/styles.scss";
+import NavBar from "../../src/NavBar";
 
 const TestResult = ({ testResult }) => {
   console.log("Test result passed back to company", testResult);
@@ -18,24 +19,32 @@ const TestResult = ({ testResult }) => {
   const run = () => {
     editor.run(testResult.codes);
   };
-  return (
-    <div>
-      <h1> Here is the candidate's test result</h1>
-      <p>{testResult.candidate_email}</p>
-      <p>{testResult.city}</p>
 
-      <div className="app">
-        <div className="split-view">
-          <div className="code-editor">
-            <textarea value={testResult.codes} />
+  if (testResult) {
+    return (
+      <>
+        <NavBar />
+        <div>
+          <h1> Here is the candidate's test result</h1>
+          <p>{testResult.candidate_email}</p>
+          <p>{testResult.city}</p>
+
+          <div className="app">
+            <div className="split-view">
+              <div className="code-editor">
+                <textarea value={testResult.codes} />
+              </div>
+              <div className="preview" ref={el} />
+            </div>
+            <button onClick={runCode}>Run</button>
           </div>
-          <div className="preview" ref={el} />
+          <p>{testResult.testResult}</p>
         </div>
-        <button onClick={runCode}>Run</button>
-      </div>
-      <p>{testResult.testResult}</p>
-    </div>
-  );
+      </>
+    );
+  } else {
+    return <p>Loading</p>;
+  }
 };
 
 TestResult.getInitialProps = async ({ query: { id } }) => {

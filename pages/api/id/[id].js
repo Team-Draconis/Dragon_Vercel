@@ -6,7 +6,8 @@ dbConnect();
 // for register
 export default async (req, res) => {
   const { method } = req;
-  console.log(req)
+  console.log(method);
+  console.log(req);
   switch (method) {
     case "GET":
       try {

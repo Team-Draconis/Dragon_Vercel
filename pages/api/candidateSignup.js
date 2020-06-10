@@ -1,0 +1,25 @@
+import { hash } from "bcrypt";
+import dbConnect from "../../utils/dbConnect";
+const Candidate = require("../../models/Candidate");
+
+dbConnect();
+
+// Candidate Register
+export default async (req, res) => {
+  const { method } = req;
+  // console.log("Candidate Register req.body", req.body);
+  switch (method) {
+    case "POST":
+      try {
+        hash(req.body.candidate_password, 10, async function (err, hash) {
+          req.body.candidate_password = hash;
+          // console.log("password after hashed", req.body);
+          const newCandidate = await Candidate.create(req.body);
+          res.status(200).json({ message: "Thank you for sign up" });
+        });
+      } catch (error) {
+        res.status(400).json({ message: "Oops,Sigh Up failed" });
+      }
+      break;
+  }
+};

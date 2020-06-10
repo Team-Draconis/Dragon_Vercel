@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { createEditor } from "../../utils/editor";
 import Link from "next/link";
 import Router from "next/router";
+import NavBar from "../src/NavBar";
 
 // default code
 const code = `function Codes() {
@@ -73,28 +74,31 @@ export default function SandBox() {
   };
 
   return (
-    <div className="app">
-      <input type="text" onChange={onEmailChange} value={email} />
-      <input type="text" onChange={onCityChange} value={city} />
+    <>
+      <NavBar />
+      <div className="app">
+        <input type="text" onChange={onEmailChange} value={email} />
+        <input type="text" onChange={onCityChange} value={city} />
 
-      <div className="split-view">
-        <div className="code-editor">
-          <textarea
-            value={codeInput}
-            onChange={(e) => setCodeInput(e.target.value)}
-          />
+        <div className="split-view">
+          <div className="code-editor">
+            <textarea
+              value={codeInput}
+              onChange={(e) => setCodeInput(e.target.value)}
+            />
+          </div>
+          <div className="preview" ref={el} />
         </div>
-        <div className="preview" ref={el} />
-      </div>
-      <button onClick={runCode}>Run</button>
+        <button onClick={runCode}>Run</button>
 
-      <button onClick={handleSubmit}>Submit</button>
-      <Link href="/appl/report">Review Results</Link>
-      <Link href="/">
-        <button>Go Back To Home</button>
-      </Link>
-      <button onClick={runTest}>Test</button>
-      <div>{testResult}</div>
-    </div>
+        <button onClick={handleSubmit}>Submit</button>
+        {/* <Link href="/appl/report">Review Results</Link> */}
+        {/* <Link href="/">
+          <button>Go Back To Home</button>
+        </Link> */}
+        <button onClick={runTest}>Test</button>
+        <div>{testResult}</div>
+      </div>
+    </>
   );
 }
