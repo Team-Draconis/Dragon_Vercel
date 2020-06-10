@@ -9,10 +9,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 class Index extends Component {
   state = {};
+
   render() {
-    const handleSubmit = (e) => {
-      console.log(e);
-    };
     return (
       // <Container maxWidth="lg">
       <>

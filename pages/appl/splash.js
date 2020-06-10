@@ -1,5 +1,18 @@
 import NavBar from "../src//NavBar";
+// import useSWR from "swr";
+
 export default function Splash() {
+  // const { data, revalidate } = useSWR("../api/me", async function (args) {
+  //   const res = await fetch(args);
+  //   return res.json();
+  // });
+  // console.log(data);
+  // if (!data) return <h1>Loading...</h1>;
+  // let loggedIn = false;
+  // if (data.email) {
+  //   loggedIn = true;
+  // }
+
   return (
     <div>
       <NavBar />
