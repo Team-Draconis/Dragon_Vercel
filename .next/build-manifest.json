@@ -20,11 +20,7 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/comp/dash": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/test/[id]": [
+    "/comp/login": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
