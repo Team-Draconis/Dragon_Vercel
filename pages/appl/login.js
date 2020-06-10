@@ -10,6 +10,7 @@ const handleSocialLoginFailure = (err) => {
 }
 
 export default function Splash() {
+
   return (
     <div>
       <h3>Login page</h3>

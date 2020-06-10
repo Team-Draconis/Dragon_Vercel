@@ -8,10 +8,9 @@ import NavBar from "./NavBar";
 
 class Index extends Component {
   state = {};
+
+
   render() {
-    const handleSubmit = (e) => {
-      console.log(e);
-    };
     return (
       <div>
         <NavBar />

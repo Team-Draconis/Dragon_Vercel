@@ -9,7 +9,7 @@ dbConnect();
 
 export default async (req, res) => {
   const { method } = req;
-  console.log(method);
+  console.log(method,req.cookies  );
   switch (method) {
       case "POST":
       try {

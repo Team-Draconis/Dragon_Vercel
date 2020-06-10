@@ -7,6 +7,7 @@ export default function NavBar() {
   const [loggedUser, loginUser] = useState("Logged Out");
   const handleSocialLogin = (user) => {
     console.log(user.profile, "HERE IS THE USER!!!!!!!!!!!!!");
+    
     loginUser(user.profile);
   };
   const handleSocialLoginFailure = (err) => {
@@ -25,7 +26,7 @@ export default function NavBar() {
             provider="github"
             gatekeeper="http://localhost:9999"
             appId="92ee8233527f289507b9"
-            redirect="http://localhost:3000/"
+            redirect="http://localhost:3000/appl/splash"
             scope="user"
             onLoginSuccess={handleSocialLogin}
             onLoginFailure={handleSocialLoginFailure}

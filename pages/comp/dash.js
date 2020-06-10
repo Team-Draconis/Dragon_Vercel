@@ -44,7 +44,7 @@ const Dashboard = ({ testResults }) => {
                   </Card.Content>
                   <Card.Content extra>
                     <Link href={`/test/${testResult._id}`}>
-                      <Button primary>View Codes</Button>
+                      <Button primary>View Code</Button>
                     </Link>
                   </Card.Content>
                 </Card>
@@ -77,7 +77,7 @@ const Dashboard = ({ testResults }) => {
                   </Card.Content>
                   <Card.Content extra>
                     <Link href={`/test/${testResult._id}`}>
-                      <Button primary>View Codes</Button>
+                      <Button primary>View Code</Button>
                     </Link>
                   </Card.Content>
                 </Card>
