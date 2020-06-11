@@ -12,7 +12,6 @@ export default async (req, res) => {
     case "GET":
       try {
         const codeTest = await CodingTest.find({});
-        console.log(codeTest);
         res.status(200).json({ data: codeTest });
       } catch (error) {
         res.status(400).json({ success: false });
@@ -33,10 +32,12 @@ export default async (req, res) => {
           if (stderr) {
             req.body.testResult = stderr;
             let codeTest = await CodingTest.create(req.body);
+            console.log(codeTest);
             res.status(201).json({ data: codeTest });
           }
         });
       } catch (error) {
+        console.log("error happens");
         res.status(400).json({ success: false });
       }
       break;

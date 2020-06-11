@@ -1,3 +1,6 @@
+// This is candidate indivisual dashboard after they successfully login-in
+// This route should be protected
+
 import NavBar from "../src/NavBar";
 import Link from "next/link";
 import Typography from "@material-ui/core/Typography";

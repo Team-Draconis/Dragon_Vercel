@@ -2,7 +2,7 @@ import dbConnect from "../../utils/dbConnect";
 const Candidate = require("../../models/Candidate");
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-
+const cookie = require("cookie");
 dbConnect();
 
 // Candidate Login
@@ -11,11 +11,9 @@ export default async (req, res) => {
   switch (method) {
     case "POST":
       try {
-        console.log(req.body);
         const candidate = await Candidate.findOne({
           candidate_email: req.body.candidate_email,
         });
-        console.log(candidate);
         compare(
           req.body.candidate_password,
           candidate.candidate_password,
@@ -23,9 +21,20 @@ export default async (req, res) => {
             if (!err && result) {
               console.log("successfully verified");
 
-              const claims = { sub: candidate._id };
-              const jwt = sign(claims, "dragon");
-              res.status(200).json({ authToken: jwt });
+              const payload = { candidate: candidate._id };
+              const jwt = sign(payload, "dragon", { expiresIn: "1h" });
+              res.setHeader(
+                "Set-Cookie",
+                cookie.serialize("auth", jwt, {
+                  httpOnly: true,
+                  secure: process.env.NODE_ENV !== "development",
+                  sameSite: "strict",
+                  maxAge: 3600,
+                  path: "/",
+                })
+              );
+              console.log("candidate info", candidate);
+              res.status(200).json({ data: candidate });
             } else {
               res
                 .status(400)
