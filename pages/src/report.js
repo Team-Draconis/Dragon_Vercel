@@ -1,4 +1,4 @@
-import NavBar from "../src/NavBar";
+import NavBar from "./NavBar";
 export default function Report() {
   const handleSubmit = (e) => {
     console.log("clicked!");

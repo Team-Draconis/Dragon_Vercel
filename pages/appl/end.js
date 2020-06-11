@@ -1,3 +1,4 @@
+// This page is a thank you notes when candidate finished their tests and click the submit button in /sandbox
 import NavBar from "../src/NavBar";
 import Link from "next/link";
 import Typography from "@material-ui/core/Typography";

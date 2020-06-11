@@ -1,11 +1,12 @@
-const jwt = require('jsonwebtoken');
-const jwtSecret = 'SUPERSECRETE20220';
+// this is created by Chip
+const jwt = require("jsonwebtoken");
+const jwtSecret = "SUPERSECRETE20220";
 
 export default (req, res) => {
-    console.log(req.cookies,"cookies?")
-  if (req.method === 'GET') {
-    if (!('token' in req.cookies)) {
-      res.status(401).json({message: 'Unable to auth'});
+  console.log(req.cookies, "cookies?");
+  if (req.method === "GET") {
+    if (!("token" in req.cookies)) {
+      res.status(401).json({ message: "Unable to auth" });
       return;
     }
     let decoded;
@@ -22,7 +23,7 @@ export default (req, res) => {
       res.json(decoded);
       return;
     } else {
-      res.status(401).json({message: 'Unable to auth'});
+      res.status(401).json({ message: "Unable to auth" });
     }
   }
 };
