@@ -28,3 +28,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Docker
+
+- Install Docker [Docker.com](https://www.docker.com/get-started)
+- Run the following command to build Docker image in root directory
+
+```
+docker build -t <your_username>/dragon_vercel .
+```
+
+- Running up container with image
+
+```
+docker run -d -p 3333:3000 <your_username>/dragon_vercel:latest
+```
+
+- Visit `http://localhost:3333/`
