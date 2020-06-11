@@ -17,6 +17,13 @@ export default function SandBox() {
   const [email, setEmail] = useState("email");
   const [city, setCity] = useState("city");
   const [testResult, setTestResult] = useState(null);
+  const [counter, setCounter] = useState(60);
+
+  useEffect(() => {
+    const timer =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
+  }, [counter]);
 
   let editor = null;
   const el = useRef(null);
@@ -80,6 +87,7 @@ export default function SandBox() {
       <div className="app">
         <input type="text" onChange={onEmailChange} value={email} />
         <input type="text" onChange={onCityChange} value={city} />
+        Countdown: {counter}
 
         <div className="split-view">
           <div className="code-editor">
