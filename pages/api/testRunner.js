@@ -1,21 +1,26 @@
 const { exec } = require("child_process");
 import TestResult from "../../models/TestResult";
 import dbConnect from "../../utils/dbConnect";
+import {execute} from '@yarnpkg/shell';
+const tmpdir = require('os').tmpdir()
+console.log(tmpdir)
 const fs = require("fs");
 
 dbConnect();
 
 export default async (req, res) => {
   const { method } = req;
-  console.log(method, req.cookies);
+
+  console.log(method);
   switch (method) {
     case "POST":
       try {
         fs.writeFileSync(
-          "./tester.js",
+          `${tmpdir}/tester.js`,
           `import React from 'react'; ${req.body.testResult} export default Codes`
         );
         let result;
+        execute(`yarn test --json --outputFile="./output.txt"`)
         exec("yarn test", async (error, command, stdout) => {
           if (error) {
             result = error;

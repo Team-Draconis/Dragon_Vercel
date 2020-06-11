@@ -1,3 +1,6 @@
+// Save this code and use it on info.js
+
+
 import fetch from "isomorphic-unfetch";
 import { Button, Card } from "semantic-ui-react";
 import Link from "next/link";
