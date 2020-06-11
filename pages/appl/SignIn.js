@@ -13,7 +13,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Router from "next/router";
-import { useForm } from "react-hook-form";
 
 function Copyright() {
   return (
