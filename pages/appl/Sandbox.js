@@ -52,7 +52,8 @@ export default function SandBox() {
     })
       .then((res) => {
         // Do a fast client-side transition to the already prefetched dashboard page
-        if (res.ok) Router.push("/appl/end");
+        console.log("should redirect to thank you page ");
+        Router.push("/appl/end");
       })
       .catch((error) => {
         console.log(error); // add more detail error later

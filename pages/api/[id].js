@@ -1,13 +1,11 @@
-import dbConnect from "../../../utils/dbConnect";
-const CodingTest = require("../../../models/CodingTest");
+import dbConnect from "../../utils/dbConnect";
+const CodingTest = require("../../models/CodingTest");
 
 dbConnect();
 
 // for register
 export default async (req, res) => {
   const { method } = req;
-  console.log(method);
-  console.log(req);
   switch (method) {
     case "GET":
       try {

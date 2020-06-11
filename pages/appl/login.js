@@ -1,3 +1,4 @@
+// maybe delete file later? since we have /appl/signin to handel candidate signin
 import NavBar from "../src/NavBar";
 import Link from "next/link";
 import Typography from "@material-ui/core/Typography";

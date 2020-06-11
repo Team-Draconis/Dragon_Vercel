@@ -4,6 +4,7 @@ const CodeTestSchema = new mongoose.Schema({
   candidate_email: {
     type: String,
     required: [true, "Email is required"],
+    unique: true,
     trim: true,
   },
   city: {
