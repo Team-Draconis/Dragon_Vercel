@@ -8,49 +8,62 @@ import "../../appl/styles.scss";
 import NavBar from "../../src/NavBar";
 
 const TestResult = ({ testResult }) => {
-  console.log("Test result passed back to company", testResult);
-  let editor = null;
-  const el = useRef(null);
-  const runCode = () => {
-    editor = createEditor(el.current);
-    editor.run(testResult.codes);
-    run(testResult.codes);
-  };
-  const run = () => {
-    editor.run(testResult.codes);
-  };
-
   if (testResult) {
-    return (
-      <>
-        <NavBar />
-        <div>
-          <h1> Here is the candidate's test result</h1>
-          <p>{testResult.candidate_email}</p>
-          <p>{testResult.city}</p>
+    let editor = null;
+    const el = useRef(null);
+    const runCode = () => {
+      editor = createEditor(el.current);
+      editor.run(testResult.codes);
+      run(testResult.codes);
+    };
+    const run = () => {
+      editor.run(testResult.codes);
+    };
 
-          <div className="app">
-            <div className="split-view">
-              <div className="code-editor">
-                <textarea value={testResult.codes} />
+    if (testResult) {
+      return (
+        <>
+          <NavBar />
+          <div>
+            <h1> Here is the candidate's test result</h1>
+            <p>{testResult.candidate_email}</p>
+            <p>{testResult.city}</p>
+
+            <div className="app">
+              <div className="split-view">
+                <div className="code-editor">
+                  <textarea value={testResult.codes} />
+                </div>
+                <div className="preview" ref={el} />
               </div>
-              <div className="preview" ref={el} />
+              <button onClick={runCode}>Run</button>
             </div>
-            <button onClick={runCode}>Run</button>
+            <p>{testResult.testResult}</p>
           </div>
-          <p>{testResult.testResult}</p>
-        </div>
-      </>
-    );
-  } else {
-    return <p>Loading</p>;
+        </>
+      );
+    } else {
+      return <p>Loading</p>;
+    }
   }
 };
 
 TestResult.getInitialProps = async ({ query: { id } }) => {
-  const res = await fetch(`https://dragon-tester.now.sh/api/${id}/`);
-  const { data } = await res.json();
-  return { testResult: data };
+  try {
+    const res = await fetch(`https://dragon-tester.now.sh/api/${id}/`);
+    const { data } = await res.json();
+    return { testResult: data };
+  } catch (error) {
+    console.log(error);
+    return {
+      testResult: {
+        _id: "none",
+        candidate_email: "none",
+        city: "none",
+        codes: "none",
+      },
+    };
+  }
 };
 
 export default TestResult;

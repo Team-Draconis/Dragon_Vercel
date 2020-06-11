@@ -108,9 +108,19 @@ const Dashboard = ({ testResults }) => {
 };
 
 Dashboard.getInitialProps = async () => {
-  const res = await fetch("https://dragon-tester.now.sh/api/codetest");
-  const { data } = await res.json();
-  return { testResults: data };
+  try {
+    const res = await fetch("https://dragon-tester.now.sh/api/codetest");
+    const { data } = await res.json();
+    return { testResults: data };
+  } catch (error) {
+    console.log(error);
+    return {
+      testResults: [
+        { _id: "none", candidate_email: "none", city: "none" },
+        { _id: "none", candidate_email: "none", city: "none" },
+      ],
+    };
+  }
 };
 
 export default Dashboard;
