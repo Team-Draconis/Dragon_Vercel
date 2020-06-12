@@ -1,62 +1,56 @@
 import "./styles.module.scss";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { createEditor } from "../../utils/editor";
-import Link from "next/link";
 import Router from "next/router";
 import NavBar from "../src/NavBar";
 
 // default code
-const code = `function Codes() {
-// there should be a paragraph with text "Hello World!"
+const defaultCode = `function Codes() {
   return (<div><p>Hello World!</p><button>Click</button></div>)
 }
 <Codes />
 `;
-export default function SandBox() {
-  const [codeInput, setCodeInput] = useState(code);
-  const [email, setEmail] = useState("email");
-  const [city, setCity] = useState("city");
+
+// Needs Mako's help to modify here
+const requirements = {
+  easy: `Easy Mode: there should be a paragraph with text "Hello World!"`,
+  medium: `Midium Mode: there should be a paragraph with text "Hello World!"`,
+  hard: `Hard Mode: there should be a paragraph with text "Hello World!"`,
+};
+
+export default function SandBox({ mode, goBackToDashboard, candidateID }) {
+  const [code, setCode] = useState(defaultCode);
   const [testResult, setTestResult] = useState(null);
 
   let editor = null;
   const el = useRef(null);
   const runCode = () => {
     editor = createEditor(el.current);
-    editor.run(codeInput);
-    run(codeInput);
-  };
-  const onEmailChange = ({ target: { value } }) => {
-    setEmail(value);
-  };
-
-  const onCityChange = ({ target: { value } }) => {
-    setCity(value);
+    editor.run(code);
+    run(code);
   };
 
   const run = () => {
-    editor.run(codeInput);
+    editor.run(code);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    fetch("/api/codetest", {
+    fetch("/api/testRunner", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        candidate_email: email,
-        codes: codeInput,
-        city: city,
-        testResult: "Here comes test result",
+        id: candidateID,
+        codes: code,
+        test_mode: mode,
+        test_result: "Here comes test result",
       }),
     })
       .then((res) => {
-        // Do a fast client-side transition to the already prefetched dashboard page
-        console.log("should redirect to thank you page ");
         Router.push("/appl/end");
       })
       .catch((error) => {
-        console.log(error); // add more detail error later
+        console.log(error);
       });
   };
 
@@ -65,7 +59,7 @@ export default function SandBox() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        testResult: codeInput,
+        codes: code,
       }),
     }).then((res) =>
       res.json().then((res) => {
@@ -77,26 +71,17 @@ export default function SandBox() {
   return (
     <>
       <NavBar />
+      <button onClick={goBackToDashboard}>Back to dashboard</button>
+      <p>Requirements: {requirements[mode]}</p>
       <div className="app">
-        <input type="text" onChange={onEmailChange} value={email} />
-        <input type="text" onChange={onCityChange} value={city} />
-
         <div className="split-view">
           <div className="code-editor">
-            <textarea
-              value={codeInput}
-              onChange={(e) => setCodeInput(e.target.value)}
-            />
+            <textarea value={code} onChange={(e) => setCode(e.target.value)} />
           </div>
           <div className="preview" ref={el} />
         </div>
         <button onClick={runCode}>Run</button>
-
         <button onClick={handleSubmit}>Submit</button>
-        {/* <Link href="/appl/report">Review Results</Link> */}
-        {/* <Link href="/">
-          <button>Go Back To Home</button>
-        </Link> */}
         <button onClick={runTest}>Test</button>
         <div>{testResult}</div>
       </div>

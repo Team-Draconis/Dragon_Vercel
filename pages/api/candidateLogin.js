@@ -1,3 +1,6 @@
+//this is for condidates login page to check their password and email match
+//issue token and cookies
+
 import dbConnect from "../../utils/dbConnect";
 const Candidate = require("../../models/Candidate");
 import { compare } from "bcrypt";
