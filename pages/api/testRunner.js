@@ -10,11 +10,6 @@ dbConnect();
 
 export default async (req, res) => {
   const { method } = req;
-<<<<<<< HEAD
-
-  console.log(method);
-=======
->>>>>>> d0837cfcfaa1cf5664a9b7e1f038a1ed78daa166
   switch (method) {
     case "POST":
       try {

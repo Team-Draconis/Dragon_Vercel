@@ -63,10 +63,10 @@ export default function SignIn() {
         candidate_password: password,
       }),
     }).then((res) => {
-      console.log("should direct to candidate dashboard which is /appl/info");
+      console.log("should direct to candidate dashboard which is /appl/info",res.ok);
       //This router direct not working at this moment
       if (res.ok) {
-        Router.push("/appl/info");
+        Router.push({pathname:"/appl/info",query:{test: 'test'}},'/appl/info');
       }
     });
   };
