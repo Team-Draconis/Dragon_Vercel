@@ -1,18 +1,20 @@
+// This is for appl info
+// for company to jump into specific candidate
 import dbConnect from "../../utils/dbConnect";
-const CodingTest = require("../../models/CodingTest");
+const Candidate = require("../../models/Candidate");
 
 dbConnect();
 
-// for register
 export default async (req, res) => {
   const { method } = req;
+  console.log(req.query.id);
   switch (method) {
     case "GET":
       try {
-        const codeTest = await CodingTest.findById(req.query.id);
-        res.status(200).json({ data: codeTest });
+        const candidate = await Candidate.findById(req.query.id);
+        res.status(200).json({ data: candidate });
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(400).json({ message: "error when finding candidate" });
       }
       break;
   }

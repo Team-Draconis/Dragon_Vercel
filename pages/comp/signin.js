@@ -49,40 +49,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch("/api/candidateLogin", {
+    fetch("/api/companyLogin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        candidate_email: email,
-        candidate_password: password,
+        company_name: name,
+        company_password: password,
       }),
     }).then((res) => {
-<<<<<<< HEAD
-      console.log("should direct to candidate dashboard which is /appl/info",res.ok);
-      //This router direct not working at this moment
-      if (res.ok) {
-        Router.push({pathname:"/appl/info",query:{test: 'test'}},'/appl/info');
-      }
-=======
       res.json().then((res) => {
-        console.log("WHEN USER SUCCESSFULLY VERIFIED", res);
-        //This router direct not working at this moment
-
         if (res.data) {
-          Router.push(`/appl/dashboard/${res.data._id}`);
+          console.log("routingggggggggggggggg");
+          Router.push("/dashboard");
         } else {
           setErrorMessage("Please input correct email and password");
         }
       });
->>>>>>> 2bef7ac814db030d28384512b22da26c0efff8d5
     });
   };
+
+  useEffect(() => {
+    // Prefetch the dashboard page as the user will go there after the login
+    Router.prefetch("/dashboard");
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -105,8 +100,8 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <TextField
             variant="outlined"

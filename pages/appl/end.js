@@ -5,22 +5,39 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import { motion } from "framer-motion";
 
 export default function End() {
   return (
     <>
       <NavBar />
-      <Box mt={30}>
-        <Typography variant="h4" component="h1" align="center">
+      <Box mt={30} align="center">
+        <motion.h2
+          initial={{ y: -250 }}
+          animate={{ y: -10, fontSize: 120 }}
+          transition={{
+            delay: 0.2,
+            type: "spring",
+          }}
+        >
           Thank You! 🐉
-        </Typography>
+        </motion.h2>
       </Box>
       <Box align="center" m={10}>
-        <Link href="/">
-          <Button variant="contained" color="primary">
-            Close
-          </Button>
-        </Link>
+        <motion.div
+          initial={{ y: -200 }}
+          animate={{ y: -100, fontSize: 120 }}
+          transition={{
+            delay: 0.2,
+            type: "spring",
+          }}
+        >
+          <Link href="/">
+            <Button variant="contained" color="primary">
+              Close
+            </Button>
+          </Link>
+        </motion.div>
       </Box>
       {/* <div>
         <h3>Thank you!</h3>
