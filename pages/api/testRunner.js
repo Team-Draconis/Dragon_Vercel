@@ -2,10 +2,13 @@ const { exec } = require("child_process");
 import TestResult from "../../models/TestResult";
 import dbConnect from "../../utils/dbConnect";
 import {execute} from '@yarnpkg/shell';
-const tmpdir = require('os').tmpdir()
-console.log(tmpdir)
+import * as upath from 'upath';
 const fs = require("fs");
 
+let tmpdir = require('os').tmpdir()
+tmpdir = upath.toUnix(tmpdir)
+console.log(tmpdir)
+ 
 dbConnect();
 
 export default async (req, res) => {
@@ -18,7 +21,10 @@ export default async (req, res) => {
           `import React from 'react'; ${req.body.testResult} export default Codes`
         );
         let result;
-        execute(`yarn test --json --outputFile="./output.txt"`)
+        console.log('###################',tmpdir)
+        execute(`yarn test --json --outputFile="${tmpdir}/output.txt"`)
+        let test = fs.readFileSync(`${tmpdir}/output.txt`, {encoding:'utf8', flag:'r'})
+        console.log(test,"@@@@@@@@@@@@@@@@@@@@@")
         exec("yarn test", async (error, command, stdout) => {
           if (error) {
             result = error;
@@ -29,7 +35,7 @@ export default async (req, res) => {
             console.log("The stdout is consoled", stdout);
           }
 
-          await res.status(200).send({ data: result });
+          await res.status(200).send({ data: test });
         });
       } catch (error) {
         res.status(400).json({ success: false });
