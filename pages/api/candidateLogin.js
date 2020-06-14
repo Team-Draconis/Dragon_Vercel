@@ -1,16 +1,16 @@
 //this is for condidates login page to check their password and email match
 //issue token and cookies
-
 import dbConnect from "../../utils/dbConnect";
 const Candidate = require("../../models/Candidate");
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 const cookie = require("cookie");
 dbConnect();
-
 // Candidate Login
 export default async (req, res) => {
   const { method } = req;
+  console.log(process.env.SECRET_CANDIDATE);
+  console.log(process.env.SECRET_TOKEN);
   switch (method) {
     case "POST":
       try {
@@ -23,12 +23,13 @@ export default async (req, res) => {
           function (err, result) {
             if (!err && result) {
               console.log("successfully verified");
-
               const payload = { candidate: candidate._id };
-              const jwt = sign(payload, "dragon", { expiresIn: "1h" });
+              const jwt = sign(payload, process.env.SECRET_TOKEN, {
+                expiresIn: "1h",
+              });
               res.setHeader(
                 "Set-Cookie",
-                cookie.serialize("auth", jwt, {
+                cookie.serialize(process.env.SECRET_CANDIDATE, jwt, {
                   httpOnly: true,
                   secure: process.env.NODE_ENV !== "development",
                   sameSite: "strict",
