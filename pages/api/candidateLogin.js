@@ -11,6 +11,8 @@ dbConnect();
 // Candidate Login
 export default async (req, res) => {
   const { method } = req;
+  console.log(process.env.SECRET_CANDIDATE);
+  console.log(process.env.SECRET_TOKEN);
   switch (method) {
     case "POST":
       try {
@@ -25,10 +27,12 @@ export default async (req, res) => {
               console.log("successfully verified");
 
               const payload = { candidate: candidate._id };
-              const jwt = sign(payload, "dragon", { expiresIn: "1h" });
+              const jwt = sign(payload, process.env.SECRET_TOKEN, {
+                expiresIn: "1h",
+              });
               res.setHeader(
                 "Set-Cookie",
-                cookie.serialize("auth", jwt, {
+                cookie.serialize(process.env.SECRET_CANDIDATE, jwt, {
                   httpOnly: true,
                   secure: process.env.NODE_ENV !== "development",
                   sameSite: "strict",

@@ -9,6 +9,8 @@ dbConnect();
 // company Login
 export default async (req, res) => {
   const { method } = req;
+  console.log(process.env.SECRET_COMPANY);
+  console.log(process.env.SECRET_TOKEN);
   switch (method) {
     case "POST":
       try {
@@ -26,7 +28,7 @@ export default async (req, res) => {
             });
             res.setHeader(
               "Set-Cookie",
-              cookie.serialize(process.env.COOKIE_SECRET, jwt, {
+              cookie.serialize(process.env.SECRET_COMPANY, jwt, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV !== "development",
                 sameSite: "Strict",
