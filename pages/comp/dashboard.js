@@ -2,7 +2,7 @@ import { Card, Button } from "semantic-ui-react";
 import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useState } from "react";
-import NavBar from "./src/NavBar";
+import NavBar from "../src/NavBar";
 
 const Dashboard = ({ candidates_Info }) => {
   let temp;
