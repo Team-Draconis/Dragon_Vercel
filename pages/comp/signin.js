@@ -66,7 +66,7 @@ export default function SignIn() {
       res.json().then((res) => {
         if (res.data) {
           console.log("routingggggggggggggggg");
-          Router.push("/dashboard");
+          Router.push("/comp/dashboard");
         } else {
           setErrorMessage("Please input correct email and password");
         }
@@ -74,10 +74,10 @@ export default function SignIn() {
     });
   };
 
-  useEffect(() => {
-    // Prefetch the dashboard page as the user will go there after the login
-    Router.prefetch("/dashboard");
-  }, []);
+  // useEffect(() => {
+  //   // Prefetch the dashboard page as the user will go there after the login
+  //   Router.prefetch("/dashboard");
+  // }, []);
 
   return (
     <Container component="main" maxWidth="xs">
