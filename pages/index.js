@@ -59,8 +59,10 @@ const ButtonContainer = styled.div`
 
 const ButtonBox = styled.div`
   /* background-color: yellow; */
+  display: flex;
   margin: 0.5rem;
   margin-top: 2rem;
+  justify-content: center;
 `;
 
 const Scroll = styled.div`
@@ -68,6 +70,13 @@ const Scroll = styled.div`
   border-radius: 30px;
   width: 150px;
   height: 150px;
+`;
+
+const TextBox = styled.div`
+  /* background-color: darkred; */
+  text-align: center;
+  width: 800px;
+  margin-top: 16rem;
 `;
 
 class Index extends Component {
@@ -129,23 +138,25 @@ class Index extends Component {
               </ButtonBox>
               {/* </Box> */}
             </ButtonContainer>
+            <ButtonBox>
+              <Button variant="contained" color="secondary" href="#detail">
+                How it works?
+              </Button>
+            </ButtonBox>
           </BoxContainer>
           <Box>
             <img src="/dragon.jpg" alt="dragon" width="250" height="250" />
           </Box>
-          {/* <Scroll> */}
-          <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
-            <Button variant="contained" color="primary" href="/appl/register">
-              haha
-            </Button>
-          </motion.div>
-          {/* </Scroll> */}
         </Container>
-        <Container id="a">
-          We bypass recruiters and algorithms which may introduce unconscious
-          bias and allow your skill to open doors. We retain only your email
-          address and location preference. Feel free to take the tests multiple
-          times and look for jobs across the globe.
+        <Container id="detail">
+          <TextBox>
+            <Typography variant="h4" component="h1" align="center">
+              We bypass recruiters and algorithms which may introduce
+              unconscious bias and allow your skill to open doors. We retain
+              only your email address and location preference. Feel free to take
+              the tests multiple times and look for jobs across the globe.
+            </Typography>
+          </TextBox>
         </Container>
         {/* </Parent> */}
       </>
