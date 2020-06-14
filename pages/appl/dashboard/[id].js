@@ -102,7 +102,21 @@ export default function CandidateDashboard({ candidateInfo }) {
   }
 }
 CandidateDashboard.getInitialProps = async ({ query: { id } }) => {
-  const res = await fetch(`http://localhost:3000/api/${id}`);
-  const { data } = await res.json();
-  return { candidateInfo: data };
+  try {
+    const res = await fetch(
+      `http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/${id}`
+    );
+    const { data } = await res.json();
+    return { candidateInfo: data };
+  } catch (error) {
+    return {
+      candidateInfo: {
+        _id: "dummy",
+        candidate_name: "dummy",
+        andidate_email: "dummy",
+        candidate_city: "dummy",
+        coding_tests: "dummy",
+      },
+    };
+  }
 };
