@@ -3,14 +3,17 @@ const mongoose = require("mongoose");
 const CompanySchema = new mongoose.Schema({
   company_name: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, "Name is required"],
     unique: true,
     trim: true,
   },
-  candidate_password: {
+  company_password: {
     type: String,
     required: [true, "Password is required"],
   },
+  company_bio: {
+    type: String,
+  },
 });
-
-module.exports = mongoose.models.Company || mongoose.model("Company", Company);
+module.exports =
+  mongoose.models.Company || mongoose.model("Company", CompanySchema);

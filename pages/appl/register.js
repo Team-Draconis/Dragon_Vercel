@@ -1,5 +1,4 @@
 // Shuntaro will update this page with meterial UI
-import NavBar from "../src/NavBar";
 import React, { useState } from "react";
 import Router from "next/router";
 
@@ -12,7 +11,7 @@ export default function Register() {
   const handleRegister = (e) => {
     e.preventDefault();
     console.log(email, name, city, password);
-    fetch("/api/candidateSignup", {
+    fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -22,21 +21,19 @@ export default function Register() {
         candidate_password: password,
       }),
     })
-      .then((res) => {
-        // Do a fast client-side transition to the already prefetched dashboard page
-        if (res.ok) Router.push("/appl/end");
-      })
+      .then((res) =>
+        res.json().then((res) => {
+          console.log("$$$", res.id);
+          Router.push(`/appl/dashboard/${res.id}`);
+        })
+      )
       .catch((error) => {
-        console.log(error); // add more detail error later
+        console.log(error);
       });
   };
 
   return (
     <div>
-      <NavBar />
-      <h3>Applicant Register page</h3>
-      <h4>New Applicant's will register here</h4>
-      {/* <form action="/appl/info"> */}
       <form>
         Name:{" "}
         <input
@@ -70,10 +67,6 @@ export default function Register() {
         <br />
         <input onClick={handleRegister} type="submit" />
       </form>
-
-      <a href="/" className="card">
-        <h3>return to login</h3>
-      </a>
     </div>
   );
 }

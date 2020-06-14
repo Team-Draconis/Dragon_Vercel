@@ -1,49 +1,48 @@
+//1, to run the test and send the data back to browser without sending to db=> test button
+//2, if submit button sent the test result to db,  => submit button
+
 const { exec } = require("child_process");
-import TestResult from "../../models/TestResult";
 import dbConnect from "../../utils/dbConnect";
 const fs = require("fs");
+import Candidate from "../../models/Candidate";
 
 dbConnect();
 
 export default async (req, res) => {
   const { method } = req;
+  console.log(req.body);
   switch (method) {
     case "POST":
       try {
         fs.writeFileSync(
-          "./tester.js",
-          `import React from 'react'; ${req.body.testResult} export default Codes`
+          "./codes_file.js",
+          `import React from 'react'; ${req.body.codes} export default Codes`
         );
-        let result;
         exec("yarn test", async (error, command, stdout) => {
+          let result;
           if (error) {
             result = error;
           }
-
-          if (stdout) {
+          if (req.body.id === undefined && stdout) {
             result = await stdout;
-            console.log("The stdout is consoled", stdout);
+            await res.status(200).send({ data: result });
           }
-
-          await res.status(200).send({ data: result });
+          if (req.body.id !== undefined && stdout) {
+            result = await stdout;
+            const testResult = {
+              coding_test_codes: req.body.codes,
+              coding_test_result: result,
+            };
+            const candidate = await Candidate.findById(req.body.id);
+            console.log(candidate);
+            candidate.coding_tests[req.body.test_mode].push(testResult);
+            await candidate.save();
+            res.json(candidate);
+          }
         });
       } catch (error) {
         res.status(400).json({ success: false });
       }
-      break;
-
-    case "GET":
-      try {
-        const testResults = await TestResult.find()
-          .limit(1)
-          .sort({ $natural: -1 });
-        res.status(200).json({ data: testResults });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-    default:
-      res.status(400).json({ success: false });
       break;
   }
 };
