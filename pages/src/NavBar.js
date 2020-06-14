@@ -19,7 +19,7 @@ export default function NavBar() {
     //     <a>Company LogIn</a>
     //   </Link>
     // </div>
-    <div className={styles.navbar}>
+    <div>
       <AppBar position="static">
         <Toolbar>
           <IconButton
