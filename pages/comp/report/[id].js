@@ -101,56 +101,57 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
 
 export default function Report({ candidateInfo }) {
   const [view, setView] = useState("initial");
+  if (candidateInfo) {
+    return (
+      <>
+        <NavBar />
+        <p>Candidate Name : {candidateInfo.candidate_name}</p>
+        <p>Desired Location : {candidateInfo.candidate_city}</p>
+        <p>Email : {candidateInfo.candidate_email}</p>
+        {/* <p>Quiz correct rates: {candidateInfo.quiz_tests.quiz_score}</p> */}
+        <p>Quiz correct rates: 60% </p>
+        {candidateInfo.coding_tests.easy.length > 0 ? (
+          <button
+            onClick={() => {
+              setView("easy");
+            }}
+          >
+            Easy Mode Result
+          </button>
+        ) : null}
 
-  return (
-    <>
-      <NavBar />
-      <p>Candidate Name : {candidateInfo.candidate_name}</p>
-      <p>Desired Location : {candidateInfo.candidate_city}</p>
-      <p>Email : {candidateInfo.candidate_email}</p>
-      {/* <p>Quiz correct rates: {candidateInfo.quiz_tests.quiz_score}</p> */}
-      <p>Quiz correct rates: 60% </p>
-      {candidateInfo.coding_tests.easy.length > 0 ? (
-        <button
-          onClick={() => {
-            setView("easy");
-          }}
-        >
-          Easy Mode Result
-        </button>
-      ) : null}
+        {candidateInfo.coding_tests.medium.length > 0 ? (
+          <button
+            onClick={() => {
+              setView("medium");
+            }}
+          >
+            Medium Mode Result
+          </button>
+        ) : null}
 
-      {candidateInfo.coding_tests.medium.length > 0 ? (
-        <button
-          onClick={() => {
-            setView("medium");
-          }}
-        >
-          Medium Mode Result
-        </button>
-      ) : null}
+        {candidateInfo.coding_tests.hard.length > 0 ? (
+          <button
+            onClick={() => {
+              setView("hard");
+            }}
+          >
+            Hard Mode Result
+          </button>
+        ) : null}
 
-      {candidateInfo.coding_tests.hard.length > 0 ? (
-        <button
-          onClick={() => {
-            setView("hard");
-          }}
-        >
-          Hard Mode Result
-        </button>
-      ) : null}
-
-      {view === "easy" ? (
-        <CodeDisplaySandbox view={view} candidateInfo={candidateInfo} />
-      ) : null}
-      {view === "medium" ? (
-        <CodeDisplaySandbox view={view} candidateInfo={candidateInfo} />
-      ) : null}
-      {view === "hard" ? (
-        <CodeDisplaySandbox view={view} candidateInfo={candidateInfo} />
-      ) : null}
-    </>
-  );
+        {view === "easy" ? (
+          <CodeDisplaySandbox view={view} candidateInfo={candidateInfo} />
+        ) : null}
+        {view === "medium" ? (
+          <CodeDisplaySandbox view={view} candidateInfo={candidateInfo} />
+        ) : null}
+        {view === "hard" ? (
+          <CodeDisplaySandbox view={view} candidateInfo={candidateInfo} />
+        ) : null}
+      </>
+    );
+  }
 }
 
 Report.getInitialProps = async ({ query: { id } }) => {
