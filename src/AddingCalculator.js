@@ -51,20 +51,20 @@ class AddingCalculator extends React.Component {
         <div>
           <input
             type="text"
-            data-testid="number1"
+            className="number1"
             onChange={(e) => {
               this.setState({ number1: e.target.value });
             }}
           ></input>
           <input
             type="text"
-            data-testid="number2"
+            className="number2"
             onChange={(e) => {
               this.setState({ number2: e.target.value });
             }}
           ></input>
         </div>
-        <button data-testid="add" onClick={this.adding}>
+        <button className="add" onClick={this.adding}>
           add
         </button>
         <p data-testid="result">{this.state.total}</p>

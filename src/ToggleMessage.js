@@ -36,7 +36,7 @@ class ToggleMessage extends React.Component {
       <div>
         <a
           href="#"
-          data-testid="toggle"
+          className="toggle"
           onClick={(e) => {
             e.preventDefault();
             this.setState({ showNumber: !this.state.showNumber });
@@ -45,7 +45,7 @@ class ToggleMessage extends React.Component {
           Want to buy a new car?
         </a>
         {this.state.showNumber && (
-          <p data-testid="text">Call +11 22 33 44 now!</p>
+          <p className="text">Call +11 22 33 44 now!</p>
         )}
       </div>
     );
