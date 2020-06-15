@@ -1,11 +1,10 @@
+// import Codes from "../../tester";
+// import yarn from yarn
+// yarn
 
-import Codes from "../../tester";
-import yarn from yarn 
-yarn 
+// module.exports = (req, res) => {
+//         res.json({
+//       body: req.body,
 
-module.exports = (req, res) => {
-        res.json({
-      body: req.body,
-
-    })
-  }
+//     })
+//   }

@@ -4,7 +4,11 @@ import { createEditor } from "../../utils/editor";
 import Router from "next/router";
 import NavBar from "../src/NavBar";
 import styled from "styled-components";
-import LegalPop from '../src/LegalPop'
+import LegalPop from "../src/LegalPop";
+import requirements from "../../src/test/requirements";
+import defaultCode from "../../src/test/defaultCode";
+import _ToggleMessage from "../../src/test/_ToggleMessage";
+import _AddingCalculator from "../../src/test/_AddingCalculator";
 
 //Styling
 const App = styled.div`
@@ -19,24 +23,10 @@ const Split_View = styled.div`
   min-width: 600px;
 `;
 
-// default code
-const defaultCode = `function Codes() {
-  return (<div><p>Hello World!</p><button>Click</button></div>)
-}
-<Codes />
-`;
-
-// Needs Mako's help to modify here
-const requirements = {
-  easy: `Easy Mode: there should be a paragraph with text "Hello World!"`,
-  medium: `Medium Mode: there should be a paragraph with text "Hello World!"`,
-  hard: `Hard Mode: there should be a paragraph with text "Hello World!"`,
-};
-
 export default function SandBox({ mode, goBackToDashboard, candidateID }) {
-  const [code, setCode] = useState(defaultCode);
-  const [testResult, setTestResult] = useState(null);
+  const [code, setCode] = useState(defaultCode(mode));
   const [counter, setCounter] = useState(600);
+  const [requirement, setRequirement] = useState("");
 
   useEffect(() => {
     const timer =
@@ -44,15 +34,27 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
     return () => clearInterval(timer);
   }, [counter]);
 
+  useEffect(() => {
+    setRequirement(
+      requirements(mode)
+        .split("\n")
+        .map((str, index) => <p key={index}>{str}</p>)
+    );
+  }, []);
+
   let editor = null;
   const el = useRef(null);
+  const testTarget = useRef(null);
+  const result = useRef(null);
+  const codeEditor = useRef(null);
+
   const runCode = () => {
-    editor = createEditor(el.current);
-    editor.run(code);
-    run(code);
+    run(el.current);
+    result.current.innerHTML = "";
   };
 
-  const run = () => {
+  const run = (element) => {
+    editor = createEditor(element);
     editor.run(code);
   };
 
@@ -76,38 +78,57 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
       });
   };
 
-  const runTest = async (req, res) => {
-    await fetch("/api/testRunner", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        codes: code,
-      }),
-    }).then((res) =>
-      res.json().then((res) => {
-        setTestResult(res.data);
-      })
-    );
+  const testOnBrowser = async () => {
+    result.current.innerHTML = "";
+    await run(testTarget.current);
+    if (mode === "easy") {
+      _ToggleMessage();
+    }
+    if (mode === "medium") {
+      _AddingCalculator();
+    }
+  };
+
+  const clear = () => {
+    // crear code editor
+    codeEditor.current.value = "";
+    codeEditor.current.value = defaultCode(mode);
+    setCode(defaultCode(mode));
+
+    // clear test result
+    result.current.innerHTML = "";
+
+    // crear preview
   };
 
   return (
     <>
       <NavBar />
       <button onClick={goBackToDashboard}>Back to dashboard</button>
-      <p>Requirements: {requirements[mode]}</p>
+      <div>{requirement}</div>
       <p>Countdown: {counter}</p>
       <div className="app">
         <div className="split-view">
           <div className="code-editor">
-            <textarea value={code} onChange={(e) => setCode(e.target.value)} />
+            <textarea
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              ref={codeEditor}
+            />
           </div>
           <div className="preview" ref={el} />
         </div>
         <button onClick={runCode}>Run</button>
         <button onClick={handleSubmit}>Submit</button>
-        <button onClick={runTest}>Test</button>
-        <LegalPop canID = {candidateID} canCode = {code} canMode = {mode} />
-        <div>{testResult}</div>
+        <button onClick={clear}>start from scratch</button>
+        <button onClick={testOnBrowser}>Run test on the browser</button>
+        <div
+          ref={testTarget}
+          id="test-target"
+          style={{ display: "none" }}
+        ></div>
+        <div id="test-result" ref={result}></div>
+        <LegalPop canID={candidateID} canCode={code} canMode={mode} />
       </div>
     </>
   );

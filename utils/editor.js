@@ -73,7 +73,13 @@ export function createEditor(domElement, moduleResolver = () => null) {
 
     // compiles and invokes the wrapper function
     run(code) {
-      this.compile(code)(React, render, require, useState);
+      try {
+        this.compile(code)(React, render, require, useState);
+      } catch (error) {
+        const container = document.createElement("div");
+        container.innerHTML = `Fail - Error happens. Click "Run" button and please check error message on the code editor.`;
+        document.getElementById("test-result").appendChild(container);
+      }
     },
 
     // just compiles and returns the stringified wrapper function
