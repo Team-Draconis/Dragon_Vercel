@@ -11,7 +11,16 @@ import SandBox from "../Sandbox";
 import QuizApp from "../QuizApp";
 
 export default function CandidateDashboard({ candidateInfo }) {
+  let temp
+  let city
   const [view, setView] = useState("initial");
+  const onAddCity = ({ target: { value } }) => {
+    console.log(value);
+    city = value;
+  };
+  const handleAddCity = () => {
+    console.log(city)
+  };
 
   const goBackToDashboard = () => {
     setView("initial");
@@ -26,6 +35,8 @@ export default function CandidateDashboard({ candidateInfo }) {
             <Typography variant="h4" component="h1" align="center">
               {`Welcome to Dragon, ${candidateInfo.candidate_name}`}
             </Typography>
+            <input type="text" onChange={onAddCity} value={temp} />
+            <button onClick={handleAddCity}>Add Additional City</button>
             <p>{candidateInfo.candidate_email}</p>
             <p>{candidateInfo.candidate_city}</p>
             {candidateInfo.coding_tests ? (

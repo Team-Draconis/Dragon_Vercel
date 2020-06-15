@@ -20,7 +20,7 @@ export default async (req, res) => {
           res.status(200).json({ id: newCandidate._id });
         });
       } catch (error) {
-        res.status(400).json({ message: "Oops,Sigh Up failed" });
+        res.status(400).json({ message: "Oops,Sign Up failed" });
       }
       break;
   }
