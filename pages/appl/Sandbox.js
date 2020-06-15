@@ -4,6 +4,7 @@ import { createEditor } from "../../utils/editor";
 import Router from "next/router";
 import NavBar from "../src/NavBar";
 import styled from "styled-components";
+import LegalPop from '../src/LegalPop'
 
 //Styling
 const App = styled.div`
@@ -28,14 +29,14 @@ const defaultCode = `function Codes() {
 // Needs Mako's help to modify here
 const requirements = {
   easy: `Easy Mode: there should be a paragraph with text "Hello World!"`,
-  medium: `Midium Mode: there should be a paragraph with text "Hello World!"`,
+  medium: `Medium Mode: there should be a paragraph with text "Hello World!"`,
   hard: `Hard Mode: there should be a paragraph with text "Hello World!"`,
 };
 
 export default function SandBox({ mode, goBackToDashboard, candidateID }) {
   const [code, setCode] = useState(defaultCode);
   const [testResult, setTestResult] = useState(null);
-  const [counter, setCounter] = useState(60);
+  const [counter, setCounter] = useState(600);
 
   useEffect(() => {
     const timer =
@@ -105,6 +106,7 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
         <button onClick={runCode}>Run</button>
         <button onClick={handleSubmit}>Submit</button>
         <button onClick={runTest}>Test</button>
+        <LegalPop canID = {candidateID} canCode = {code} canMode = {mode} />
         <div>{testResult}</div>
       </div>
     </>
