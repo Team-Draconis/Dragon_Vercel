@@ -62,18 +62,22 @@ export default function SignIn() {
         candidate_email: email,
         candidate_password: password,
       }),
-    }).then((res) => {
-      res.json().then((res) => {
-        console.log("WHEN USER SUCCESSFULLY VERIFIED", res);
-        //This router direct not working at this moment
+    })
+      .then((res) => {
+        res.json().then((res) => {
+          console.log("WHEN USER SUCCESSFULLY VERIFIED", res);
+          //This router direct not working at this moment
 
-        if (res.data) {
-          Router.push(`/appl/dashboard/${res.data._id}`);
-        } else {
-          setErrorMessage("Please input correct email and password");
-        }
+          if (res.data) {
+            Router.push(`/appl/dashboard/${res.data._id}`);
+          } else {
+            setErrorMessage("Please input correct email and password");
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    });
   };
 
   return (

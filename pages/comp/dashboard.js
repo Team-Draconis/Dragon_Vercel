@@ -2,7 +2,7 @@ import { Card, Button } from "semantic-ui-react";
 import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useState } from "react";
-import NavBar from "./src/NavBar";
+import NavBar from "../src/NavBar";
 
 const Dashboard = ({ candidates_Info }) => {
   let temp;
@@ -106,10 +106,33 @@ const Dashboard = ({ candidates_Info }) => {
 };
 
 Dashboard.getInitialProps = async () => {
-  const res = await fetch("http://localhost:3000/api/candidatesInfo");
-  const { data } = await res.json();
-  console.log("in client");
-  return { candidates_Info: data };
+  try {
+    const res = await fetch(
+      "http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/candidatesInfo"
+    );
+    const { data } = await res.json();
+    console.log("in client");
+    return { candidates_Info: data };
+  } catch (error) {
+    return {
+      candidates_Info: [
+        {
+          _id: "dummy1",
+          candidate_name: "dummy1",
+          andidate_email: "dummy1",
+          candidate_city: "dummy1",
+          coding_tests: "dummy1",
+        },
+        {
+          _id: "dummy2",
+          candidate_name: "dummy2",
+          andidate_email: "dummy2",
+          candidate_city: "dummy2",
+          coding_tests: "dummy2",
+        },
+      ],
+    };
+  }
 };
 
 export default Dashboard;
