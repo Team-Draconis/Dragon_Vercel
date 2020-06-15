@@ -6,6 +6,8 @@ import dbConnect from "../../utils/dbConnect";
 const fs = require("fs");
 import Candidate from "../../models/Candidate";
 
+
+ 
 dbConnect();
 
 export default async (req, res) => {

@@ -37,8 +37,11 @@ export default function NavBar() {
           <Link href="/appl/SignIn">
             <Button color="inherit">Login</Button>
           </Link>
-          <Link href="/comp/login">
+          <Link href="/comp/signin">
             <Button color="inherit">Company</Button>
+          </Link>
+          <Link href="/">
+            <Button color="inherit">Logout</Button>
           </Link>
         </Toolbar>
       </AppBar>

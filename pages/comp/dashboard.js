@@ -17,14 +17,24 @@ const Dashboard = ({ candidates_Info }) => {
     city = value;
   };
 
+  let flag = false;
   const handleSubmit = () => {
     tempResults = candidates_Info.filter((el) => {
-      return el.candidate_city.includes(city);
+      flag = false;
+      console.log(el);
+      for (let item of el.candidate_city) {
+        if (item.toLowerCase() === city.toLowerCase()) {
+          flag = true;
+        }
+      }
+      return flag;
     });
     console.log(tempResults);
     setNewResults(tempResults);
     setView(false);
   };
+
+
   const handleReset = () => {
     setView(true);
   };
@@ -71,34 +81,37 @@ const Dashboard = ({ candidates_Info }) => {
     );
   } else {
     return (
-      <div style={{ marginLeft: "50px", marginTop: "30px" }}>
-        <input type="text" onChange={onCityChange} value={temp} />
-        <button onClick={handleSubmit}>Submit</button>
-        <button onClick={handleReset}>Reset</button>
+      <div>
+        <NavBar />
+        <div style={{ marginLeft: "50px", marginTop: "30px" }}>
+          <input type="text" onChange={onCityChange} value={temp} />
+          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleReset}>Reset</button>
 
-        <h1>Coding Test Report</h1>
-        <div id="list">
-          {newResults.map((testResult) => {
-            return (
-              <div key={testResult._id}>
-                <Card>
-                  <Card.Content>
-                    <Card.Header>
+          <h1>Coding Test Report</h1>
+          <div id="list">
+            {newResults.map((testResult) => {
+              return (
+                <div key={testResult._id}>
+                  <Card>
+                    <Card.Content>
+                      <Card.Header>
+                        <Link href={`/api/${testResult._id}`}>
+                          <a>{testResult.candidate_email}</a>
+                        </Link>
+                        <p>From {testResult.candidate_city}</p>
+                      </Card.Header>
+                    </Card.Content>
+                    <Card.Content extra>
                       <Link href={`/api/${testResult._id}`}>
-                        <a>{testResult.candidate_email}</a>
+                        <Button primary>View Code</Button>
                       </Link>
-                      <p>From {testResult.candidate_city}</p>
-                    </Card.Header>
-                  </Card.Content>
-                  <Card.Content extra>
-                    <Link href={`/api/${testResult._id}`}>
-                      <Button primary>View Code</Button>
-                    </Link>
-                  </Card.Content>
-                </Card>
-              </div>
-            );
-          })}
+                    </Card.Content>
+                  </Card>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
