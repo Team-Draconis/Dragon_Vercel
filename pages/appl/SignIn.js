@@ -63,13 +63,6 @@ export default function SignIn() {
         candidate_password: password,
       }),
     }).then((res) => {
-<<<<<<< HEAD
-      console.log("should direct to candidate dashboard which is /appl/info",res.ok);
-      //This router direct not working at this moment
-      if (res.ok) {
-        Router.push({pathname:"/appl/info",query:{test: 'test'}},'/appl/info');
-      }
-=======
       res.json().then((res) => {
         console.log("WHEN USER SUCCESSFULLY VERIFIED", res);
         //This router direct not working at this moment
@@ -80,7 +73,6 @@ export default function SignIn() {
           setErrorMessage("Please input correct email and password");
         }
       });
->>>>>>> 2bef7ac814db030d28384512b22da26c0efff8d5
     });
   };
 

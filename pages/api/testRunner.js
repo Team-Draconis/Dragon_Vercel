@@ -21,20 +21,9 @@ export default async (req, res) => {
     case "POST":
       try {
         fs.writeFileSync(
-<<<<<<< HEAD
-          `${tmpdir}/tester.js`,
-          `import React from 'react'; ${req.body.testResult} export default Codes`
-        );
-        let result;
-        console.log('###################',tmpdir)
-        execute(`yarn test --json --outputFile="${tmpdir}/output.txt"`)
-        let test = fs.readFileSync(`${tmpdir}/output.txt`, {encoding:'utf8', flag:'r'})
-        console.log(test,"@@@@@@@@@@@@@@@@@@@@@")
-=======
           "./codes_file.js",
           `import React from 'react'; ${req.body.codes} export default Codes`
         );
->>>>>>> 2bef7ac814db030d28384512b22da26c0efff8d5
         exec("yarn test", async (error, command, stdout) => {
           let result;
           if (error) {
@@ -56,11 +45,6 @@ export default async (req, res) => {
             await candidate.save();
             res.json(candidate);
           }
-<<<<<<< HEAD
-
-          await res.status(200).send({ data: test });
-=======
->>>>>>> 2bef7ac814db030d28384512b22da26c0efff8d5
         });
       } catch (error) {
         res.status(400).json({ success: false });
