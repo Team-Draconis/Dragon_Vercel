@@ -1,5 +1,6 @@
-import React from 'react'; function Codes() {
-  return (<div><p>Hello World!</p><button>Click</button></div>)
+import React from 'react'; 
+function Codes() {
+    return (<div><p>Easy Mode!!Hello World!</p><button>Click</button></div>)
 }
 <Codes />
- export default Codes
+           export default Codes
