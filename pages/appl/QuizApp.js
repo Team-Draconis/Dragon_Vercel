@@ -18,6 +18,7 @@ import quizReducer from '../../src/QuizReducers/QuizReducer';
 // import './QuizApp.css';
 
 function QuizApp() {
+
     const questions = [
         {
             id: 1,
