@@ -72,7 +72,7 @@ export default function CandidateDashboard({ candidateInfo }) {
     }
 
     if (view === "quiz") {
-      return <QuizApp />;
+      return <QuizApp goBackToDashboard={goBackToDashboard} />;
     }
 
     if (view === "easy") {
