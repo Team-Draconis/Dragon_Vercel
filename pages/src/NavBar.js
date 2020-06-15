@@ -40,6 +40,9 @@ export default function NavBar() {
           <Link href="/comp/signin">
             <Button color="inherit">Company</Button>
           </Link>
+          <Link href="/">
+            <Button color="inherit">Logout</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
