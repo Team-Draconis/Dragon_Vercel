@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 const LoginPage = dynamic(() => import("../register"));
 import SandBox from "../Sandbox";
+import QuizApp from "../QuizApp";
 
 export default function CandidateDashboard({ candidateInfo }) {
   const [view, setView] = useState("initial");
@@ -68,6 +69,10 @@ export default function CandidateDashboard({ candidateInfo }) {
           </Box>
         </div>
       );
+    }
+
+    if (view === "quiz") {
+      return <QuizApp />;
     }
 
     if (view === "easy") {
