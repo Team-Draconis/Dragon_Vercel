@@ -26,12 +26,21 @@ const Split_View = styled.div`
 export default function SandBox({ mode, goBackToDashboard, candidateID }) {
   const [code, setCode] = useState(defaultCode(mode));
   const [counter, setCounter] = useState(600);
+  const [requirement, setRequirement] = useState("");
 
   useEffect(() => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);
   }, [counter]);
+
+  useEffect(() => {
+    setRequirement(
+      requirements(mode)
+        .split("\n")
+        .map((str, index) => <p key={index}>{str}</p>)
+    );
+  }, []);
 
   let editor = null;
   const el = useRef(null);
@@ -96,13 +105,7 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
     <>
       <NavBar />
       <button onClick={goBackToDashboard}>Back to dashboard</button>
-      <div>
-        {requirements(mode)
-          .split("\n")
-          .map((str, index) => (
-            <p key={index}>{str}</p>
-          ))}
-      </div>
+      <div>{requirement}</div>
       <p>Countdown: {counter}</p>
       <div className="app">
         <div className="split-view">
