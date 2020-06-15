@@ -8,7 +8,6 @@ const Dashboard = ({ candidates_Info }) => {
   let temp;
   let city;
   let tempResults;
-  console.log(candidates_Info);
   const [newResults, setNewResults] = useState(candidates_Info);
   const [view, setView] = useState(true);
 
@@ -29,11 +28,9 @@ const Dashboard = ({ candidates_Info }) => {
       }
       return flag;
     });
-    console.log(tempResults);
     setNewResults(tempResults);
     setView(false);
   };
-
 
   const handleReset = () => {
     setView(true);
@@ -54,21 +51,21 @@ const Dashboard = ({ candidates_Info }) => {
                   <Card>
                     <Card.Content>
                       <Card.Header>
-                        <Link href={`/api/${info._id}`}>
+                        <Link href={`/comp/report/${info._id}`}>
                           <a>{info.candidate_email}</a>
                         </Link>
                         <p>From {info.candidate_city}</p>
                       </Card.Header>
                     </Card.Content>
                     <Card.Content extra>
-                      <Link href={`/api/${info._id}`}>
+                      <Link href={`/comp/report/${info._id}`}>
                         <Button primary>View Codes</Button>
                       </Link>
                       <p>From {info.city}</p>
                     </Card.Content>
                     <Card.Content extra>
-                      <Link href={`/api/${info._id}`}>
-                        <Button primary>View Code</Button>
+                      <Link href={`/comp/report/${info._id}`}>
+                        <Button primary>View Test Detail</Button>
                       </Link>
                     </Card.Content>
                   </Card>
@@ -96,14 +93,14 @@ const Dashboard = ({ candidates_Info }) => {
                   <Card>
                     <Card.Content>
                       <Card.Header>
-                        <Link href={`/api/${testResult._id}`}>
+                        <Link href={`/comp/report/${testResult._id}`}>
                           <a>{testResult.candidate_email}</a>
                         </Link>
                         <p>From {testResult.candidate_city}</p>
                       </Card.Header>
                     </Card.Content>
                     <Card.Content extra>
-                      <Link href={`/api/${testResult._id}`}>
+                      <Link href={`/comp/report/${testResult._id}`}>
                         <Button primary>View Code</Button>
                       </Link>
                     </Card.Content>
@@ -120,11 +117,8 @@ const Dashboard = ({ candidates_Info }) => {
 
 Dashboard.getInitialProps = async () => {
   try {
-    const res = await fetch(
-      "http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/candidatesInfo"
-    );
+    const res = await fetch("http://localhost:3000/api/candidatesInfo");
     const { data } = await res.json();
-    console.log("in client");
     return { candidates_Info: data };
   } catch (error) {
     return {

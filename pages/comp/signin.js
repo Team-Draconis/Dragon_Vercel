@@ -74,12 +74,6 @@ export default function SignIn() {
       });
     });
   };
-
-  // useEffect(() => {
-  //   // Prefetch the dashboard page as the user will go there after the login
-  //   Router.prefetch("/dashboard");
-  // }, []);
-
   return (
     <>
       <NavBar />
