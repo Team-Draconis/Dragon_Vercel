@@ -3,14 +3,10 @@
 
 const { exec } = require("child_process");
 import dbConnect from "../../utils/dbConnect";
-import {execute} from '@yarnpkg/shell';
-import * as upath from 'upath';
 const fs = require("fs");
 import Candidate from "../../models/Candidate";
 
-let tmpdir = require('os').tmpdir()
-tmpdir = upath.toUnix(tmpdir)
-console.log(tmpdir)
+
  
 dbConnect();
 
