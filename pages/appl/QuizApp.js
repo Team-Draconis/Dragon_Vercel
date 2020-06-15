@@ -1,8 +1,8 @@
 import React, {useReducer} from 'react';
-import Progress from '../../components/QuizComponents/Progress';
-import Question from '../../components/QuizComponents/Question';
-import Answers from '../../components/QuizComponents/Answers';
-import QuizContext from '../src/QuizContext/QuizContext';
+import Progress from '../../components/Progress';
+import Question from '../../components/Question';
+import Answers from '../../components/Answers';
+import QuizContext from '../../src/Context/QuizContext';
 
 import {
     SET_ANSWERS,
@@ -11,9 +11,9 @@ import {
     SET_ERROR,
     SET_SHOW_RESULTS,
     RESET_QUIZ,
-} from '../src/QuizReducers/types';
+} from '../../src/QuizReducers/types';
 
-import quizReducer from '../src/QuizReducers/QuizReducer';
+import quizReducer from '../../src/QuizReducers/QuizReducer';
 
 // import './QuizApp.css';
 

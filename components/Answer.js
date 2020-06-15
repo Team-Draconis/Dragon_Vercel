@@ -1,5 +1,5 @@
 import React from 'react';
-import {SET_CURRENT_ANSWER, SET_ERROR} from '../../pages/src/QuizReducers/types.js';
+import {SET_CURRENT_ANSWER, SET_ERROR} from '../src/QuizReducers/types.js';
 
 function Answer(props) {
     let classes = ['answer'];
