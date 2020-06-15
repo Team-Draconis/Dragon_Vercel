@@ -5,10 +5,10 @@ import Router from "next/router";
 import NavBar from "../src/NavBar";
 import styled from "styled-components";
 import LegalPop from "../src/LegalPop";
-import requirements from "../src/test/requirements";
-import defaultCode from "../src/test/defaultCode";
-import _ToggleMessage from "../src/test/_ToggleMessage";
-import _AddingCalculator from "../src/test/_AddingCalculator";
+import requirements from "../../src/test/requirements";
+import defaultCode from "../../src/test/defaultCode";
+import _ToggleMessage from "../../src/test/_ToggleMessage";
+import _AddingCalculator from "../../src/test/_AddingCalculator";
 
 //Styling
 const App = styled.div`
