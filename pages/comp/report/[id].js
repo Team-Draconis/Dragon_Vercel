@@ -26,77 +26,77 @@ const Split_View = styled.div`
 `;
 
 function CodeDisplaySandbox({ candidateInfo, view }) {
-  console.log("CANDIDATEINFO IN CodeDisplaySandbox", candidateInfo);
+  if (candidateInfo) {
+    const code =
+      candidateInfo.coding_tests[view][
+        candidateInfo.coding_tests[view].length - 1
+      ].coding_test_codes;
 
-  const code =
-    candidateInfo.coding_tests[view][
-      candidateInfo.coding_tests[view].length - 1
-    ].coding_test_codes;
+    const submitted_at =
+      candidateInfo.coding_tests[view][
+        candidateInfo.coding_tests[view].length - 1
+      ].coding_test_submitted_at;
 
-  const submitted_at =
-    candidateInfo.coding_tests[view][
-      candidateInfo.coding_tests[view].length - 1
-    ].coding_test_submitted_at;
+    const duration =
+      candidateInfo.coding_tests[view][
+        candidateInfo.coding_tests[view].length - 1
+      ].coding_test_duration;
 
-  const duration =
-    candidateInfo.coding_tests[view][
-      candidateInfo.coding_tests[view].length - 1
-    ].coding_test_duration;
+    let editor = null;
+    const el = useRef(null);
+    const testTarget = useRef(null);
+    const result = useRef(null);
+    const codeEditor = useRef(null);
 
-  let editor = null;
-  const el = useRef(null);
-  const testTarget = useRef(null);
-  const result = useRef(null);
-  const codeEditor = useRef(null);
+    const runCode = () => {
+      run(el.current);
+      result.current.innerHTML = "";
+    };
 
-  const runCode = () => {
-    run(el.current);
-    result.current.innerHTML = "";
-  };
+    const run = (element) => {
+      editor = createEditor(element);
+      editor.run(code);
+    };
 
-  const run = (element) => {
-    editor = createEditor(element);
-    editor.run(code);
-  };
+    const testOnBrowser = async () => {
+      result.current.innerHTML = "";
+      await run(testTarget.current);
+      if (view === "easy") {
+        _ToggleMessage();
+      }
+      if (view === "medium") {
+        _AddingCalculator();
+      }
+    };
 
-  const testOnBrowser = async () => {
-    result.current.innerHTML = "";
-    await run(testTarget.current);
-    if (view === "easy") {
-      _ToggleMessage();
-    }
-    if (view === "medium") {
-      _AddingCalculator();
-    }
-  };
+    useEffect(() => {
+      runCode();
+      run();
+      testOnBrowser();
+    }, []);
 
-  useEffect(() => {
-    runCode();
-    run();
-    testOnBrowser();
-  }, []);
-
-  return (
-    <>
-      <p>This test was the latest, submitted at : {submitted_at}</p>
-      <p>Candidate spent : {duration}</p>
-      <div className="app">
-        <div className="split-view">
-          <div className="code-editor">
-            <textarea value={code} ref={codeEditor} />
+    return (
+      <>
+        <p>This test was the latest, submitted at : {submitted_at}</p>
+        <p>Candidate spent : {duration}</p>
+        <div className="app">
+          <div className="split-view">
+            <div className="code-editor">
+              <textarea value={code} ref={codeEditor} />
+            </div>
+            <div className="preview" ref={el} />
           </div>
-          <div className="preview" ref={el} />
+          <div
+            ref={testTarget}
+            id="test-target"
+            style={{ display: "none" }}
+          ></div>
+          <p>Test Results:</p>
+          <div id="test-result" ref={result}></div>
         </div>
-        <div
-          ref={testTarget}
-          id="test-target"
-          style={{ display: "none" }}
-        ></div>
-        <p>Test Results:</p>
-        <div id="test-result" ref={result}></div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
 
 export default function Report({ candidateInfo }) {
