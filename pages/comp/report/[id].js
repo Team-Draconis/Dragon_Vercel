@@ -96,6 +96,8 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
         </div>
       </>
     );
+  } else {
+    return null;
   }
 }
 
@@ -151,6 +153,8 @@ export default function Report({ candidateInfo }) {
         ) : null}
       </>
     );
+  } else {
+    return null;
   }
 }
 
