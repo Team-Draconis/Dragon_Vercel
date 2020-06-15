@@ -12,8 +12,38 @@ import QuizApp from "../QuizApp";
 import { motion } from "framer-motion";
 
 export default function CandidateDashboard({ candidateInfo }) {
+  let temp;
+  let city;
   const [view, setView] = useState("initial");
+  
+  const onAddCity = ({ target: { value } }) => {
+    console.log(value);
+    city = value;
+  };
+  
+  const handleAddCity = (e) => {
+    e.preventDefault();
+    console.log(city);
+    fetch("/api/addCity", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        candidate_email: candidateInfo.candidate_email,
+        candidate_city: city,
+      }),
+    })
+      .then((res) =>
+        res.json().then((res) => {
+          console.log("$$$", res.id);
+          Router.push(`/appl/dashboard/${res.id}`);
+        })
+      )
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  
   const goBackToDashboard = () => {
     setView("initial");
   };
@@ -74,6 +104,8 @@ export default function CandidateDashboard({ candidateInfo }) {
                 </motion.div>
               </Typography>
             </Box>
+            <input type="text" onChange={onAddCity} value={temp} />
+            <button onClick={handleAddCity}>Add Additional City</button>
             {/* {candidateInfo.coding_tests ? (
               JSON.stringify(candidateInfo.coding_tests)
             ) : (
@@ -160,7 +192,7 @@ export default function CandidateDashboard({ candidateInfo }) {
     }
 
     if (view === "quiz") {
-      return <QuizApp goBackToDashboard={goBackToDashboard} />;
+      return <QuizApp />;
     }
 
     if (view === "easy") {
@@ -206,7 +238,7 @@ CandidateDashboard.getInitialProps = async ({ query: { id } }) => {
       candidateInfo: {
         _id: "dummy",
         candidate_name: "dummy",
-        andidate_email: "dummy",
+        candidate_email: "dummy",
         candidate_city: "dummy",
         coding_tests: "dummy",
       },
