@@ -5,7 +5,6 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 const cookie = require("cookie");
 dbConnect();
-
 // company Login
 export default async (req, res) => {
   const { method } = req;

@@ -3,6 +3,20 @@ import React, { useState, useRef, useEffect } from "react";
 import { createEditor } from "../../utils/editor";
 import Router from "next/router";
 import NavBar from "../src/NavBar";
+import styled from "styled-components";
+
+//Styling
+const App = styled.div`
+  box-sizing: border-box;
+  -webkit-fontsmoothing: antialiased;
+  font-family: "Monaco", "Consolas", "sans";
+`;
+
+const Split_View = styled.div`
+  display: flex;
+  width: 100%;
+  min-width: 600px;
+`;
 
 // default code
 const defaultCode = `function Codes() {
