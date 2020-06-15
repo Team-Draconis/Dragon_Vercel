@@ -15,16 +15,16 @@ import {
 
 import quizReducer from "../../src/QuizReducers/QuizReducer";
 
-import styles from '../styles/QuizApp.module.css';
+import styles from "../styles/QuizApp.module.css";
 
 /**
  * Styles is not working for buttons and centering
- *  
+ *
  */
 
 function QuizApp({ goBackToDashboard }) {
-//   const [quizResults, setQuizResults] = useState();
-//   const [selects, setSelects] = useState();
+  //   const [quizResults, setQuizResults] = useState();
+  //   const [selects, setSelects] = useState();
   const questions = [
     {
       id: 1,
@@ -79,35 +79,35 @@ function QuizApp({ goBackToDashboard }) {
     return <div className={styles.error}>{error}</div>;
   };
 
-//   const calculation = () => {
-//     console.log(answers, "<--- ANSWERS");
-//     let resultArray = [];
+  //   const calculation = () => {
+  //     console.log(answers, "<--- ANSWERS");
+  //     let resultArray = [];
 
-//     answers.forEach((answer) => {
-//       resultArray.push(answer.answer);
-//     });
+  //     answers.forEach((answer) => {
+  //       resultArray.push(answer.answer);
+  //     });
 
-//     console.log(resultArray, "<---- RESULT ARRAY");
-//     let correctAnswerArray = [];
+  //     console.log(resultArray, "<---- RESULT ARRAY");
+  //     let correctAnswerArray = [];
 
-//     questions.forEach((question) => {
-//       correctAnswerArray.push(question.correct_answer);
-//     });
+  //     questions.forEach((question) => {
+  //       correctAnswerArray.push(question.correct_answer);
+  //     });
 
-//     console.log(correctAnswerArray, "<---- CORRECT ANSWER ARRAY");
+  //     console.log(correctAnswerArray, "<---- CORRECT ANSWER ARRAY");
 
-//     let count = 0;
+  //     let count = 0;
 
-//     for (let i = 0; i < questions.length; i++) {
-//       if (resultArray[i] === correctAnswerArray[i]) {
-//         count += 1;
-//       }
-//     }
+  //     for (let i = 0; i < questions.length; i++) {
+  //       if (resultArray[i] === correctAnswerArray[i]) {
+  //         count += 1;
+  //       }
+  //     }
 
-//     console.log(count, "<----- COUNT");
-//     setQuizResults(count / questions.length);
-//     console.log(quizResults, "<--- QUIZ RESULTS");
-//   };
+  //     console.log(count, "<----- COUNT");
+  //     setQuizResults(count / questions.length);
+  //     console.log(quizResults, "<--- QUIZ RESULTS");
+  //   };
 
   const renderResultMark = (question, answer) => {
     // setSelects(answers);
@@ -161,26 +161,66 @@ function QuizApp({ goBackToDashboard }) {
 
   if (showResults) {
     return (
-      <div className={styles.container}>
+      <div className="container results">
         <h2>Results</h2>
         <ul>{renderResultsData()}</ul>
         {/* Call Function for Correct Answers Logic */}
-        <button className={styles.btnprimary} onClick={restart}>
+        <button className="btn btnPrimary" onClick={restart}>
           Restart
         </button>
-        <button onClick={goBackToDashboard}>Back to dashboard</button>
+        <button className="btn btnPrimary" onClick={goBackToDashboard}>
+          Back to dashboard
+        </button>
         {/* <button onClick={calculation}>Submit Result</button> */}
+        <style jsx global>{`
+          .container {
+            background-color: #282c34;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            color: white;
+            text-align: center;
+          }
+          .btn {
+            color: #4f4c4c;
+            background-color: #f4f4f4;
+            padding: 10px 50px;
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+          }
+          .btnPrimary {
+            color: gray;
+            background-color: #ffc107;
+            font-weight: bold;
+          }
+          h1,
+          h2 {
+            margin: 10px;
+          }
+          .results span.correct {
+            color: #c8ffbb;
+          }
+
+          .results span.failed {
+            color: #f27c7c;
+          }
+        `}</style>
       </div>
     );
   } else {
     return (
       <QuizContext.Provider value={{ state, dispatch }}>
-        <div className={styles.container}>
+        <div className="container">
           <Progress total={questions.length} current={currentQuestion + 1} />
           <Question />
           {renderError()}
           <Answers />
-          <button className={styles.btn} onClick={next}>
+          <button className="btn btnPrimary" onClick={next}>
             Confirm and Continue
           </button>
         </div>

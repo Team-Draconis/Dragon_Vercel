@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import styles from "../styles/Navbar.module.css";
+import Box from "@material-ui/core/Box";
 
 export default function NavBar() {
   return (
@@ -20,29 +21,34 @@ export default function NavBar() {
     //   </Link>
     // </div>
     <div>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
+      <AppBar position="static" backgroundColor="black">
+        <Toolbar display="flex" justifyContent="flex-start">
+          {/* <IconButton
             edge="start"
             // className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           {/* <Typography variant="h6">Home</Typography> */}
-          <Link href="/">
-            <Button color="inherit">Home</Button>
-          </Link>
+          <Box style={{ marginRight: "auto" }}>
+            <Link href="/">
+              <Button color="inherit">Home</Button>
+            </Link>
+          </Box>
+          {/* </Link>
           <Link href="/appl/SignIn">
             <Button color="inherit">Login</Button>
           </Link>
           <Link href="/comp/signin">
             <Button color="inherit">Company</Button>
-          </Link>
-          <Link href="/">
-            <Button color="inherit">Logout</Button>
-          </Link>
+          </Link> */}
+          <Box>
+            <Link href="/">
+              <Button color="inherit">Logout</Button>
+            </Link>
+          </Box>
         </Toolbar>
       </AppBar>
     </div>
