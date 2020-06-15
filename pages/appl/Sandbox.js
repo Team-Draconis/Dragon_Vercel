@@ -1,5 +1,5 @@
 import "./styles.module.scss";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { createEditor } from "../../utils/editor";
 import Router from "next/router";
 import NavBar from "../src/NavBar";
@@ -35,6 +35,13 @@ const requirements = {
 export default function SandBox({ mode, goBackToDashboard, candidateID }) {
   const [code, setCode] = useState(defaultCode);
   const [testResult, setTestResult] = useState(null);
+  const [counter, setCounter] = useState(60);
+
+  useEffect(() => {
+    const timer =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
+  }, [counter]);
 
   let editor = null;
   const el = useRef(null);
@@ -87,6 +94,7 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
       <NavBar />
       <button onClick={goBackToDashboard}>Back to dashboard</button>
       <p>Requirements: {requirements[mode]}</p>
+      <p>Countdown: {counter}</p>
       <div className="app">
         <div className="split-view">
           <div className="code-editor">
