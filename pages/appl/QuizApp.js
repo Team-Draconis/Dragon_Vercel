@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import Progress from "../../components/Progress";
 import Question from "../../components/Question";
 import Answers from "../../components/Answers";
@@ -15,7 +15,16 @@ import {
 
 import quizReducer from "../../src/QuizReducers/QuizReducer";
 
-function QuizApp() {
+import styles from '../styles/QuizApp.module.css';
+
+/**
+ * Styles is not working for buttons and centering
+ *  
+ */
+
+function QuizApp({ goBackToDashboard }) {
+//   const [quizResults, setQuizResults] = useState();
+//   const [selects, setSelects] = useState();
   const questions = [
     {
       id: 1,
@@ -67,15 +76,46 @@ function QuizApp() {
       return;
     }
 
-    return <div className="error">{error}</div>;
+    return <div className={styles.error}>{error}</div>;
   };
 
+//   const calculation = () => {
+//     console.log(answers, "<--- ANSWERS");
+//     let resultArray = [];
+
+//     answers.forEach((answer) => {
+//       resultArray.push(answer.answer);
+//     });
+
+//     console.log(resultArray, "<---- RESULT ARRAY");
+//     let correctAnswerArray = [];
+
+//     questions.forEach((question) => {
+//       correctAnswerArray.push(question.correct_answer);
+//     });
+
+//     console.log(correctAnswerArray, "<---- CORRECT ANSWER ARRAY");
+
+//     let count = 0;
+
+//     for (let i = 0; i < questions.length; i++) {
+//       if (resultArray[i] === correctAnswerArray[i]) {
+//         count += 1;
+//       }
+//     }
+
+//     console.log(count, "<----- COUNT");
+//     setQuizResults(count / questions.length);
+//     console.log(quizResults, "<--- QUIZ RESULTS");
+//   };
+
   const renderResultMark = (question, answer) => {
+    // setSelects(answers);
     if (question.correct_answer === answer.answer) {
-      return <span className="correct">Correct</span>;
+      return <span className={styles.correct}>Correct</span>;
     }
 
-    return <span className="failed">Failed</span>;
+    return <span className={styles.failed}>Failed</span>;
   };
 
   const renderResultsData = () => {
@@ -121,23 +161,26 @@ function QuizApp() {
 
   if (showResults) {
     return (
-      <div className="container results">
+      <div className={styles.container}>
         <h2>Results</h2>
         <ul>{renderResultsData()}</ul>
-        <button className="btn btn-primary" onClick={restart}>
+        {/* Call Function for Correct Answers Logic */}
+        <button className={styles.btnprimary} onClick={restart}>
           Restart
         </button>
+        <button onClick={goBackToDashboard}>Back to dashboard</button>
+        {/* <button onClick={calculation}>Submit Result</button> */}
       </div>
     );
   } else {
     return (
       <QuizContext.Provider value={{ state, dispatch }}>
-        <div className="container">
+        <div className={styles.container}>
           <Progress total={questions.length} current={currentQuestion + 1} />
           <Question />
           {renderError()}
           <Answers />
-          <button className="btn btn-primary" onClick={next}>
+          <button className={styles.btn} onClick={next}>
             Confirm and Continue
           </button>
         </div>
