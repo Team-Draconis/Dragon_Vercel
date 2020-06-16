@@ -79,7 +79,9 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
     }
     if (mode === "hard") {
       await _LoopOver();
-      isAllPassed();
+      setTimeout(() => {
+        isAllPassed();
+      }, 150);
     }
   };
 
@@ -137,16 +139,12 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           </div>
           <div className="preview" ref={el} />
         </div>
-        {/* <button onClick={runCode}>Run</button>
-        <button onClick={clear}>start from scratch</button>
-        <button onClick={testOnBrowser}>Run test on the browser</button> */}
-        {/* <div
-
+        <div
           ref={testTarget}
           id="test-target"
           style={{ display: "none" }}
         ></div>
-        <div id="test-result" ref={result}></div> */}
+        <div id="test-result" ref={result}></div>
         {/* <LegalPop
           canID={candidateID}
           canCode={code}
