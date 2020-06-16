@@ -76,7 +76,7 @@ h2 {
 }
 
 .btnPrimary {
-  color: black;
-  background-color: #ffc107;
-  font-weight: bold;
+    color: gray;
+    background-color: #ffc107;
+    font-weight: bold;
 }
