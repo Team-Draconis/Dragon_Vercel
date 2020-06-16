@@ -14,6 +14,15 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Lemonada:wght@700&display=swap"
+            rel="stylesheet"
+          ></link>
+          <link href="/fonts/LilitaOne-Regular.css" rel="stylesheet"></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <body>
           <Main />

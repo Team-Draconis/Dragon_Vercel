@@ -1,4 +1,4 @@
-//This is for company to view all the candidates list. at comp/dash
+//comp/dashboard
 
 import dbConnect from "../../utils/dbConnect";
 import Candidate from "../../models/Candidate";
@@ -11,8 +11,8 @@ export const authenticated = (fn) => async (req, res) => {
     err,
     decoded
   ) {
-    if (!err && decoded) {
-      console.log("### DECODED COMPANY ###", decoded);
+    // must have company token, candidate token could not get the data
+    if (!err && decoded.company_sub) {
       return await fn(req, res);
     }
     res.status(401).json({ message: "Sorry you are not authenticated." });

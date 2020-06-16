@@ -12,18 +12,30 @@ export default function defaultCode(mode) {
       }
 <ToggleMessage />
           `,
-    medium: `
-function Codes() {
-    return (<div><p>Hello World!</p><button>Click</button></div>)
+    medium: `class AddingCalculator extends React.Component {
+  render() {
+    return (
+      <div>    
+        <input></input>
+        <input></input>
+        <button>add</button>
+        <p>result</p>
+      </div>
+    );
+  }
 }
-<Codes />
-          `,
-    hard: `
-function Codes() {
-    return (<div><p>Hello World!</p><button>Click</button></div>)
-}
-<Codes />
-      `,
+<AddingCalculator />`,
+    hard: `class LoopOver extends React.Component {
+      render() {
+        return (
+          <div>
+            <p>Pokemon1</p>
+            <p>Pokemon2</p>
+          </div>
+        );
+      }
+    }
+  <LoopOver />`,
   };
   return obj[mode];
 }

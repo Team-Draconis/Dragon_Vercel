@@ -1,4 +1,4 @@
-// save candidate codes and duration when they click the 'submit results' button in appl/Sandbox
+//Save candidate codes and duration when they click the 'submit results' button in appl/Sandbox
 
 import dbConnect from "../../utils/dbConnect";
 import Candidate from "../../models/Candidate";

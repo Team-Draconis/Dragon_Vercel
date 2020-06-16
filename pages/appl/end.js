@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 export default function End() {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Box mt={30} align="center">
         <motion.h2
           initial={{ y: -250 }}
@@ -19,17 +19,21 @@ export default function End() {
             delay: 0.2,
             type: "spring",
           }}
+          style={{
+            fontFamily: "Josefin Sans",
+          }}
         >
           Thank You! 🐉
         </motion.h2>
       </Box>
-      <Box align="center" m={10}>
+      <Box align="center" m={2}>
         <motion.div
           initial={{ y: -200 }}
           animate={{ y: -100, fontSize: 120 }}
           transition={{
             delay: 0.2,
             type: "spring",
+            yoyo: Infinity,
           }}
         >
           <Link href="/">

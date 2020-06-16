@@ -1,11 +1,12 @@
 //For company login, to check the pass and company's name match
+//If matched, issume companytoken
 import dbConnect from "../../utils/dbConnect";
 const Company = require("../../models/Company");
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-// const cookie = require("cookie");
+
 dbConnect();
-// company Login
+
 export default async (req, res) => {
   const { method } = req;
   switch (method) {
@@ -25,16 +26,6 @@ export default async (req, res) => {
             const jwt = sign(claims, process.env.SECRET_TOKEN, {
               expiresIn: "1h",
             });
-            // res.setHeader(
-            //   "Set-Cookie",
-            //   cookie.serialize(process.env.SECRET_COMPANY, jwt, {
-            //     httpOnly: true,
-            //     secure: process.env.NODE_ENV !== "development",
-            //     sameSite: "Strict",
-            //     maxAge: 3600,
-            //     path: "/",
-            //   })
-            // );
             res.status(200).json({ authToken: jwt });
           } else {
             res

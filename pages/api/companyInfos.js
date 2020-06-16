@@ -1,4 +1,4 @@
-// this is for register company, we will do this manually using postman as admin
+// register company, currently needs postman to add new company
 import { hash } from "bcrypt";
 import dbConnect from "../../utils/dbConnect";
 const Company = require("../../models/Company");

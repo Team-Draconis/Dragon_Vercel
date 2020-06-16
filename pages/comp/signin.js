@@ -19,7 +19,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="/">
         Dragon Tester
       </Link>{" "}
       {new Date().getFullYear()}
@@ -77,7 +77,7 @@ export default function SignIn() {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -100,6 +100,7 @@ export default function SignIn() {
               autoFocus
               value={name}
               onChange={(e) => setName(e.target.value)}
+              color="secondary"
             />
             <TextField
               variant="outlined"
@@ -113,9 +114,10 @@ export default function SignIn() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              color="secondary"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox value="remember" color="secondary" />}
               label="Remember me"
             />
             <Link href="info">
@@ -131,16 +133,16 @@ export default function SignIn() {
               </Button>
             </Link>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
-              </Grid>
-              <Grid item>
+              </Grid> */}
+              {/* <Grid item>
                 <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
           </form>
           <h2>{errorMessage}</h2>

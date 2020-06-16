@@ -18,7 +18,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="/">
         Dragon Tester
       </Link>{" "}
       {new Date().getFullYear()}
@@ -97,6 +97,8 @@ export default function SignIn() {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            color="secondary"
+            placeholder="Your email here"
           />
           <TextField
             variant="outlined"
@@ -110,9 +112,11 @@ export default function SignIn() {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            color="secondary"
+            placeholder="Your password here"
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="secondary" />}
             label="Remember me"
           />
           <Link href="info">
@@ -128,13 +132,8 @@ export default function SignIn() {
             </Button>
           </Link>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/appl/register" variant="body2" color="secondary">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
