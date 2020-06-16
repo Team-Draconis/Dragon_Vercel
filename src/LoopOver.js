@@ -39,7 +39,9 @@ class LoopOver extends React.Component {
       .then((res) => res.json())
       .then((json) => {
         const pokeList = json.results.map((pokemon) => (
-          <p key={pokemon.name}>{pokemon.name}</p>
+          <p key={pokemon.name} className="poke-name">
+            {pokemon.name}
+          </p>
         ));
         this.setState({ pokemon: pokeList });
       });

@@ -28,4 +28,14 @@ export default function test(element, target, expected, description) {
     }
     document.getElementById("test-result").appendChild(container);
   }
+
+  if (target === "length") {
+    const container = document.createElement("div");
+    if (element.length === expected) {
+      container.innerHTML = `Pass - ${description}`;
+    } else {
+      container.innerHTML = `Fail - ${description}`;
+    }
+    document.getElementById("test-result").appendChild(container);
+  }
 }
