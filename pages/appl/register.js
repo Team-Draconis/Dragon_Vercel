@@ -23,8 +23,8 @@ export default function Register() {
     })
       .then((res) =>
         res.json().then((res) => {
-          console.log("$$$", res.id);
-          Router.push(`/appl/dashboard/${res.id}`);
+          console.log(res);
+          Router.push(`/appl/end`);
         })
       )
       .catch((error) => {

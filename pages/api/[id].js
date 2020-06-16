@@ -2,12 +2,29 @@
 // for company to jump into specific candidate
 import dbConnect from "../../utils/dbConnect";
 const Candidate = require("../../models/Candidate");
+import { verify } from "jsonwebtoken";
 
 dbConnect();
 
-export default async (req, res) => {
+export const authenticated = (fn) => async (req, res) => {
+  verify(req.headers.token, process.env.SECRET_TOKEN, async function (
+    err,
+    decoded
+  ) {
+    if (!err && decoded) {
+      console.log("### DECODED ###", decoded);
+      if (req.query.id === decoded.sub || decoded.company_sub) {
+        return await fn(req, res);
+      } else {
+        res.status(401).json({ message: "Sorry you are not authenticated." });
+      }
+    }
+  });
+};
+
+export default authenticated(async (req, res) => {
   const { method } = req;
-  console.log(req.query.id);
+
   switch (method) {
     case "GET":
       try {
@@ -18,4 +35,4 @@ export default async (req, res) => {
       }
       break;
   }
-};
+});
