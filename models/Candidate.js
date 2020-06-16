@@ -29,6 +29,7 @@ const CandidateSchema = new mongoose.Schema({
         coding_test_codes: String,
         coding_test_result: String,
         coding_test_submitted_at: { type: Date, default: Date.now },
+        coding_test_duration: String,
       },
     ],
     medium: [
@@ -36,6 +37,7 @@ const CandidateSchema = new mongoose.Schema({
         coding_test_codes: String,
         coding_test_result: String,
         coding_test_submitted_at: { type: Date, default: Date.now },
+        coding_test_duration: String,
       },
     ],
     hard: [
@@ -43,6 +45,7 @@ const CandidateSchema = new mongoose.Schema({
         coding_test_codes: String,
         coding_test_result: String,
         coding_test_submitted_at: { type: Date, default: Date.now },
+        coding_test_duration: String,
       },
     ],
   },

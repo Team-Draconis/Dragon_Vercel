@@ -1,3 +1,6 @@
+//Zowie's memo:
+//When candidate clicks 'agree' in legal page, only duration, codes will be saved to db. Test result is unnecessary since if we have codes we can get the result by running it in browser anyway.
+
 import "./styles.module.scss";
 import React, { useState, useRef, useEffect } from "react";
 import { createEditor } from "../../utils/editor";
@@ -61,26 +64,6 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
     editor.run(code);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch("/api/testRunner", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: candidateID,
-        codes: code,
-        test_mode: mode,
-        test_result: "Here comes test result",
-      }),
-    })
-      .then((res) => {
-        Router.push("/appl/end");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const testOnBrowser = async () => {
     result.current.innerHTML = "";
     await run(testTarget.current);
@@ -129,6 +112,23 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           </div>
           <div className="preview" ref={el} />
         </div>
+        <button onClick={runCode}>Run</button>
+        <button onClick={clear}>start from scratch</button>
+        <button onClick={testOnBrowser}>Run test on the browser</button>
+        <div
+          ref={testTarget}
+          id="test-target"
+          style={{ display: "none" }}
+        ></div>
+        <div id="test-result" ref={result}></div>
+        <LegalPop
+          canID={candidateID}
+          canCode={code}
+          canMode={mode}
+          canCounter={`${Math.floor((600 - counter) / 60)}mins ${
+            (600 - counter) % 60
+          }secs`}
+        />
         <Box display="flex" mt={2} mb={3}>
           <Box m={1} ml={1}>
             <Button variant="contained" color="primary" onClick={runCode}>
