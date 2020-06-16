@@ -67,7 +67,7 @@ class AddingCalculator extends React.Component {
         <button className="add" onClick={this.adding}>
           add
         </button>
-        <p data-testid="result">{this.state.total}</p>
+        <p className="adding-result">{this.state.total}</p>
       </div>
     );
   }
