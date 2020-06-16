@@ -1,9 +1,15 @@
 import { Card } from "semantic-ui-react";
 import { useCallback, useEffect } from "react";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import NavBar from "../src/NavBar";
 import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 const Dashboard = ({ candidates_Info }) => {
   let temp;
@@ -59,11 +65,9 @@ const Dashboard = ({ candidates_Info }) => {
                       </Card.Header>
                     </Card.Content>
                     <Card.Content extra>
-
                       <p>From {info.city}</p>
                     </Card.Content>
                     <Card.Content extra>
-
                       <Link href={`/comp/report/${info._id}`}>
                         <Button
                           variant="contained"
@@ -106,8 +110,7 @@ const Dashboard = ({ candidates_Info }) => {
                       </Card.Header>
                     </Card.Content>
                     <Card.Content extra>
-
-                       <Link href={`/comp/report/${testResult._id}`}>
+                      <Link href={`/comp/report/${testResult._id}`}>
                         <Button
                           variant="contained"
                           color="secondary"
@@ -130,7 +133,6 @@ const Dashboard = ({ candidates_Info }) => {
 
 Dashboard.getInitialProps = async () => {
   try {
-
     const res = await fetch(
       // "http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/candidatesInfo"
       "http://localhost:3000/api/candidatesInfo"

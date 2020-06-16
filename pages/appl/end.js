@@ -19,11 +19,14 @@ export default function End() {
             delay: 0.2,
             type: "spring",
           }}
+          style={{
+            fontFamily: "Josefin Sans",
+          }}
         >
           Thank You! 🐉
         </motion.h2>
       </Box>
-      <Box align="center" m={10}>
+      <Box align="center" m={2}>
         <motion.div
           initial={{ y: -200 }}
           animate={{ y: -100, fontSize: 120 }}

@@ -15,6 +15,7 @@ import _AddingCalculator from "../../src/test/_AddingCalculator";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import { motion } from "framer-motion";
 
 //Styling
 const App = styled.div`
@@ -96,7 +97,13 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
         </Button>
       </Box>
       <Box align="center">
-        <Typography variant="body1">{requirement}</Typography>
+        <motion.div
+          initial={{ y: 26 * 1.2, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+        >
+          <Typography variant="body1">{requirement}</Typography>
+        </motion.div>
       </Box>
       <Box ml={3}>
         <Typography variant="h6">Remaining Time: {counter}</Typography>
@@ -112,23 +119,23 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           </div>
           <div className="preview" ref={el} />
         </div>
-        <button onClick={runCode}>Run</button>
+        {/* <button onClick={runCode}>Run</button>
         <button onClick={clear}>start from scratch</button>
-        <button onClick={testOnBrowser}>Run test on the browser</button>
-        <div
+        <button onClick={testOnBrowser}>Run test on the browser</button> */}
+        {/* <div
           ref={testTarget}
           id="test-target"
           style={{ display: "none" }}
         ></div>
-        <div id="test-result" ref={result}></div>
-        <LegalPop
+        <div id="test-result" ref={result}></div> */}
+        {/* <LegalPop
           canID={candidateID}
           canCode={code}
           canMode={mode}
           canCounter={`${Math.floor((600 - counter) / 60)}mins ${
             (600 - counter) % 60
           }secs`}
-        />
+        /> */}
         <Box display="flex" mt={2} mb={3}>
           <Box m={1} ml={1}>
             <Button variant="contained" color="primary" onClick={runCode}>
@@ -157,7 +164,15 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
             <div id="test-result" ref={result}></div>
           </Box>
           <Box marginLeft="auto" mt={1} mr={1}>
-            <LegalPop canID={candidateID} canCode={code} canMode={mode} />
+            {/* <LegalPop canID={candidateID} canCode={code} canMode={mode} /> */}
+            <LegalPop
+              canID={candidateID}
+              canCode={code}
+              canMode={mode}
+              canCounter={`${Math.floor((600 - counter) / 60)}mins ${
+                (600 - counter) % 60
+              }secs`}
+            />
           </Box>
         </Box>
         {/* <button onClick={handleSubmit}>Submit</button>

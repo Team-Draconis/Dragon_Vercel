@@ -15,12 +15,12 @@ export default function CandidateDashboard({ candidateInfo }) {
   let temp;
   let city;
   const [view, setView] = useState("initial");
-  
+
   const onAddCity = ({ target: { value } }) => {
     console.log(value);
     city = value;
   };
-  
+
   const handleAddCity = (e) => {
     e.preventDefault();
     console.log(city);
@@ -43,7 +43,6 @@ export default function CandidateDashboard({ candidateInfo }) {
       });
   };
 
-  
   const goBackToDashboard = () => {
     setView("initial");
   };
@@ -53,6 +52,10 @@ export default function CandidateDashboard({ candidateInfo }) {
       return (
         <div>
           <NavBar />
+          <Box>
+            <input type="text" onChange={onAddCity} value={temp} />
+            <button onClick={handleAddCity}>Add Additional City</button>
+          </Box>
           {/* <Box display="flex">
             <Box>HOME</Box>
             <Box ml={165}>Log Out</Box>
@@ -104,8 +107,7 @@ export default function CandidateDashboard({ candidateInfo }) {
                 </motion.div>
               </Typography>
             </Box>
-            <input type="text" onChange={onAddCity} value={temp} />
-            <button onClick={handleAddCity}>Add Additional City</button>
+
             {/* {candidateInfo.coding_tests ? (
               JSON.stringify(candidateInfo.coding_tests)
             ) : (
@@ -192,7 +194,7 @@ export default function CandidateDashboard({ candidateInfo }) {
     }
 
     if (view === "quiz") {
-      return <QuizApp />;
+      return <QuizApp goBackToDashboard={goBackToDashboard} />;
     }
 
     if (view === "easy") {
