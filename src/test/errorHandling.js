@@ -1,5 +1,5 @@
-export default function errorHandling(description) {
+export default function errorHandling() {
   const container = document.createElement("div");
-  container.innerHTML = `Fail - ${description}`;
+  container.innerHTML = `Fail - Your code is wrong. Please check requirements and try again.`;
   document.getElementById("test-result").appendChild(container);
 }
