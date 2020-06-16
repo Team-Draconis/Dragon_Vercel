@@ -9,10 +9,41 @@ import { useState } from "react";
 const LoginPage = dynamic(() => import("../register"));
 import SandBox from "../Sandbox";
 import QuizApp from "../QuizApp";
+import { motion } from "framer-motion";
 
 export default function CandidateDashboard({ candidateInfo }) {
+  let temp;
+  let city;
   const [view, setView] = useState("initial");
+  
+  const onAddCity = ({ target: { value } }) => {
+    console.log(value);
+    city = value;
+  };
+  
+  const handleAddCity = (e) => {
+    e.preventDefault();
+    console.log(city);
+    fetch("/api/addCity", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        candidate_email: candidateInfo.candidate_email,
+        candidate_city: city,
+      }),
+    })
+      .then((res) =>
+        res.json().then((res) => {
+          console.log("$$$", res.id);
+          Router.push(`/appl/dashboard/${res.id}`);
+        })
+      )
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  
   const goBackToDashboard = () => {
     setView("initial");
   };
@@ -22,57 +53,146 @@ export default function CandidateDashboard({ candidateInfo }) {
       return (
         <div>
           <NavBar />
-          <Box mt={30}>
-            <Typography variant="h4" component="h1" align="center">
-              {`Welcome to Dragon, ${candidateInfo.candidate_name}`}
+          {/* <Box display="flex">
+            <Box>HOME</Box>
+            <Box ml={165}>Log Out</Box>
+          </Box> */}
+          <Box mt={22}>
+            <Typography
+              variant="h3"
+              component="h1"
+              align="center"
+              style={{ fontFamily: "Josefin Sans" }}
+            >
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 0.7 }}
+              >
+                {`Hello ${candidateInfo.candidate_name} 🐲  This is your dashboard`}
+              </motion.div>
             </Typography>
-            <p>{candidateInfo.candidate_email}</p>
-            <p>{candidateInfo.candidate_city}</p>
-            {candidateInfo.coding_tests ? (
+            <Box mt={3}>
+              <Typography
+                variant="h4"
+                component="h1"
+                align="center"
+                style={{ fontFamily: "Josefin Sans" }}
+              >
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.2 }}
+                >
+                  {`Your email address is ${candidateInfo.candidate_email}`}
+                </motion.div>
+              </Typography>
+            </Box>
+            <Box mt={3}>
+              <Typography
+                variant="h4"
+                component="h1"
+                align="center"
+                style={{ fontFamily: "Josefin Sans" }}
+              >
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                >
+                  {`You are interested in working in ${candidateInfo.candidate_city}`}
+                </motion.div>
+              </Typography>
+            </Box>
+            <input type="text" onChange={onAddCity} value={temp} />
+            <button onClick={handleAddCity}>Add Additional City</button>
+            {/* {candidateInfo.coding_tests ? (
               JSON.stringify(candidateInfo.coding_tests)
             ) : (
               <p>No taken the code test yet</p>
-            )}
+            )} */}
           </Box>
-          <Box align="center" m={10}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setView("quiz")}
+          <Box mt={15}>
+            <Typography
+              variant="h4"
+              component="h1"
+              align="center"
+              style={{ fontFamily: "Josefin Sans" }}
             >
-              Quiz Test
-            </Button>
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+              >
+                Test Your Skills
+              </motion.div>
+            </Typography>
           </Box>
-          <Box align="center" m={10}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setView("easy")}
-            >
-              Easy Mode
-            </Button>
-          </Box>
+          <Box display="flex" justifyContent="center">
+            <Box align="center" m={8}>
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setView("quiz")}
+                >
+                  Quiz Test
+                </Button>
+              </motion.div>
+            </Box>
+            <Box align="center" m={8}>
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setView("easy")}
+                >
+                  Easy Mode
+                </Button>
+              </motion.div>
+            </Box>
 
-          <Box align="center" m={10} onClick={() => setView("medium")}>
-            <Button variant="contained" color="primary">
-              Medium Mode
-            </Button>
-          </Box>
-          <Box align="center" m={10}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setView("hard")}
-            >
-              Hard Mode
-            </Button>
+            <Box align="center" m={8} onClick={() => setView("medium")}>
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+              >
+                <Button variant="contained" color="primary">
+                  Medium Mode
+                </Button>
+              </motion.div>
+            </Box>
+            <Box align="center" m={8}>
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setView("hard")}
+                >
+                  Hard Mode
+                </Button>
+              </motion.div>
+            </Box>
           </Box>
         </div>
       );
     }
 
     if (view === "quiz") {
-      return <QuizApp goBackToDashboard={goBackToDashboard} />;
+      return <QuizApp />;
     }
 
     if (view === "easy") {
@@ -118,7 +238,7 @@ CandidateDashboard.getInitialProps = async ({ query: { id } }) => {
       candidateInfo: {
         _id: "dummy",
         candidate_name: "dummy",
-        andidate_email: "dummy",
+        candidate_email: "dummy",
         candidate_city: "dummy",
         coding_tests: "dummy",
       },

@@ -1,8 +1,9 @@
-import { Card, Button } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import { useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useState } from "react";
 import NavBar from "../src/NavBar";
+import Button from "@material-ui/core/Button";
 
 const Dashboard = ({ candidates_Info }) => {
   let temp;
@@ -58,14 +59,19 @@ const Dashboard = ({ candidates_Info }) => {
                       </Card.Header>
                     </Card.Content>
                     <Card.Content extra>
-                      <Link href={`/comp/report/${info._id}`}>
-                        <Button primary>View Codes</Button>
-                      </Link>
+
                       <p>From {info.city}</p>
                     </Card.Content>
                     <Card.Content extra>
+
                       <Link href={`/comp/report/${info._id}`}>
-                        <Button primary>View Test Detail</Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          align="center"
+                        >
+                          View Test Detail
+                        </Button>
                       </Link>
                     </Card.Content>
                   </Card>
@@ -100,8 +106,15 @@ const Dashboard = ({ candidates_Info }) => {
                       </Card.Header>
                     </Card.Content>
                     <Card.Content extra>
-                      <Link href={`/comp/report/${testResult._id}`}>
-                        <Button primary>View Code</Button>
+
+                       <Link href={`/comp/report/${testResult._id}`}>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          align="center"
+                        >
+                          View Code
+                        </Button>
                       </Link>
                     </Card.Content>
                   </Card>
@@ -117,7 +130,11 @@ const Dashboard = ({ candidates_Info }) => {
 
 Dashboard.getInitialProps = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/candidatesInfo");
+
+    const res = await fetch(
+      // "http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/candidatesInfo"
+      "http://localhost:3000/api/candidatesInfo"
+    );
     const { data } = await res.json();
     return { candidates_Info: data };
   } catch (error) {
