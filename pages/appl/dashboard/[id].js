@@ -17,6 +17,10 @@ export default function CandidateDashboard({ candidateInfo }) {
   const [view, setView] = useState("initial");
 
   const onAddCity = ({ target: { value } }) => {
+    city = value;
+  };
+
+  const onRemoveCity = ({ target: { value } }) => {
     console.log(value);
     city = value;
   };
@@ -25,6 +29,28 @@ export default function CandidateDashboard({ candidateInfo }) {
     e.preventDefault();
     console.log(city);
     fetch("/api/addCity", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        candidate_email: candidateInfo.candidate_email,
+        candidate_city: city,
+      }),
+    })
+      .then((res) =>
+        res.json().then((res) => {
+          console.log("$$$", res.id);
+          Router.push(`/appl/dashboard/${res.id}`);
+        })
+      )
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleRemoveCity = (e) => {
+    e.preventDefault();
+    console.log(city);
+    fetch("/api/removeCity", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -107,7 +133,10 @@ export default function CandidateDashboard({ candidateInfo }) {
                 </motion.div>
               </Typography>
             </Box>
-
+            <input type="text" onChange={onAddCity} value={temp} />
+            <button onClick={handleAddCity}>Add Additional City</button>
+            <input type="text" onChange={onRemoveCity} value={temp} />
+            <button onClick={handleRemoveCity}>Remove City</button>
             {/* {candidateInfo.coding_tests ? (
               JSON.stringify(candidateInfo.coding_tests)
             ) : (

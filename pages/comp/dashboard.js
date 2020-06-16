@@ -10,8 +10,15 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Box from "@material-ui/core/Box";
 
 const Dashboard = ({ candidates_Info }) => {
+  const useStyles = makeStyles((theme) => ({
+    seeMore: {
+      marginTop: theme.spacing(3),
+    },
+  }));
+
   let temp;
   let city;
   let tempResults;
@@ -46,12 +53,14 @@ const Dashboard = ({ candidates_Info }) => {
     return (
       <>
         <NavBar />
-        <div style={{ marginLeft: "50px", marginTop: "30px" }}>
+        {/* <div style={{ marginLeft: "50px", marginTop: "30px" }}> */}
+        <Box align="center" m={5}>
+          <h1>Coding Test Report</h1>
           <input type="text" onChange={onCityChange} value={temp} />
           <button onClick={handleSubmit}>Submit</button>
           <button onClick={handleReset}>Reset</button>
-          <h1>Coding Test Report</h1>
-          <div id="list">
+        </Box>
+        {/* <div id="list">
             {candidates_Info.map((info) => {
               return (
                 <div key={info._id}>
@@ -82,21 +91,60 @@ const Dashboard = ({ candidates_Info }) => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
+        {/* </div> */}
+        <div>
+          <Table size="large">
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>City</TableCell>
+                <TableCell>Score</TableCell>
+                <TableCell align="right">View Test Detail</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {candidates_Info.map((info) => (
+                <TableRow key={info._id}>
+                  <TableCell></TableCell>
+                  <TableCell>{info.candidate_email}</TableCell>
+                  <TableCell>{info.candidate_city}</TableCell>
+                  <TableCell></TableCell>
+                  <TableCell align="right">
+                    <Link href={`/comp/report/${info._id}`}>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        align="center"
+                      >
+                        View Test Detail
+                      </Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
+        {/* <div className={classes.seeMore}>
+          <Link color="primary" href="#" onClick={preventDefault}>
+            See more orders
+          </Link>
+        </div> */}
       </>
     );
   } else {
     return (
-      <div>
+      <>
         <NavBar />
-        <div style={{ marginLeft: "50px", marginTop: "30px" }}>
+        <Box align="center" m={5}>
+          <h1>Coding Test Report</h1>
           <input type="text" onChange={onCityChange} value={temp} />
           <button onClick={handleSubmit}>Submit</button>
           <button onClick={handleReset}>Reset</button>
-
-          <h1>Coding Test Report</h1>
-          <div id="list">
+        </Box>
+        {/* <div id="list">
             {newResults.map((testResult) => {
               return (
                 <div key={testResult._id}>
@@ -124,9 +172,42 @@ const Dashboard = ({ candidates_Info }) => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
+        <div>
+          <Table size="large">
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>City</TableCell>
+                <TableCell>Score</TableCell>
+                <TableCell align="right">View Test Detail</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {newResults.map((testResult) => (
+                <TableRow key={testResult._id}>
+                  <TableCell></TableCell>
+                  <TableCell>{testResult.candidate_email}</TableCell>
+                  <TableCell>{testResult.candidate_city}</TableCell>
+                  <TableCell></TableCell>
+                  <TableCell align="right">
+                    <Link href={`/comp/report/${testResult._id}`}>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        align="center"
+                      >
+                        View Test Detail
+                      </Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
-      </div>
+      </>
     );
   }
 };
