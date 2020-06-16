@@ -23,6 +23,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#e00700",
+
       // #e00700
       // #304ffe
     },

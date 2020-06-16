@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import styles from "../styles/Navbar.module.css";
 import Box from "@material-ui/core/Box";
+import { motion } from "framer-motion";
 
 export default function NavBar() {
   return (
@@ -21,9 +22,10 @@ export default function NavBar() {
     //   </Link>
     // </div>
     <div>
-      <AppBar position="static" backgroundColor="black">
-        <Toolbar display="flex" justifyContent="flex-start">
-          {/* <IconButton
+      <Box display="flex" justifyContent="flex-start" m={2.1}>
+        {/* <AppBar position="static" color="primary">
+        <Toolbar display="flex" justifyContent="flex-start"> */}
+        {/* <IconButton
             edge="start"
             // className={classes.menuButton}
             color="inherit"
@@ -31,26 +33,37 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton> */}
-          {/* <Typography variant="h6">Home</Typography> */}
-          <Box style={{ marginRight: "auto" }}>
-            <Link href="/">
-              <Button color="inherit">Home</Button>
-            </Link>
-          </Box>
-          {/* </Link>
+        {/* <Typography variant="h6">Home</Typography> */}
+        <Box style={{ marginRight: "auto" }}>
+          <Link href="/">
+            {/* <Button color="inherit">Home</Button> */}
+
+            <motion.img
+              src="/dragon.svg"
+              height="60"
+              width="65"
+              style={{ cursor: "pointer" }}
+              whileHover={{ scale: 1.2 }}
+            />
+          </Link>
+        </Box>
+        {/* </Link>
           <Link href="/appl/SignIn">
             <Button color="inherit">Login</Button>
           </Link>
           <Link href="/comp/signin">
             <Button color="inherit">Company</Button>
           </Link> */}
-          <Box>
-            <Link href="/">
+        <Box>
+          <Link href="/">
+            <motion.div whileHover={{ scale: 1.2 }}>
               <Button color="inherit">Logout</Button>
-            </Link>
-          </Box>
-        </Toolbar>
-      </AppBar>
+            </motion.div>
+          </Link>
+        </Box>
+        {/* </Toolbar>
+      </AppBar> */}
+      </Box>
     </div>
   );
 }
