@@ -1,20 +1,51 @@
 //candidate dashboard when they successfully login in
 import NavBar from "../../src/NavBar";
-import Link from "next/link";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const LoginPage = dynamic(() => import("../register"));
 import SandBox from "../Sandbox";
 import QuizApp from "../QuizApp";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+import Router from "next/router";
 
-export default function CandidateDashboard({ candidateInfo }) {
+export default function CandidateDashboard({ candidateID }) {
+  const router = useRouter();
   let temp;
   let city;
   const [view, setView] = useState("initial");
+  const [candidateInfo, setCandidateInfo] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    console.log(router.query);
+    if (localStorage.getItem("candidatetoken") !== null) {
+      fetch(`/api/${router.query.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("candidatetoken"),
+        },
+      }).then((res) => {
+        res.json().then((res) => {
+          console.log(res);
+          if (res.message) {
+            setErrorMessage(res.message);
+            console.log(errorMessage);
+          } else {
+            setCandidateInfo(res.data);
+            console.log(candidateInfo);
+          }
+        });
+      });
+    } else {
+      //if there is no token , then force the candidate to sign in
+      Router.push("/appl/SignIn");
+    }
+  }, []);
 
   const onAddCity = ({ target: { value } }) => {
     city = value;
@@ -254,16 +285,18 @@ export default function CandidateDashboard({ candidateInfo }) {
       );
     }
   } else {
-    return <p>nothing</p>;
+    return (
+      <p>
+        {errorMessage
+          ? "Sorry you are not authenticated,please signin first"
+          : "It is loading"}
+      </p>
+    );
   }
 }
 CandidateDashboard.getInitialProps = async ({ query: { id } }) => {
   try {
-    const res = await fetch(
-      `http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/${id}`
-    );
-    const { data } = await res.json();
-    return { candidateInfo: data };
+    return { candidateID: id };
   } catch (error) {
     return {
       candidateInfo: {

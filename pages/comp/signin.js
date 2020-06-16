@@ -65,8 +65,8 @@ export default function SignIn() {
       }),
     }).then((res) => {
       res.json().then((res) => {
-        if (res.data) {
-          console.log("routingggggggggggggggg");
+        if (res.authToken) {
+          localStorage.setItem("token", res.authToken);
           Router.push("/comp/dashboard");
         } else {
           setErrorMessage("Please input correct email and password");
@@ -74,6 +74,7 @@ export default function SignIn() {
       });
     });
   };
+
   return (
     <>
       {/* <NavBar /> */}

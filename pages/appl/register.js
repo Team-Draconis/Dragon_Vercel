@@ -1,5 +1,5 @@
 // Shuntaro will update this page with meterial UI
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -55,10 +55,10 @@ export default function Register() {
   const [city, setCity] = useState("your city");
   const [name, setName] = useState("your name");
   const [password, setPassword] = useState("your password");
+  const [isFinished, setIsFinished] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(email, name, city, password);
     fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -71,14 +71,20 @@ export default function Register() {
     })
       .then((res) =>
         res.json().then((res) => {
-          console.log("$$$", res.id);
-          Router.push(`/appl/dashboard/${res.id}`);
+          console.log(res);
+          setIsFinished(true);
         })
       )
       .catch((error) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    if (isFinished) {
+      Router.push("/appl/SignIn");
+    }
+  }, [isFinished]);
 
   return (
     <Container component="main" maxWidth="xs">

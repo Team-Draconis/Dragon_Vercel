@@ -11,8 +11,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Box from "@material-ui/core/Box";
+import Router from "next/router";
 
-const Dashboard = ({ candidates_Info }) => {
+const Dashboard = () => {
   const useStyles = makeStyles((theme) => ({
     seeMore: {
       marginTop: theme.spacing(3),
@@ -22,8 +23,29 @@ const Dashboard = ({ candidates_Info }) => {
   let temp;
   let city;
   let tempResults;
-  const [newResults, setNewResults] = useState(candidates_Info);
+  const [newResults, setNewResults] = useState();
   const [view, setView] = useState(true);
+  const [candidates_Info, setCandidate_Info] = useState();
+
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      fetch("http://localhost:3000/api/candidatesInfo", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+      }).then((res) => {
+        res.json().then((res) => {
+          setCandidate_Info(res.data);
+          setNewResults(res.data);
+        });
+      });
+    } else {
+      //if there is no token , then force the company to sign in
+      Router.push("/comp/signin");
+    }
+  }, []);
 
   const onCityChange = ({ target: { value } }) => {
     console.log(value);
@@ -49,18 +71,20 @@ const Dashboard = ({ candidates_Info }) => {
   const handleReset = () => {
     setView(true);
   };
-  if (candidates_Info && view) {
-    return (
-      <>
-        <NavBar />
-        {/* <div style={{ marginLeft: "50px", marginTop: "30px" }}> */}
-        <Box align="center" m={5}>
-          <h1>Coding Test Report</h1>
-          <input type="text" onChange={onCityChange} value={temp} />
-          <button onClick={handleSubmit}>Submit</button>
-          <button onClick={handleReset}>Reset</button>
-        </Box>
-        {/* <div id="list">
+
+  if (candidates_Info) {
+    if (view) {
+      return (
+        <>
+          <NavBar />
+          {/* <div style={{ marginLeft: "50px", marginTop: "30px" }}> */}
+          <Box align="center" m={5}>
+            <h1>Coding Test Report</h1>
+            <input type="text" onChange={onCityChange} value={temp} />
+            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleReset}>Reset</button>
+          </Box>
+          {/* <div id="list">
             {candidates_Info.map((info) => {
               return (
                 <div key={info._id}>
@@ -68,7 +92,7 @@ const Dashboard = ({ candidates_Info }) => {
                     <Card.Content>
                       <Card.Header>
                         <Link href={`/comp/report/${info._id}`}>
-                          <a>{info.candidate_email}</a>
+                          <Button primary>View Test Detail</Button>
                         </Link>
                         <p>From {info.candidate_city}</p>
                       </Card.Header>
@@ -92,59 +116,59 @@ const Dashboard = ({ candidates_Info }) => {
               );
             })}
           </div> */}
-        {/* </div> */}
-        <div>
-          <Table size="large">
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>City</TableCell>
-                <TableCell>Score</TableCell>
-                <TableCell align="right">View Test Detail</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {candidates_Info.map((info) => (
-                <TableRow key={info._id}>
-                  <TableCell></TableCell>
-                  <TableCell>{info.candidate_email}</TableCell>
-                  <TableCell>{info.candidate_city}</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell align="right">
-                    <Link href={`/comp/report/${info._id}`}>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        align="center"
-                      >
-                        View Test Detail
-                      </Button>
-                    </Link>
-                  </TableCell>
+          {/* </div> */}
+          <div>
+            <Table size="large">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>City</TableCell>
+                  <TableCell>Score</TableCell>
+                  <TableCell align="right">View Test Detail</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-        {/* <div className={classes.seeMore}>
+              </TableHead>
+              <TableBody>
+                {candidates_Info.map((info) => (
+                  <TableRow key={info._id}>
+                    <TableCell></TableCell>
+                    <TableCell>{info.candidate_email}</TableCell>
+                    <TableCell>{info.candidate_city}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell align="right">
+                      <Link href={`/comp/report/${info._id}`}>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          align="center"
+                        >
+                          View Test Detail
+                        </Button>
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          {/* <div className={classes.seeMore}>
           <Link color="primary" href="#" onClick={preventDefault}>
             See more orders
           </Link>
         </div> */}
-      </>
-    );
-  } else {
-    return (
-      <>
-        <NavBar />
-        <Box align="center" m={5}>
-          <h1>Coding Test Report</h1>
-          <input type="text" onChange={onCityChange} value={temp} />
-          <button onClick={handleSubmit}>Submit</button>
-          <button onClick={handleReset}>Reset</button>
-        </Box>
-        {/* <div id="list">
+        </>
+      );
+    } else {
+      return (
+        <>
+          <NavBar />
+          <Box align="center" m={5}>
+            <h1>Coding Test Report</h1>
+            <input type="text" onChange={onCityChange} value={temp} />
+            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleReset}>Reset</button>
+          </Box>
+          {/* <div id="list">
             {newResults.map((testResult) => {
               return (
                 <div key={testResult._id}>
@@ -152,7 +176,7 @@ const Dashboard = ({ candidates_Info }) => {
                     <Card.Content>
                       <Card.Header>
                         <Link href={`/comp/report/${testResult._id}`}>
-                          <a>{testResult.candidate_email}</a>
+                          <Button primary>View Code</Button>
                         </Link>
                         <p>From {testResult.candidate_city}</p>
                       </Card.Header>
@@ -173,72 +197,45 @@ const Dashboard = ({ candidates_Info }) => {
               );
             })}
           </div> */}
-        <div>
-          <Table size="large">
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>City</TableCell>
-                <TableCell>Score</TableCell>
-                <TableCell align="right">View Test Detail</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {newResults.map((testResult) => (
-                <TableRow key={testResult._id}>
-                  <TableCell></TableCell>
-                  <TableCell>{testResult.candidate_email}</TableCell>
-                  <TableCell>{testResult.candidate_city}</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell align="right">
-                    <Link href={`/comp/report/${testResult._id}`}>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        align="center"
-                      >
-                        View Test Detail
-                      </Button>
-                    </Link>
-                  </TableCell>
+          <div>
+            <Table size="large">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>City</TableCell>
+                  <TableCell>Score</TableCell>
+                  <TableCell align="right">View Test Detail</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </>
-    );
-  }
-};
-
-Dashboard.getInitialProps = async () => {
-  try {
-    const res = await fetch(
-      // "http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/candidatesInfo"
-      "http://localhost:3000/api/candidatesInfo"
-    );
-    const { data } = await res.json();
-    return { candidates_Info: data };
-  } catch (error) {
-    return {
-      candidates_Info: [
-        {
-          _id: "dummy1",
-          candidate_name: "dummy1",
-          andidate_email: "dummy1",
-          candidate_city: "dummy1",
-          coding_tests: "dummy1",
-        },
-        {
-          _id: "dummy2",
-          candidate_name: "dummy2",
-          andidate_email: "dummy2",
-          candidate_city: "dummy2",
-          coding_tests: "dummy2",
-        },
-      ],
-    };
+              </TableHead>
+              <TableBody>
+                {newResults.map((testResult) => (
+                  <TableRow key={testResult._id}>
+                    <TableCell></TableCell>
+                    <TableCell>{testResult.candidate_email}</TableCell>
+                    <TableCell>{testResult.candidate_city}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell align="right">
+                      <Link href={`/comp/report/${testResult._id}`}>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          align="center"
+                        >
+                          View Test Detail
+                        </Button>
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </>
+      );
+    }
+  } else {
+    return <div></div>;
   }
 };
 

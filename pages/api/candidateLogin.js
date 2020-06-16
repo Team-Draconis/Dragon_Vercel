@@ -1,16 +1,13 @@
-//this is for condidates login page to check their password and email match
-//issue token and cookies
+//this is for condidates login page to check their password and email are matched
+//issue token, valid for 1h
 import dbConnect from "../../utils/dbConnect";
 const Candidate = require("../../models/Candidate");
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-const cookie = require("cookie");
 dbConnect();
-// Candidate Login
+
 export default async (req, res) => {
   const { method } = req;
-  console.log(process.env.SECRET_CANDIDATE);
-  console.log(process.env.SECRET_TOKEN);
   switch (method) {
     case "POST":
       try {
@@ -22,23 +19,14 @@ export default async (req, res) => {
           candidate.candidate_password,
           function (err, result) {
             if (!err && result) {
-              console.log("successfully verified");
-              const payload = { candidate: candidate._id };
-              const jwt = sign(payload, process.env.SECRET_TOKEN, {
+              console.log("#### CANDIDATE EMAIL AND PW ARE MATCHED ####");
+              const claims = { sub: candidate._id };
+              const jwt = sign(claims, process.env.SECRET_TOKEN, {
                 expiresIn: "1h",
               });
-              res.setHeader(
-                "Set-Cookie",
-                cookie.serialize(process.env.SECRET_CANDIDATE, jwt, {
-                  httpOnly: true,
-                  secure: process.env.NODE_ENV !== "development",
-                  sameSite: "strict",
-                  maxAge: 3600,
-                  path: "/",
-                })
-              );
-              console.log("candidate info", candidate);
-              res.status(200).json({ data: candidate });
+              res
+                .status(200)
+                .json({ authToken: jwt, candidateID: candidate._id });
             } else {
               res
                 .status(400)

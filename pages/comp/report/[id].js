@@ -11,6 +11,7 @@ import { createEditor } from "../../../utils/editor";
 import styled from "styled-components";
 import _ToggleMessage from "../../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../../src/test/_AddingCalculator";
+import { useRouter, Router } from "next/router";
 
 //Styling
 const App = styled.div`
@@ -101,8 +102,40 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
   }
 }
 
-export default function Report({ candidateInfo }) {
+export default function Report({ candidateID }) {
+  const router = useRouter();
   const [view, setView] = useState("initial");
+  const [candidateInfo, setCandidateInfo] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    console.log(router.query);
+    // console.log(candidateID);
+    if (localStorage.getItem("token") !== null) {
+      fetch(`/api/${router.query.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+      }).then((res) => {
+        res.json().then((res) => {
+          console.log(res);
+          if (res.message) {
+            setErrorMessage(res.message);
+            console.log(errorMessage);
+          } else {
+            setCandidateInfo(res.data);
+            console.log(candidateInfo);
+          }
+        });
+      });
+    } else {
+      //if there is no token , then force the candidate to sign in
+      setErrorMessage("Please login");
+    }
+  }, []);
+
   if (candidateInfo) {
     return (
       <>
@@ -154,17 +187,19 @@ export default function Report({ candidateInfo }) {
       </>
     );
   } else {
-    return null;
+    return (
+      <p>
+        {errorMessage
+          ? "Sorry you are not authenticated,please signin first"
+          : "It is loading"}
+      </p>
+    );
   }
 }
 
 Report.getInitialProps = async ({ query: { id } }) => {
   try {
-    const res = await fetch(
-      `http://dragontester-env-1.eba-cqpqhfiq.us-east-2.elasticbeanstalk.com/api/${id}`
-    );
-    const { data } = await res.json();
-    return { candidateInfo: data };
+    return { candidateID: id };
   } catch (error) {
     return {
       candidateInfo: {

@@ -57,7 +57,14 @@ export default function NavBar() {
         <Box>
           <Link href="/">
             <motion.div whileHover={{ scale: 1.2 }}>
-              <Button color="inherit">Logout</Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  localStorage.clear();
+                }}
+              >
+                Logout
+              </Button>
             </motion.div>
           </Link>
         </Box>
