@@ -21,7 +21,6 @@ export const authenticated = (fn) => async (req, res) => {
 
 export default authenticated(async (req, res) => {
   const { method } = req;
-  console.log(method);
   switch (method) {
     case "GET":
       const candidates = await Candidate.find({});
