@@ -11,6 +11,8 @@ import QuizApp from "../QuizApp";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Router from "next/router";
+import { TextField } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 export default function CandidateDashboard({ candidateID }) {
   const router = useRouter();
@@ -19,6 +21,32 @@ export default function CandidateDashboard({ candidateID }) {
   const [view, setView] = useState("initial");
   const [candidateInfo, setCandidateInfo] = useState();
   const [errorMessage, setErrorMessage] = useState("");
+
+  //Declaring styled textfield
+  const CssTextField = withStyles({
+    root: {
+      "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline": {
+        borderColor: "red", //default
+      },
+      "& label.Mui-focused": {
+        color: "white",
+      },
+      "& .MuiInput-underline:after": {
+        borderBottomColor: "yellow",
+      },
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: "white",
+        },
+        "&:hover fieldset": {
+          borderColor: "white",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "green",
+        },
+      },
+    },
+  })(TextField);
 
   useEffect(() => {
     if (localStorage.getItem("candidatetoken") !== null) {
@@ -100,15 +128,7 @@ export default function CandidateDashboard({ candidateID }) {
       return (
         <div>
           <NavBar />
-          <Box>
-            <input type="text" onChange={onAddCity} value={temp} />
-            <button onClick={handleAddCity}>Add Additional City</button>
-          </Box>
-          {/* <Box display="flex">
-            <Box>HOME</Box>
-            <Box ml={165}>Log Out</Box>
-          </Box> */}
-          <Box mt={22}>
+          <Box mt={10}>
             <Typography
               variant="h3"
               component="h1"
@@ -118,7 +138,7 @@ export default function CandidateDashboard({ candidateID }) {
               <motion.div
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 0.7 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
               >
                 {`Hello ${candidateInfo.candidate_name} 🐲  This is your dashboard`}
               </motion.div>
@@ -133,7 +153,7 @@ export default function CandidateDashboard({ candidateID }) {
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.2 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 0.8 }}
                 >
                   {`Your email address is ${candidateInfo.candidate_email}`}
                 </motion.div>
@@ -149,23 +169,73 @@ export default function CandidateDashboard({ candidateID }) {
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
                 >
                   {`You are interested in working in ${candidateInfo.candidate_city}`}
                 </motion.div>
               </Typography>
             </Box>
-            <input type="text" onChange={onAddCity} value={temp} />
-            <button onClick={handleAddCity}>Add Additional City</button>
-            <input type="text" onChange={onRemoveCity} value={temp} />
-            <button onClick={handleRemoveCity}>Remove City</button>
+            <Box align="center" mt={4}>
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
+                // display="flex"
+                // flexDirection="row"
+              >
+                <Box display="flex" justifyContent="center">
+                  <Box m={(0, 2)}>
+                    <CssTextField
+                      onChange={onAddCity}
+                      value={temp}
+                      placeholder="Add Additional City"
+                      inputProps={{
+                        style: { fontFamily: "nunito", color: "white" },
+                      }}
+                      variant="outlined"
+                    />
+                  </Box>
+                  <Box mt={4.3}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      align="center"
+                      onClick={handleAddCity}
+                    >
+                      Add
+                    </Button>
+                  </Box>
+                  <Box m={(0, 2)}>
+                    <CssTextField
+                      placeholder="Remove City"
+                      inputProps={{
+                        style: { fontFamily: "nunito", color: "white" },
+                      }}
+                      variant="outlined"
+                      onChange={onRemoveCity}
+                      value={temp}
+                    />
+                  </Box>
+                  <Box mt={4.3}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      align="center"
+                      onClick={handleRemoveCity}
+                    >
+                      Remove
+                    </Button>
+                  </Box>
+                </Box>
+              </motion.div>
+            </Box>
             {/* {candidateInfo.coding_tests ? (
               JSON.stringify(candidateInfo.coding_tests)
             ) : (
               <p>No taken the code test yet</p>
             )} */}
           </Box>
-          <Box mt={15}>
+          <Box mt={12}>
             <Typography
               variant="h4"
               component="h1"
@@ -175,18 +245,18 @@ export default function CandidateDashboard({ candidateID }) {
               <motion.div
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
               >
                 Test Your Skills
               </motion.div>
             </Typography>
           </Box>
           <Box display="flex" justifyContent="center">
-            <Box align="center" m={8}>
+            <Box align="center" m={7}>
               <motion.div
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
               >
                 <Button
                   variant="contained"
@@ -197,11 +267,11 @@ export default function CandidateDashboard({ candidateID }) {
                 </Button>
               </motion.div>
             </Box>
-            <Box align="center" m={8}>
+            <Box align="center" m={7}>
               <motion.div
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
               >
                 <Button
                   variant="contained"
@@ -213,22 +283,22 @@ export default function CandidateDashboard({ candidateID }) {
               </motion.div>
             </Box>
 
-            <Box align="center" m={8} onClick={() => setView("medium")}>
+            <Box align="center" m={7} onClick={() => setView("medium")}>
               <motion.div
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
               >
                 <Button variant="contained" color="primary">
                   Medium Mode
                 </Button>
               </motion.div>
             </Box>
-            <Box align="center" m={8}>
+            <Box align="center" m={7}>
               <motion.div
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 2.2 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
               >
                 <Button
                   variant="contained"
