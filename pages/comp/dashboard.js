@@ -12,6 +12,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Box from "@material-ui/core/Box";
 import Router from "next/router";
+import { TextField } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 const Dashboard = () => {
   const useStyles = makeStyles((theme) => ({
@@ -19,6 +21,32 @@ const Dashboard = () => {
       marginTop: theme.spacing(3),
     },
   }));
+
+  //Declaring styled textfield
+  const CssTextField = withStyles({
+    root: {
+      "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline": {
+        borderColor: "red", //default
+      },
+      "& label.Mui-focused": {
+        color: "white",
+      },
+      "& .MuiInput-underline:after": {
+        borderBottomColor: "yellow",
+      },
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: "white",
+        },
+        "&:hover fieldset": {
+          borderColor: "white",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "green",
+        },
+      },
+    },
+  })(TextField);
 
   let temp;
   let city;
@@ -80,9 +108,39 @@ const Dashboard = () => {
           {/* <div style={{ marginLeft: "50px", marginTop: "30px" }}> */}
           <Box align="center" m={5}>
             <h1>Coding Test Report</h1>
-            <input type="text" onChange={onCityChange} value={temp} />
-            <button onClick={handleSubmit}>Submit</button>
-            <button onClick={handleReset}>Reset</button>
+            <Box display="flex" justifyContent="center">
+              <Box>
+                <CssTextField
+                  onChange={onCityChange}
+                  value={temp}
+                  placeholder="Filter By City"
+                  inputProps={{
+                    style: { fontFamily: "nunito", color: "white" },
+                  }}
+                  variant="outlined"
+                />
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+              </Box>
+            </Box>
           </Box>
           {/* <div id="list">
             {candidates_Info.map((info) => {
@@ -164,9 +222,39 @@ const Dashboard = () => {
           <NavBar />
           <Box align="center" m={5}>
             <h1>Coding Test Report</h1>
-            <input type="text" onChange={onCityChange} value={temp} />
-            <button onClick={handleSubmit}>Submit</button>
-            <button onClick={handleReset}>Reset</button>
+            <Box display="flex" justifyContent="center">
+              <Box>
+                <CssTextField
+                  onChange={onCityChange}
+                  value={temp}
+                  placeholder="Filter By City"
+                  inputProps={{
+                    style: { fontFamily: "nunito", color: "white" },
+                  }}
+                  variant="outlined"
+                />
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+              </Box>
+            </Box>
           </Box>
           {/* <div id="list">
             {newResults.map((testResult) => {
