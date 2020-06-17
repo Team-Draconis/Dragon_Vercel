@@ -25,9 +25,9 @@ const Dashboard = () => {
   //Declaring styled textfield
   const CssTextField = withStyles({
     root: {
-      "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline": {
-        borderColor: "red", //default
-      },
+      // "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline": {
+      //   borderColor: "red", //default
+      // },
       "& label.Mui-focused": {
         color: "white",
       },
@@ -107,15 +107,23 @@ const Dashboard = () => {
           <Box align="center" m={5}>
             <h1>Coding Test Report</h1>
             <Box display="flex" justifyContent="center">
-              <Box>
-                <CssTextField
-                  onChange={onCityChange}
+              <Box mt={3}>
+                {/* //please dont delete this */}
+
+                {/* <CssTextField
+                  onChange={(e) => onCityChange}
                   value={temp}
                   placeholder="Filter By City"
                   inputProps={{
                     style: { fontFamily: "nunito", color: "white" },
                   }}
                   variant="outlined"
+                /> */}
+                <input
+                  type="text"
+                  onChange={onCityChange}
+                  value={temp}
+                  placeholder="Filter by city"
                 />
               </Box>
               <Box mt={2.2} ml={1}>
@@ -221,8 +229,9 @@ const Dashboard = () => {
           <Box align="center" m={5}>
             <h1>Coding Test Report</h1>
             <Box display="flex" justifyContent="center">
-              <Box>
-                <CssTextField
+              <Box mt={3}>
+                {/* please dont delete this */}
+                {/* <CssTextField
                   onChange={onCityChange}
                   value={temp}
                   placeholder="Filter By City"
@@ -230,6 +239,12 @@ const Dashboard = () => {
                     style: { fontFamily: "nunito", color: "white" },
                   }}
                   variant="outlined"
+                /> */}
+                <input
+                  type="text"
+                  onChange={onCityChange}
+                  value={temp}
+                  placeholder="Filter by city"
                 />
               </Box>
               <Box mt={2.2} ml={1}>
