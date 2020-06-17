@@ -254,7 +254,7 @@ export default function CandidateDashboard({ candidateID }) {
     }
 
     if (view === "quiz") {
-      return <QuizApp goBackToDashboard={goBackToDashboard} />;
+      return <QuizApp goBackToDashboard={goBackToDashboard} id ={candidateID} />;
     }
 
     if (view === "easy") {
