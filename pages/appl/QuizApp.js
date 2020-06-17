@@ -22,9 +22,10 @@ import styles from "../styles/QuizApp.module.css";
  *
  */
 
-function QuizApp({ goBackToDashboard }) {
+function QuizApp({ goBackToDashboard, id }) {
   //   const [quizResults, setQuizResults] = useState();
   //   const [selects, setSelects] = useState();
+  console.log("####",id)
   const questions = [
     {
       id: 1,
@@ -177,7 +178,22 @@ function QuizApp({ goBackToDashboard }) {
       }
     }
 
-    num = Math.floor((num * 100) / answers.length);
+    num = Math.floor((num * 100)/answers.length);
+    
+    fetch("/api/quizSaver", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+        score: num,
+      }),
+    })
+      .then((res) => {
+        console.log("####SAVED THE RESULTS TO DB RES", res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     return num;
   };
@@ -215,7 +231,7 @@ function QuizApp({ goBackToDashboard }) {
         <h2>Results</h2>
         <ul>{renderResultsData()}</ul>
         <ul>You got {renderNumericalCorrect()}% correct on this quiz!</ul>
-
+      
         <button className="btn btnPrimary" onClick={restart}>
           Restart
         </button>
