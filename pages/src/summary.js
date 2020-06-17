@@ -1,6 +1,5 @@
 // Save this code and use it on info.js
 
-
 import fetch from "isomorphic-unfetch";
 import { Button, Card } from "semantic-ui-react";
 import Link from "next/link";
@@ -15,15 +14,14 @@ const Dashboard = ({ testResults }) => {
 
   const onEmailChange = ({ target: { value } }) => {
     email = value;
-    console.log(email)
   };
 
   const handleSubmit = async () => {
-    console.log(email)
-    const res = await fetch(`http://localhost:3000/api/candidate_email/${email}`);
+    const res = await fetch(
+      `http://localhost:3000/api/candidate_email/${email}`
+    );
     const { data } = await res.json();
-    console.log(data)
-    tempResults=data
+    tempResults = data;
     setNewResults(tempResults);
     setView(false);
   };
@@ -46,7 +44,7 @@ const Dashboard = ({ testResults }) => {
         <button onClick={handleReset}>Reset</button>
 
         <h1>Coding Test Report</h1>
-        <div >
+        <div>
           {newResults.map((testResult) => {
             return (
               <div key={testResult._id}>
