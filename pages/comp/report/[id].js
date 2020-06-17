@@ -109,8 +109,6 @@ export default function Report({ candidateID }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    console.log(router.query);
-    // console.log(candidateID);
     if (localStorage.getItem("token") !== null) {
       fetch(`/api/${router.query.id}`, {
         method: "GET",
@@ -120,13 +118,10 @@ export default function Report({ candidateID }) {
         },
       }).then((res) => {
         res.json().then((res) => {
-          console.log(res);
           if (res.message) {
             setErrorMessage(res.message);
-            console.log(errorMessage);
           } else {
             setCandidateInfo(res.data);
-            console.log(candidateInfo);
           }
         });
       });

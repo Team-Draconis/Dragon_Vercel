@@ -13,7 +13,6 @@ export default async (req, res) => {
         hash(req.body.company_password, 10, async function (err, hash) {
           req.body.company_password = hash;
           const newCompany = await Company.create(req.body);
-          console.log("##THIS IS COMPANY REGISTERED IN DB", newCompany);
           res.status(200).json({ data: newCompany });
         });
       } catch (error) {

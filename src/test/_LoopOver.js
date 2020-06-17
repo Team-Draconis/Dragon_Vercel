@@ -24,7 +24,7 @@ export default async function _LoopOver() {
     await setTimeout(() => {
       try {
         test(
-          pokenameClass,
+          pokenameClass.item(0),
           "isDefined",
           "defined",
           "Each Pokemon name element should have class name: 'poke-name'."
@@ -34,12 +34,12 @@ export default async function _LoopOver() {
           pokenameClass,
           "length",
           10,
-          "Each Pokemon name should be inside separated element. 10 Pokemon should be displayed on the page."
+          "Each Pokemon name should be inside separated element."
         );
 
         //check if displayed Pokemon is correct
         const container = document.createElement("div");
-        const description = "Order of Pokemon name should be correct.";
+        const description = "Order of 10 Pokemon name should be correct.";
 
         let result = 0;
         for (let i = 0; i < 10; i++) {
@@ -60,7 +60,4 @@ export default async function _LoopOver() {
   } catch (error) {
     errorHandling();
   }
-
-  //     //- Each Pokemon name element should have key prop and set name inside it.
-  //     - Each Pokemon name element should have class name: "poke-name".
 }

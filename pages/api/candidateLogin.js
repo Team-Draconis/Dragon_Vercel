@@ -19,7 +19,6 @@ export default async (req, res) => {
           candidate.candidate_password,
           function (err, result) {
             if (!err && result) {
-              console.log("#### CANDIDATE EMAIL AND PW ARE MATCHED ####");
               const claims = { sub: candidate._id };
               const jwt = sign(claims, process.env.SECRET_TOKEN, {
                 expiresIn: "1h",

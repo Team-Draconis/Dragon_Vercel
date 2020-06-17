@@ -21,7 +21,6 @@ export default function CandidateDashboard({ candidateID }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    console.log(router.query);
     if (localStorage.getItem("candidatetoken") !== null) {
       fetch(`/api/${router.query.id}`, {
         method: "GET",
@@ -31,13 +30,10 @@ export default function CandidateDashboard({ candidateID }) {
         },
       }).then((res) => {
         res.json().then((res) => {
-          console.log(res);
           if (res.message) {
             setErrorMessage(res.message);
-            console.log(errorMessage);
           } else {
             setCandidateInfo(res.data);
-            console.log(candidateInfo);
           }
         });
       });
@@ -52,13 +48,11 @@ export default function CandidateDashboard({ candidateID }) {
   };
 
   const onRemoveCity = ({ target: { value } }) => {
-    console.log(value);
     city = value;
   };
 
   const handleAddCity = (e) => {
     e.preventDefault();
-    console.log(city);
     fetch("/api/addCity", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -69,7 +63,6 @@ export default function CandidateDashboard({ candidateID }) {
     })
       .then((res) =>
         res.json().then((res) => {
-          console.log("$$$", res.id);
           Router.push(`/appl/dashboard/${res.id}`);
         })
       )
@@ -80,7 +73,6 @@ export default function CandidateDashboard({ candidateID }) {
 
   const handleRemoveCity = (e) => {
     e.preventDefault();
-    console.log(city);
     fetch("/api/removeCity", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -91,7 +83,6 @@ export default function CandidateDashboard({ candidateID }) {
     })
       .then((res) =>
         res.json().then((res) => {
-          console.log("$$$", res.id);
           Router.push(`/appl/dashboard/${res.id}`);
         })
       )
