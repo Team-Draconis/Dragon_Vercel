@@ -17,7 +17,6 @@ export default async (req, res) => {
         const candidate = await Candidate.findById(req.body.id);
         candidate.coding_tests[req.body.test_mode].push(testResult);
         await candidate.save();
-        console.log("/api/testSaver CANDIDATE CODE HAS BEEN SAVED", testResult);
         res.json(candidate);
       } catch (error) {
         res.status(400).json({

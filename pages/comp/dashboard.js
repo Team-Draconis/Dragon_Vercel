@@ -21,15 +21,15 @@ const Dashboard = () => {
   }));
 
   let temp;
-  let city;
   let tempResults;
+  const [city, setCity] = useState("");
   const [newResults, setNewResults] = useState();
   const [view, setView] = useState(true);
   const [candidates_Info, setCandidate_Info] = useState();
 
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
-      fetch("http://localhost:3000/api/candidatesInfo", {
+      fetch("/api/candidatesInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,15 +48,13 @@ const Dashboard = () => {
   }, []);
 
   const onCityChange = ({ target: { value } }) => {
-    console.log(value);
-    city = value;
+    setCity(value);
   };
 
   let flag = false;
   const handleSubmit = () => {
     tempResults = candidates_Info.filter((el) => {
       flag = false;
-      console.log(el);
       for (let item of el.candidate_city) {
         if (item.toLowerCase() === city.toLowerCase()) {
           flag = true;
@@ -118,7 +116,7 @@ const Dashboard = () => {
           </div> */}
           {/* </div> */}
           <div>
-            <Table size="large">
+            <Table size="medium">
               <TableHead>
                 <TableRow>
                   <TableCell>Date</TableCell>
@@ -198,7 +196,7 @@ const Dashboard = () => {
             })}
           </div> */}
           <div>
-            <Table size="large">
+            <Table size="medium">
               <TableHead>
                 <TableRow>
                   <TableCell>Date</TableCell>
