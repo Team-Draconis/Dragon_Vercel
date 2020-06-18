@@ -198,12 +198,17 @@ const Dashboard = () => {
                     <TableCell></TableCell>
                     <TableCell>{info.candidate_email}</TableCell>
                     <TableCell>{info.candidate_city + "  "}</TableCell>
-                    <TableCell>{info.quiz_tests.length!==0 ? info.quiz_tests[info.quiz_tests.length-1].quiz_score + "%" : "NA"}</TableCell>
+                    <TableCell>
+                      {info.quiz_tests.length !== 0
+                        ? info.quiz_tests[info.quiz_tests.length - 1]
+                            .quiz_score + "%"
+                        : "NA"}
+                    </TableCell>
                     <TableCell align="right">
                       <Link href={`/comp/report/${info._id}`}>
                         <Button
                           variant="contained"
-                          color="secondary"
+                          color="primary"
                           align="center"
                         >
                           View Test Detail
