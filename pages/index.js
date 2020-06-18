@@ -104,7 +104,7 @@ class Index extends Component {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
                 >
-                  Take coding challenge anonymously
+                  Display your front end skills anonymously
                 </motion.div>
               </Typography>
             </Box>
@@ -195,7 +195,7 @@ class Index extends Component {
                       paddingTop: 4,
                     }}
                   >
-                    How it works?
+                    How it works
                   </AnchorLink>
                 </Button>
               </motion.div>
