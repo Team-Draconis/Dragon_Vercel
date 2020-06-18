@@ -45,7 +45,7 @@ export default function CandidateDashboard({ candidateID }) {
           borderColor: "white",
         },
         "&.Mui-focused fieldset": {
-          borderColor: "green",
+          borderColor: "#FFC107",
         },
       },
     },
@@ -237,13 +237,16 @@ export default function CandidateDashboard({ candidateID }) {
             ) : (
               <p>No taken the code test yet</p>
             )} */}
-            <button
+            <Button
+              variant="contained"
+              color=""
+              align="center"
               onClick={() => {
                 setView("report");
               }}
             >
               Preview your profile which will appeal to the company{" "}
-            </button>
+            </Button>
           </Box>
           <Box mt={12}>
             <Typography
