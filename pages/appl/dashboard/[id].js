@@ -145,7 +145,8 @@ export default function CandidateDashboard({ candidateID }) {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
               >
-                {`Hello ${candidateInfo.candidate_name} 🐲  Welcome to your dashboard`}
+                {`Hello, ${candidateInfo.candidate_name} 🐲  Welcome to your dashboard`}
+
               </motion.div>
             </Typography>
             <Box mt={3}>

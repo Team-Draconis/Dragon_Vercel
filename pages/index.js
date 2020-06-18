@@ -124,7 +124,7 @@ class Index extends Component {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
                   >
-                    Take coding challenge anonymously
+                  Display your front end skills anonymously
                   </motion.div>
                 </Typography>
               </Box>
@@ -241,6 +241,7 @@ class Index extends Component {
                 align="center"
                 style={{ fontFamily: "Josefin Sans" }}
               >
+
                 We bypass recruiters and algorithms which may introduce
                 unconscious bias and allow your skill to open doors. We retain
                 only your email address and location preference. Feel free to
@@ -248,6 +249,7 @@ class Index extends Component {
                 globe.
               </Typography>
               <ButtonBox>
+
                 <Button variant="contained" color="primary">
                   <Link href="/appl/register">
                     <a
