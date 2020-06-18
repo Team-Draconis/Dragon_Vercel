@@ -7,11 +7,15 @@ import { verify } from "jsonwebtoken";
 dbConnect();
 
 export const authenticated = (fn) => async (req, res) => {
+  console.log("$$$$$$", req.headers);
   verify(req.headers.token, process.env.SECRET_TOKEN, async function (
     err,
     decoded
   ) {
     if (!err && decoded) {
+      // console.log("decodedS#####", decoded);
+      // console.log(req.query.id);
+      // console.log(req.query.id === decoded.sub);
       // in the request.headers, either companytoken or candidatetoken is okay to get the data
       if (req.query.id === decoded.sub || decoded.company_sub) {
         return await fn(req, res);
