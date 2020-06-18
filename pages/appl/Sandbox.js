@@ -58,7 +58,7 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
 
   const runCode = () => {
     run(el.current);
-    result.current.innerHTML = "";
+    testOnBrowser();
   };
 
   const run = (element) => {
@@ -79,7 +79,9 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
     }
     if (mode === "hard") {
       await _LoopOver();
-      isAllPassed();
+      setTimeout(() => {
+        isAllPassed();
+      }, 150);
     }
   };
 
@@ -120,7 +122,7 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           animate={{ y: 0, opacity: 1 }}
           transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
         >
-          <Typography variant="body1">{requirement}</Typography>
+          <div>{requirement}</div>
         </motion.div>
       </Box>
       <Box ml={3}>
@@ -137,16 +139,14 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           </div>
           <div className="preview" ref={el} />
         </div>
-        {/* <button onClick={runCode}>Run</button>
-        <button onClick={clear}>start from scratch</button>
-        <button onClick={testOnBrowser}>Run test on the browser</button> */}
-        {/* <div
-
+        {/* Run test  It should be out side the <Box/>*/}
+        <div
           ref={testTarget}
           id="test-target"
           style={{ display: "none" }}
         ></div>
-        <div id="test-result" ref={result}></div> */}
+        <div id="test-result" ref={result}></div>
+        {/* Run test */}
         {/* <LegalPop
           canID={candidateID}
           canCode={code}
@@ -167,9 +167,9 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
             </Button>
           </Box>
           <Box m={1}>
-            <Button variant="contained" color="primary" onClick={testOnBrowser}>
+            {/* <Button variant="contained" color="primary" onClick={testOnBrowser}>
               Run Test
-            </Button>
+            </Button> */}
           </Box>
           <Box mt={1} ml={3}></Box>
           <Box marginLeft="auto" mt={1} mr={1}>

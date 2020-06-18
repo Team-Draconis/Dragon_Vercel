@@ -22,9 +22,10 @@ import styles from "../styles/QuizApp.module.css";
  *
  */
 
-function QuizApp({ goBackToDashboard }) {
+function QuizApp({ goBackToDashboard, id }) {
   //   const [quizResults, setQuizResults] = useState();
   //   const [selects, setSelects] = useState();
+  console.log("####",id)
   const questions = [
     {
       id: 1,
@@ -55,6 +56,73 @@ function QuizApp({ goBackToDashboard }) {
       answer_d: "useRequest()",
       correct_answer: "c",
     },
+    {
+      id: 4,
+      question: "What are Props?",
+      answer_a: "Props is shorthand for Properties in React",
+      answer_b:
+        "They're read only components which must be kept pure, i.e. immutable",
+      answer_c: "They are always passed down from parent to child components",
+      answer_d: "All of the above",
+      correct_answer: "d",
+    },
+    {
+      id: 5,
+      question: "Which method is not part of ReactDOM?",
+      answer_a: "ReactDOM.destroy()",
+      answer_b: "ReactDOM.hydrate()",
+      answer_c: "ReactDOM.createPortal()",
+      answer_d: "ReactDOM.findDOMNode()",
+      correct_answer: "a",
+    },
+    {
+      id: 6,
+      question: "What tool allows you to test React apps?",
+      answer_a: "Prettier",
+      answer_b: "Flow",
+      answer_c: "Jest",
+      answer_d: "Yarn",
+      correct_answer: "c",
+    },
+    {
+      id: 7,
+      question: "What is a higher-order component (HOC)?",
+      answer_a:
+        "A higher-order component transforms a component into another component",
+      answer_b: "Does not exist",
+      answer_c: "Connects to the backend of an app",
+      answer_d: "None of the above",
+      correct_answer: "a",
+    },
+    {
+      id: 8,
+      question: "What is the correct order for React Lifecycle of Components?",
+      answer_a: "Mounting, Updating, Unmounting",
+      answer_b: "Rendering, Mounting, Unmounting",
+      answer_c:
+        "Constructor(), getDerivedStateFromProps(), render(), componentDidMount()",
+      answer_d: "componentWillUnmount",
+      correct_answer: "a",
+    },
+    {
+      id: 9,
+      question: "What is React.createClass()",
+      answer_a: 'Allows us to generate component "classes"',
+      answer_b: "It does not exist",
+      answer_c: "It does not affect the virtual DOM",
+      answer_d: "It is a state within React",
+      correct_answer: "a",
+    },
+    {
+      id: 10,
+      question: "What is create-react-app",
+      answer_a: "Does not do anything",
+      answer_b:
+        "it's the official CLI for React to create React apps with no build configuration",
+      answer_c: "Includes vue components",
+      answer_d: "Adds Redux to React",
+      correct_answer: "b",
+    },
   ];
 
   const initialState = {
@@ -79,38 +147,7 @@ function QuizApp({ goBackToDashboard }) {
     return <div className={styles.error}>{error}</div>;
   };
 
-  //   const calculation = () => {
-  //     console.log(answers, "<--- ANSWERS");
-  //     let resultArray = [];
-
-  //     answers.forEach((answer) => {
-  //       resultArray.push(answer.answer);
-  //     });
-
-  //     console.log(resultArray, "<---- RESULT ARRAY");
-  //     let correctAnswerArray = [];
-
-  //     questions.forEach((question) => {
-  //       correctAnswerArray.push(question.correct_answer);
-  //     });
-
-  //     console.log(correctAnswerArray, "<---- CORRECT ANSWER ARRAY");
-
-  //     let count = 0;
-
-  //     for (let i = 0; i < questions.length; i++) {
-  //       if (resultArray[i] === correctAnswerArray[i]) {
-  //         count += 1;
-  //       }
-  //     }
-
-  //     console.log(count, "<----- COUNT");
-  //     setQuizResults(count / questions.length);
-  //     console.log(quizResults, "<--- QUIZ RESULTS");
-  //   };
-
   const renderResultMark = (question, answer) => {
-    // setSelects(answers);
     if (question.correct_answer === answer.answer) {
       return <span className={styles.correct}>Correct</span>;
     }
@@ -130,6 +167,35 @@ function QuizApp({ goBackToDashboard }) {
         </div>
       );
     });
+  };
+
+  const renderNumericalCorrect = () => {
+    let num = 0;
+
+    for (let i = 0; i < answers.length; i++) {
+      if (answers[i].answer === questions[i].correct_answer) {
+        num++;
+      }
+    }
+
+    num = Math.floor((num * 100)/answers.length);
+    
+    fetch("/api/quizSaver", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+        score: num,
+      }),
+    })
+      .then((res) => {
+        console.log("####SAVED THE RESULTS TO DB RES", res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    return num;
   };
 
   const restart = () => {
@@ -164,7 +230,8 @@ function QuizApp({ goBackToDashboard }) {
       <div className="container results">
         <h2>Results</h2>
         <ul>{renderResultsData()}</ul>
-        {/* Call Function for Correct Answers Logic */}
+        <ul>You got {renderNumericalCorrect()}% correct on this quiz!</ul>
+      
         <button className="btn btnPrimary" onClick={restart}>
           Restart
         </button>
@@ -220,7 +287,7 @@ function QuizApp({ goBackToDashboard }) {
           <Question />
           {renderError()}
           <Answers />
-          <button className="btn btnPrimary" onClick={next}>
+          <button className={styles.btnPrimary} onClick={next}>
             Confirm and Continue
           </button>
         </div>

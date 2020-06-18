@@ -12,6 +12,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Box from "@material-ui/core/Box";
 import Router from "next/router";
+import { TextField } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 const Dashboard = () => {
   const useStyles = makeStyles((theme) => ({
@@ -20,16 +22,42 @@ const Dashboard = () => {
     },
   }));
 
+  //Declaring styled textfield
+  const CssTextField = withStyles({
+    root: {
+      // "&:not(hover):not($disabled):not($cssFocused):not($error) $notchedOutline": {
+      //   borderColor: "red", //default
+      // },
+      "& label.Mui-focused": {
+        color: "white",
+      },
+      "& .MuiInput-underline:after": {
+        borderBottomColor: "yellow",
+      },
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: "white",
+        },
+        "&:hover fieldset": {
+          borderColor: "white",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "green",
+        },
+      },
+    },
+  })(TextField);
+
   let temp;
-  let city;
   let tempResults;
+  const [city, setCity] = useState("");
   const [newResults, setNewResults] = useState();
   const [view, setView] = useState(true);
   const [candidates_Info, setCandidate_Info] = useState();
 
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
-      fetch("http://localhost:3000/api/candidatesInfo", {
+      fetch("/api/candidatesInfo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,15 +76,13 @@ const Dashboard = () => {
   }, []);
 
   const onCityChange = ({ target: { value } }) => {
-    console.log(value);
-    city = value;
+    setCity(value);
   };
 
   let flag = false;
   const handleSubmit = () => {
     tempResults = candidates_Info.filter((el) => {
       flag = false;
-      console.log(el);
       for (let item of el.candidate_city) {
         if (item.toLowerCase() === city.toLowerCase()) {
           flag = true;
@@ -80,9 +106,47 @@ const Dashboard = () => {
           {/* <div style={{ marginLeft: "50px", marginTop: "30px" }}> */}
           <Box align="center" m={5}>
             <h1>Coding Test Report</h1>
-            <input type="text" onChange={onCityChange} value={temp} />
-            <button onClick={handleSubmit}>Submit</button>
-            <button onClick={handleReset}>Reset</button>
+            <Box display="flex" justifyContent="center">
+              <Box mt={3}>
+                {/* //please dont delete this */}
+
+                {/* <CssTextField
+                  onChange={(e) => onCityChange}
+                  value={temp}
+                  placeholder="Filter By City"
+                  inputProps={{
+                    style: { fontFamily: "nunito", color: "white" },
+                  }}
+                  variant="outlined"
+                /> */}
+                <input
+                  type="text"
+                  onChange={onCityChange}
+                  value={temp}
+                  placeholder="Filter by city"
+                />
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+              </Box>
+            </Box>
           </Box>
           {/* <div id="list">
             {candidates_Info.map((info) => {
@@ -118,7 +182,7 @@ const Dashboard = () => {
           </div> */}
           {/* </div> */}
           <div>
-            <Table size="large">
+            <Table size="medium">
               <TableHead>
                 <TableRow>
                   <TableCell>Date</TableCell>
@@ -133,8 +197,8 @@ const Dashboard = () => {
                   <TableRow key={info._id}>
                     <TableCell></TableCell>
                     <TableCell>{info.candidate_email}</TableCell>
-                    <TableCell>{info.candidate_city}</TableCell>
-                    <TableCell></TableCell>
+                    <TableCell>{info.candidate_city + "  "}</TableCell>
+                    <TableCell>{info.quiz_tests.length!==0 ? info.quiz_tests[info.quiz_tests.length-1].quiz_score + "%" : "NA"}</TableCell>
                     <TableCell align="right">
                       <Link href={`/comp/report/${info._id}`}>
                         <Button
@@ -164,9 +228,46 @@ const Dashboard = () => {
           <NavBar />
           <Box align="center" m={5}>
             <h1>Coding Test Report</h1>
-            <input type="text" onChange={onCityChange} value={temp} />
-            <button onClick={handleSubmit}>Submit</button>
-            <button onClick={handleReset}>Reset</button>
+            <Box display="flex" justifyContent="center">
+              <Box mt={3}>
+                {/* please dont delete this */}
+                {/* <CssTextField
+                  onChange={onCityChange}
+                  value={temp}
+                  placeholder="Filter By City"
+                  inputProps={{
+                    style: { fontFamily: "nunito", color: "white" },
+                  }}
+                  variant="outlined"
+                /> */}
+                <input
+                  type="text"
+                  onChange={onCityChange}
+                  value={temp}
+                  placeholder="Filter by city"
+                />
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </Box>
+              <Box mt={2.2} ml={1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  align="center"
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+              </Box>
+            </Box>
           </Box>
           {/* <div id="list">
             {newResults.map((testResult) => {
@@ -198,7 +299,7 @@ const Dashboard = () => {
             })}
           </div> */}
           <div>
-            <Table size="large">
+            <Table size="medium">
               <TableHead>
                 <TableRow>
                   <TableCell>Date</TableCell>

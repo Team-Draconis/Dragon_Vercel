@@ -71,7 +71,6 @@ export default function Register() {
     })
       .then((res) =>
         res.json().then((res) => {
-          console.log(res);
           setIsFinished(true);
         })
       )

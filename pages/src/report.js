@@ -1,8 +1,6 @@
 import NavBar from "./NavBar";
 export default function Report() {
-  const handleSubmit = (e) => {
-    console.log("clicked!");
-  };
+  const handleSubmit = (e) => {};
 
   return (
     <div>

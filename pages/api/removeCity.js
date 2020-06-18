@@ -7,13 +7,14 @@ dbConnect();
 
 export default async (req, res) => {
   const { method } = req;
-  console.log("##THIS IS ADD CITY REQ.BODY", req.body);
   switch (method) {
     case "POST":
       try {
-        console.log(req.body)
-        await Candidate.update({candidate_email:req.body.candidate_email},{$pull: {candidate_city: req.body.candidate_city}})
-        res.status(200)
+        await Candidate.update(
+          { candidate_email: req.body.candidate_email },
+          { $pull: { candidate_city: req.body.candidate_city } }
+        );
+        res.status(200);
       } catch (error) {
         res.status(400).json({ message: "Oops,Remove City failed" });
       }

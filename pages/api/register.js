@@ -14,7 +14,6 @@ export default async (req, res) => {
         hash(req.body.candidate_password, 10, async function (err, hash) {
           req.body.candidate_password = hash;
           const newCandidate = await Candidate.create(req.body);
-          console.log("##CANDIDATE SAVED IN DB", newCandidate);
           res.status(200).json({ id: newCandidate._id });
         });
       } catch (error) {
