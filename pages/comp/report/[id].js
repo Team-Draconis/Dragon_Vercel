@@ -13,7 +13,6 @@ import _ToggleMessage from "../../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../../src/test/_AddingCalculator";
 import { useRouter } from "next/router";
 import Router from "next/router";
-
 import _LoopOver from "../../../src/test/_LoopOver";
 
 //Styling
