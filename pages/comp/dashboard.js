@@ -185,7 +185,7 @@ const Dashboard = () => {
             <Table size="medium">
               <TableHead>
                 <TableRow>
-                  <TableCell>Date</TableCell>
+                  <TableCell>Last active at</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>City</TableCell>
                   <TableCell>Score</TableCell>
@@ -195,10 +195,15 @@ const Dashboard = () => {
               <TableBody>
                 {candidates_Info.map((info) => (
                   <TableRow key={info._id}>
-                    <TableCell></TableCell>
+                    <TableCell>{`${info.last_login}`.slice(0, -30)}</TableCell>
                     <TableCell>{info.candidate_email}</TableCell>
                     <TableCell>{info.candidate_city + "  "}</TableCell>
-                    <TableCell>{info.quiz_tests.length!==0 ? info.quiz_tests[info.quiz_tests.length-1].quiz_score + "%" : "NA"}</TableCell>
+                    <TableCell>
+                      {info.quiz_tests.length !== 0
+                        ? info.quiz_tests[info.quiz_tests.length - 1]
+                            .quiz_score + "%"
+                        : "NA"}
+                    </TableCell>
                     <TableCell align="right">
                       <Link href={`/comp/report/${info._id}`}>
                         <Button

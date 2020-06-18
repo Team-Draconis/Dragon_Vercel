@@ -14,6 +14,10 @@ export default async (req, res) => {
         const candidate = await Candidate.findOne({
           candidate_email: req.body.candidate_email,
         });
+
+        candidate.last_login = req.body.loginTime;
+        await candidate.save();
+
         compare(
           req.body.candidate_password,
           candidate.candidate_password,
@@ -33,8 +37,6 @@ export default async (req, res) => {
             }
           }
         );
-        candidate.last_login = req.body.loginTime;
-        await candidate.save()
       } catch (error) {
         res.status(400).json({ success: false });
       }
