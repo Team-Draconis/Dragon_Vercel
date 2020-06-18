@@ -1,4 +1,6 @@
 //candidate dashboard when they successfully login in
+//zowie- add a button for candidate to view the latest test results that they took.
+
 import NavBar from "../../src/NavBar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -13,6 +15,7 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import { TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import ReportToCandidate from "../report";
 
 export default function CandidateDashboard({ candidateID }) {
   const router = useRouter();
@@ -234,6 +237,13 @@ export default function CandidateDashboard({ candidateID }) {
             ) : (
               <p>No taken the code test yet</p>
             )} */}
+            <button
+              onClick={() => {
+                setView("report");
+              }}
+            >
+              Preview your profile which will appeal to the company{" "}
+            </button>
           </Box>
           <Box mt={12}>
             <Typography
@@ -315,7 +325,7 @@ export default function CandidateDashboard({ candidateID }) {
     }
 
     if (view === "quiz") {
-      return <QuizApp goBackToDashboard={goBackToDashboard} id ={candidateID} />;
+      return <QuizApp goBackToDashboard={goBackToDashboard} id={candidateID} />;
     }
 
     if (view === "easy") {
@@ -342,6 +352,14 @@ export default function CandidateDashboard({ candidateID }) {
           mode="hard"
           goBackToDashboard={goBackToDashboard}
           candidateID={candidateInfo._id}
+        />
+      );
+    }
+    if (view === "report") {
+      return (
+        <ReportToCandidate
+          candidateInfo={candidateInfo}
+          goBackToDashboard={goBackToDashboard}
         />
       );
     }
