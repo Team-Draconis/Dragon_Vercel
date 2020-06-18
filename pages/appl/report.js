@@ -1,3 +1,6 @@
+//NEW NEW NEW
+// --- Zowie's Code ---
+// Component for Candidate to view their own test results.
 import "./styles.module.scss";
 import React, { useState, useRef, useEffect } from "react";
 import NavBar from "../src/NavBar";
