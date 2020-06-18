@@ -142,7 +142,6 @@ export default function Report({ candidateID }) {
 
   if (candidateInfo) {
     const candidateCities = candidateInfo.candidate_city;
-    console.log(candidateCities);
     const candidate_Cities_formatted = candidateCities.join(", ");
     return (
       <>

@@ -117,6 +117,7 @@ export default function CandidateDashboard({ candidateID }) {
     })
       .then((res) =>
         res.json().then((res) => {
+            //Please don't delete this console.log, since I don't know what to do with it , we can not return anything here including res.send()
           console.log("New City has been saved");
         })
       )

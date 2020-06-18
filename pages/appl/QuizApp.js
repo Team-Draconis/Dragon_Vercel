@@ -25,9 +25,6 @@ import styles from "../styles/QuizApp.module.css";
  */
 
 function QuizApp({ goBackToDashboard, id, handleRefresh }) {
-  //   const [quizResults, setQuizResults] = useState();
-  //   const [selects, setSelects] = useState();
-  console.log("####", id);
   const questions = [
     {
       id: 1,
@@ -191,7 +188,8 @@ function QuizApp({ goBackToDashboard, id, handleRefresh }) {
       }),
     })
       .then((res) => {
-        console.log("####SAVED THE RESULTS TO DB RES", res);
+        //Please don't delete this console.log, since I don't know what to do with it , we can not return anything here including res.send()
+        console.log("####SAVED THE RESULTS TO DB RES####");
       })
       .catch((error) => {
         console.log(error);
