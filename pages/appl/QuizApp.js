@@ -3,6 +3,8 @@ import Progress from "../../components/Progress";
 import Question from "../../components/Question";
 import Answers from "../../components/Answers";
 import QuizContext from "../../src/Context/QuizContext";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 
 import {
   SET_ANSWERS,
@@ -25,7 +27,7 @@ import styles from "../styles/QuizApp.module.css";
 function QuizApp({ goBackToDashboard, id }) {
   //   const [quizResults, setQuizResults] = useState();
   //   const [selects, setSelects] = useState();
-  console.log("####",id)
+  console.log("####", id);
   const questions = [
     {
       id: 1,
@@ -178,8 +180,8 @@ function QuizApp({ goBackToDashboard, id }) {
       }
     }
 
-    num = Math.floor((num * 100)/answers.length);
-    
+    num = Math.floor((num * 100) / answers.length);
+
     fetch("/api/quizSaver", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -231,7 +233,7 @@ function QuizApp({ goBackToDashboard, id }) {
         <h2>Results</h2>
         <ul>{renderResultsData()}</ul>
         <ul>You got {renderNumericalCorrect()}% correct on this quiz!</ul>
-      
+
         <button className="btn btnPrimary" onClick={restart}>
           Restart
         </button>
@@ -287,9 +289,17 @@ function QuizApp({ goBackToDashboard, id }) {
           <Question />
           {renderError()}
           <Answers />
-          <button className={styles.btnPrimary} onClick={next}>
-            Confirm and Continue
-          </button>
+          <Box mt={3}>
+            <Button
+              variant="contained"
+              color="primary"
+              align="center"
+              className={styles.btnPrimary}
+              onClick={next}
+            >
+              Confirm and Continue
+            </Button>
+          </Box>
         </div>
       </QuizContext.Provider>
     );

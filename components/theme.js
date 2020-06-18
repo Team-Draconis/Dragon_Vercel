@@ -22,14 +22,18 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: "#e00700",
+      main: "#FFC107",
 
       // #e00700
       // #304ffe
+      // #FFC107
     },
     secondary: {
-      main: "#19857b",
+      main: "#546e7a",
+      // #00796b teal
+      // #546e7a blue grey
       // #19857b
+      // #616161
     },
     error: {
       main: red.A400,

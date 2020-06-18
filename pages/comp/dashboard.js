@@ -208,7 +208,7 @@ const Dashboard = () => {
                       <Link href={`/comp/report/${info._id}`}>
                         <Button
                           variant="contained"
-                          color="secondary"
+                          color="primary"
                           align="center"
                         >
                           View Test Detail
