@@ -14,6 +14,8 @@ import _AddingCalculator from "../../../src/test/_AddingCalculator";
 import { useRouter } from "next/router";
 import Router from "next/router";
 
+import _LoopOver from "../../../src/test/_LoopOver";
+
 //Styling
 const App = styled.div`
   box-sizing: border-box;
@@ -68,6 +70,10 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
       }
       if (view === "medium") {
         _AddingCalculator();
+      }
+      if (view === "hard") {
+        _LoopOver();
+        setTimeout(() => {}, 150);
       }
     };
 
