@@ -12,32 +12,10 @@ import { motion } from "framer-motion";
 
 export default function NavBar() {
   return (
-    // <div className="navbar">
-    //   <h2 id="title">Dragon Tester: Show your fire!</h2>
-    //   <Link href="/">
-    //     <a>LogOut</a>
-    //   </Link>
-    //   <Link href="/comp/login">
-    //     <a>Company LogIn</a>
-    //   </Link>
-    // </div>
     <div>
       <Box display="flex" justifyContent="flex-start" m={2.1}>
-        {/* <AppBar position="static" color="primary">
-        <Toolbar display="flex" justifyContent="flex-start"> */}
-        {/* <IconButton
-            edge="start"
-            // className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton> */}
-        {/* <Typography variant="h6">Home</Typography> */}
         <Box style={{ marginRight: "auto" }}>
           <Link href="/">
-            {/* <Button color="inherit">Home</Button> */}
-
             <motion.img
               src="/dragon.svg"
               height="60"
@@ -47,13 +25,6 @@ export default function NavBar() {
             />
           </Link>
         </Box>
-        {/* </Link>
-          <Link href="/appl/SignIn">
-            <Button color="inherit">Login</Button>
-          </Link>
-          <Link href="/comp/signin">
-            <Button color="inherit">Company</Button>
-          </Link> */}
         <Box>
           <Link href="/">
             <motion.div whileHover={{ scale: 1.2 }}>
@@ -68,8 +39,6 @@ export default function NavBar() {
             </motion.div>
           </Link>
         </Box>
-        {/* </Toolbar>
-      </AppBar> */}
       </Box>
     </div>
   );
