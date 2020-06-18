@@ -55,7 +55,6 @@ export default function Register() {
   const [city, setCity] = useState("your city");
   const [name, setName] = useState("your name");
   const [password, setPassword] = useState("your password");
-  const [isFinished, setIsFinished] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -71,19 +70,17 @@ export default function Register() {
     })
       .then((res) =>
         res.json().then((res) => {
-          setIsFinished(true);
+          if (res.authToken) {
+            localStorage.setItem("candidatetoken", res.authToken);
+            Router.push(`/appl/dashboard/${res.candidateID}`);
+            // setIsFinished(true);
+          }
         })
       )
       .catch((error) => {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    if (isFinished) {
-      Router.push("/appl/SignIn");
-    }
-  }, [isFinished]);
 
   return (
     <Container component="main" maxWidth="xs">

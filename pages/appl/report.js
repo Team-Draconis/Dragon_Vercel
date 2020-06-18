@@ -118,8 +118,14 @@ export default function ReportToCandidate({
         <p>Candidate Name : {candidateInfo.candidate_name}</p>
         <p>Desired Location : {candidateInfo.candidate_city}</p>
         <p>Email : {candidateInfo.candidate_email}</p>
-        {/* <p>Quiz score: {candidateInfo.quiz_tests.quiz_score}</p> */}
-        <p>Quiz correct rates: 60% </p>
+
+        <p>
+          Quiz Score:{" "}
+          {candidateInfo.quiz_tests.length !== 0
+            ? candidateInfo.quiz_tests[candidateInfo.quiz_tests.length - 1]
+                .quiz_score + "%"
+            : "NA"}
+        </p>
         {candidateInfo.coding_tests.easy.length > 0 ? (
           <button
             onClick={() => {

@@ -45,7 +45,7 @@ export default function CandidateDashboard({ candidateID }) {
           borderColor: "white",
         },
         "&.Mui-focused fieldset": {
-          borderColor: "green",
+          borderColor: "#FFC107",
         },
       },
     },
@@ -133,7 +133,7 @@ export default function CandidateDashboard({ candidateID }) {
       return (
         <div>
           <NavBar />
-          <Box mt={10}>
+          <Box mt={6}>
             <Typography
               variant="h3"
               component="h1"
@@ -146,6 +146,7 @@ export default function CandidateDashboard({ candidateID }) {
                 transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
               >
                 {`Hello, ${candidateInfo.candidate_name} 🐲  Welcome to your dashboard`}
+
               </motion.div>
             </Typography>
             <Box mt={3}>
@@ -178,6 +179,20 @@ export default function CandidateDashboard({ candidateID }) {
                 >
                   {`You are interested in working in ${candidateInfo.candidate_city}`}
                 </motion.div>
+
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
+                >
+                  {`Your recent quiz score is ${
+                    candidateInfo.quiz_tests.length !== 0
+                      ? candidateInfo.quiz_tests[
+                          candidateInfo.quiz_tests.length - 1
+                        ].quiz_score + "%"
+                      : "NA"
+                  }`}
+                </motion.div>
               </Typography>
             </Box>
             <Box align="center" mt={4}>
@@ -185,8 +200,6 @@ export default function CandidateDashboard({ candidateID }) {
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
-                // display="flex"
-                // flexDirection="row"
               >
                 <Box display="flex" justifyContent="center">
                   <Box m={(0, 2)}>
@@ -233,21 +246,32 @@ export default function CandidateDashboard({ candidateID }) {
                   </Box>
                 </Box>
               </motion.div>
+              <motion.div
+                initial={{ y: 26 * 1.2, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
+              >
+                <Box mt={4}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    align="center"
+                    onClick={() => {
+                      setView("report");
+                    }}
+                  >
+                    View Profile{" "}
+                  </Button>
+                </Box>
+              </motion.div>
             </Box>
             {/* {candidateInfo.coding_tests ? (
               JSON.stringify(candidateInfo.coding_tests)
             ) : (
               <p>No taken the code test yet</p>
             )} */}
-            <button
-              onClick={() => {
-                setView("report");
-              }}
-            >
-              Preview your profile which will appeal to the company{" "}
-            </button>
           </Box>
-          <Box mt={12}>
+          <Box mt={9}>
             <Typography
               variant="h4"
               component="h1"
@@ -275,11 +299,11 @@ export default function CandidateDashboard({ candidateID }) {
                   color="primary"
                   onClick={() => setView("quiz")}
                 >
-                  Quiz Test
+                  Knowledge Test
                 </Button>
               </motion.div>
             </Box>
-            <Box align="center" m={7}>
+            <Box align="center" m={(4, 7)}>
               <motion.div
                 initial={{ y: 26 * 1.2, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

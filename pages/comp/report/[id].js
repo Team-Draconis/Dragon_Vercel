@@ -11,7 +11,9 @@ import { createEditor } from "../../../utils/editor";
 import styled from "styled-components";
 import _ToggleMessage from "../../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../../src/test/_AddingCalculator";
-import { useRouter, Router } from "next/router";
+import { useRouter } from "next/router";
+import Router from "next/router";
+import _LoopOver from "../../../src/test/_LoopOver";
 
 //Styling
 const App = styled.div`
@@ -67,6 +69,10 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
       }
       if (view === "medium") {
         _AddingCalculator();
+      }
+      if (view === "hard") {
+        _LoopOver();
+        setTimeout(() => {}, 150);
       }
     };
 
@@ -135,11 +141,24 @@ export default function Report({ candidateID }) {
     return (
       <>
         <NavBar />
+        <button
+          onClick={() => {
+            Router.push("/comp/dashboard");
+          }}
+        >
+          Go back to dashboard
+        </button>
         <p>Candidate Name : {candidateInfo.candidate_name}</p>
         <p>Desired Location : {candidateInfo.candidate_city}</p>
         <p>Email : {candidateInfo.candidate_email}</p>
-        {/* <p>Quiz correct rates: {candidateInfo.quiz_tests.quiz_score}</p> */}
-        <p>Quiz correct rates: 60% </p>
+        <p>
+          Quiz correct rates:{" "}
+          {candidateInfo.quiz_tests.length !== 0
+            ? candidateInfo.quiz_tests[candidateInfo.quiz_tests.length - 1]
+                .quiz_score + "%"
+            : "NA"}{" "}
+        </p>
+
         {candidateInfo.coding_tests.easy.length > 0 ? (
           <button
             onClick={() => {
