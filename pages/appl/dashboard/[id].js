@@ -5,6 +5,7 @@ import NavBar from "../../src/NavBar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 const LoginPage = dynamic(() => import("../register"));
@@ -133,216 +134,231 @@ export default function CandidateDashboard({ candidateID }) {
       return (
         <div>
           <NavBar />
-          <Box mt={6}>
-            <Typography
-              variant="h3"
-              component="h1"
-              align="center"
-              style={{ fontFamily: "Josefin Sans" }}
-            >
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
-              >
-                {`Hello ${candidateInfo.candidate_name} 🐲  Welcome to your dashboard`}
-              </motion.div>
-            </Typography>
-            <Box mt={3}>
-              <Typography
-                variant="h4"
-                component="h1"
-                align="center"
-                style={{ fontFamily: "Josefin Sans" }}
-              >
-                <motion.div
-                  initial={{ y: 26 * 1.2, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 0.8 }}
-                >
-                  {`Your email address is ${candidateInfo.candidate_email}`}
-                </motion.div>
-              </Typography>
-            </Box>
-            <Box mt={3}>
-              <Typography
-                variant="h4"
-                component="h1"
-                align="center"
-                style={{ fontFamily: "Josefin Sans" }}
-              >
-                <motion.div
-                  initial={{ y: 26 * 1.2, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
-                >
-                  {`You are interested in working in ${candidateInfo.candidate_city}`}
-                </motion.div>
 
+          <Box display="flex" flexDirection="row">
+            {/* User status part */}
+            <Box mt={6} width="60%">
+              <Typography
+                variant="h3"
+                component="h1"
+                align="center"
+                style={{ fontFamily: "Josefin Sans" }}
+              >
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
                 >
-                  {`Your recent quiz score is ${
-                    candidateInfo.quiz_tests.length !== 0
-                      ? candidateInfo.quiz_tests[
-                          candidateInfo.quiz_tests.length - 1
-                        ].quiz_score + "%"
-                      : "NA"
-                  }`}
+                  {`Hello ${candidateInfo.candidate_name} 🐲  Welcome to your dashboard`}
                 </motion.div>
               </Typography>
-            </Box>
-            <Box align="center" mt={4}>
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
-              >
-                <Box display="flex" justifyContent="center">
-                  <Box m={(0, 2)}>
-                    <CssTextField
-                      onChange={onAddCity}
-                      value={temp}
-                      placeholder="Add Additional City"
-                      inputProps={{
-                        style: { fontFamily: "nunito", color: "white" },
-                      }}
-                      variant="outlined"
-                    />
-                  </Box>
-                  <Box mt={4.3}>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      align="center"
-                      onClick={handleAddCity}
-                    >
-                      Add
-                    </Button>
-                  </Box>
-                  <Box m={(0, 2)}>
-                    <CssTextField
-                      placeholder="Remove City"
-                      inputProps={{
-                        style: { fontFamily: "nunito", color: "white" },
-                      }}
-                      variant="outlined"
-                      onChange={onRemoveCity}
-                      value={temp}
-                    />
-                  </Box>
-                  <Box mt={4.3}>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      align="center"
-                      onClick={handleRemoveCity}
-                    >
-                      Remove
-                    </Button>
-                  </Box>
-                </Box>
-              </motion.div>
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
-              >
-                <Box mt={4}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    align="center"
-                    onClick={() => {
-                      setView("report");
-                    }}
+              <Box mt={3}>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                >
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.8 }}
                   >
-                    View Profile{" "}
-                  </Button>
-                </Box>
-              </motion.div>
-            </Box>
-            {/* {candidateInfo.coding_tests ? (
+                    {`Your email address is ${candidateInfo.candidate_email}`}
+                  </motion.div>
+                </Typography>
+              </Box>
+              <Box mt={3}>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                >
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
+                  >
+                    {`You are interested in working in ${candidateInfo.candidate_city}`}
+                  </motion.div>
+                </Typography>
+              </Box>
+              <Box mt={3}>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                >
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
+                  >
+                    {`Your recent quiz score is ${
+                      candidateInfo.quiz_tests.length !== 0
+                        ? candidateInfo.quiz_tests[
+                            candidateInfo.quiz_tests.length - 1
+                          ].quiz_score + "%"
+                        : "NA"
+                    }`}
+                  </motion.div>
+                </Typography>
+              </Box>
+              <Box align="center" mt={4}>
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
+                >
+                  <Box display="flex" justifyContent="center">
+                    <Box m={(0, 2)}>
+                      <CssTextField
+                        onChange={onAddCity}
+                        value={temp}
+                        placeholder="Add Additional City"
+                        inputProps={{
+                          style: { fontFamily: "nunito", color: "white" },
+                        }}
+                        variant="outlined"
+                      />
+                    </Box>
+                    <Box mt={4.3}>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        align="center"
+                        onClick={handleAddCity}
+                      >
+                        Add
+                      </Button>
+                    </Box>
+                    <Box m={(0, 2)}>
+                      <CssTextField
+                        placeholder="Remove City"
+                        inputProps={{
+                          style: { fontFamily: "nunito", color: "white" },
+                        }}
+                        variant="outlined"
+                        onChange={onRemoveCity}
+                        value={temp}
+                      />
+                    </Box>
+                    <Box mt={4.3}>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        align="center"
+                        onClick={handleRemoveCity}
+                      >
+                        Remove
+                      </Button>
+                    </Box>
+                  </Box>
+                </motion.div>
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
+                >
+                  <Box mt={4}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      align="center"
+                      onClick={() => {
+                        setView("report");
+                      }}
+                    >
+                      View Profile{" "}
+                    </Button>
+                  </Box>
+                </motion.div>
+              </Box>
+              {/* {candidateInfo.coding_tests ? (
               JSON.stringify(candidateInfo.coding_tests)
             ) : (
               <p>No taken the code test yet</p>
             )} */}
-          </Box>
-          <Box mt={9}>
-            <Typography
-              variant="h4"
-              component="h1"
-              align="center"
-              style={{ fontFamily: "Josefin Sans" }}
-            >
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
-              >
-                Test Your Skills
-              </motion.div>
-            </Typography>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <Box align="center" m={7}>
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
-              >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setView("quiz")}
-                >
-                  Knowledge Test
-                </Button>
-              </motion.div>
-            </Box>
-            <Box align="center" m={(4, 7)}>
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
-              >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setView("easy")}
-                >
-                  Easy Mode
-                </Button>
-              </motion.div>
             </Box>
 
-            <Box align="center" m={7} onClick={() => setView("medium")}>
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
-              >
-                <Button variant="contained" color="primary">
-                  Medium Mode
-                </Button>
-              </motion.div>
-            </Box>
-            <Box align="center" m={7}>
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
-              >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setView("hard")}
+            {/* Coding test part */}
+            <Box width="40%" height="100vh">
+              <Box mt={9}>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
                 >
-                  Hard Mode
-                </Button>
-              </motion.div>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                  >
+                    Test Your Skills
+                  </motion.div>
+                </Typography>
+              </Box>
+              <Box align="center">
+                <Box align="center" m={7}>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setView("quiz")}
+                    >
+                      Knowledge Test
+                    </Button>
+                  </motion.div>
+                </Box>
+                <Box align="center" m={(4, 7)}>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setView("easy")}
+                    >
+                      Easy Mode
+                    </Button>
+                  </motion.div>
+                </Box>
+                <Box align="center" m={7} onClick={() => setView("medium")}>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                  >
+                    <Button variant="contained" color="primary">
+                      Medium Mode
+                    </Button>
+                  </motion.div>
+                </Box>
+                <Box align="center" m={7}>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setView("hard")}
+                    >
+                      Hard Mode
+                    </Button>
+                  </motion.div>
+                </Box>
+              </Box>
             </Box>
           </Box>
         </div>
