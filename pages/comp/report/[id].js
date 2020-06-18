@@ -11,6 +11,7 @@ import { createEditor } from "../../../utils/editor";
 import styled from "styled-components";
 import _ToggleMessage from "../../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../../src/test/_AddingCalculator";
+import _LoopOver from "../../../src/test/_LoopOver";
 import { useRouter, Router } from "next/router";
 
 //Styling
@@ -67,6 +68,10 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
       }
       if (view === "medium") {
         _AddingCalculator();
+      }
+      if (view === "hard") {
+        _LoopOver();
+        setTimeout(() => {}, 150);
       }
     };
 
