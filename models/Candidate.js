@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const moment = require("moment-timezone");
+const dateJapan = moment.tz(Date.now(), "Asia/Tokyo");
 
 const CandidateSchema = new mongoose.Schema({
   candidate_name: {
@@ -24,7 +26,7 @@ const CandidateSchema = new mongoose.Schema({
     {
       quiz_detail: String,
       quiz_score: Number,
-      quiz_submitted_at: { type: Date, default: Date.now },
+      quiz_submitted_at: { type: Date, default: dateJapan },
     },
   ],
 
@@ -33,7 +35,7 @@ const CandidateSchema = new mongoose.Schema({
       {
         coding_test_codes: String,
         coding_test_result: String,
-        coding_test_submitted_at: { type: Date, default: Date.now },
+        coding_test_submitted_at: { type: Date, default: dateJapan },
         coding_test_duration: String,
       },
     ],
@@ -41,7 +43,7 @@ const CandidateSchema = new mongoose.Schema({
       {
         coding_test_codes: String,
         coding_test_result: String,
-        coding_test_submitted_at: { type: Date, default: Date.now },
+        coding_test_submitted_at: { type: Date, default: dateJapan },
         coding_test_duration: String,
       },
     ],
@@ -49,7 +51,7 @@ const CandidateSchema = new mongoose.Schema({
       {
         coding_test_codes: String,
         coding_test_result: String,
-        coding_test_submitted_at: { type: Date, default: Date.now },
+        coding_test_submitted_at: { type: Date, default: dateJapan },
         coding_test_duration: String,
       },
     ],
