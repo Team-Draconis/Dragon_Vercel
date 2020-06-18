@@ -94,12 +94,13 @@ export default function CandidateDashboard({ candidateID }) {
     })
       .then((res) =>
         res.json().then((res) => {
-          Router.push(`/appl/dashboard/${res.id}`);
+          console.log("New City has been saved");
         })
       )
       .catch((error) => {
         console.log(error);
       });
+    Router.replace(`/appl/dashboard/${candidateInfo._id}`);
   };
 
   const handleRemoveCity = (e) => {
@@ -114,12 +115,13 @@ export default function CandidateDashboard({ candidateID }) {
     })
       .then((res) =>
         res.json().then((res) => {
-          Router.push(`/appl/dashboard/${res.id}`);
+          console.log("The city has been removed");
         })
       )
       .catch((error) => {
         console.log(error);
       });
+    Router.replace(`/appl/dashboard/${candidateInfo._id}`);
   };
 
   const goBackToDashboard = () => {

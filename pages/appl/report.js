@@ -1,4 +1,4 @@
-//NEW NEW NEW
+//  NEW NEW NEW
 // --- Zowie's Code ---
 // Component for Candidate to view their own test results.
 import "./styles.module.scss";
