@@ -178,6 +178,20 @@ export default function CandidateDashboard({ candidateID }) {
                 >
                   {`You are interested in working in ${candidateInfo.candidate_city}`}
                 </motion.div>
+
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
+                >
+                  {`Your recent quiz score is ${
+                    candidateInfo.quiz_tests.length !== 0
+                      ? candidateInfo.quiz_tests[
+                          candidateInfo.quiz_tests.length - 1
+                        ].quiz_score + "%"
+                      : "NA"
+                  }`}
+                </motion.div>
               </Typography>
             </Box>
             <Box align="center" mt={4}>
