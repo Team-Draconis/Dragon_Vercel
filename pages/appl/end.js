@@ -6,8 +6,24 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { verify } from "jsonwebtoken";
+import Router from "next/router";
 
 export default function End() {
+  const [candidateID, setCandidateID] = useState();
+
+  useEffect(() => {
+    const token = localStorage.getItem("candidatetoken");
+
+    verify(token, process.env.SECRET_TOKEN, async function (err, decoded) {
+      // must have company token, candidate token could not get the data
+      if (!err && decoded.sub) {
+        console.log(decoded.sub);
+        setCandidateID(decoded.sub);
+      }
+    });
+  }, []);
   return (
     <>
       {/* <NavBar /> */}
@@ -36,11 +52,15 @@ export default function End() {
             yoyo: Infinity,
           }}
         >
-          <Link href="/">
-            <Button variant="contained" color="primary">
-              Close
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              Router.push(`/appl/dashboard/${candidateID}`);
+            }}
+          >
+            Go back to dashboard
+          </Button>
         </motion.div>
       </Box>
       {/* <div>

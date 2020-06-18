@@ -138,6 +138,7 @@ export default function CandidateDashboard({ candidateID }) {
           <Box display="flex" flexDirection="row">
             {/* User status part */}
             <Box mt={6} width="60%">
+
               <Typography
                 variant="h3"
                 component="h1"
@@ -149,7 +150,7 @@ export default function CandidateDashboard({ candidateID }) {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
                 >
-                  {`Hello ${candidateInfo.candidate_name} 🐲  Welcome to your dashboard`}
+                  {`Hello ${candidateInfo.candidate_name} 🐲  Welcome Back`}
                 </motion.div>
               </Typography>
               <Box mt={3}>

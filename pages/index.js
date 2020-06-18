@@ -74,16 +74,88 @@ class Index extends Component {
                   transition={{ delay: 1.2, duration: 1.7 }}
                 >
                   Welcome to Dragon Tester
-                </motion.div>
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                variant="h4"
-                component="h1"
-                align="center"
-                style={{ fontFamily: "Josefin Sans" }}
-              >
+
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+                  >
+                  Display your front end skills anonymously
+                  </motion.div>
+                </Typography>
+              </Box>
+              <ButtonContainer>
+                <ButtonBox>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+                  >
+                    <Button variant="contained" color="primary" align="center">
+                      <Link href="/appl/register">
+                        <a
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                            fontFamily: "Josefin Sans",
+                            paddingTop: 3,
+                          }}
+                        >
+                          Sign Up
+                        </a>
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </ButtonBox>
+                <ButtonBox>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+                  >
+                    <Button variant="contained" color="primary">
+                      <Link href="/appl/SignIn">
+                        <a
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                            fontFamily: "Josefin Sans",
+                            paddingTop: 3,
+                          }}
+                        >
+                          Log In
+                        </a>
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </ButtonBox>
+                <ButtonBox>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      href="/comp/signin"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        fontFamily: "Josefin Sans",
+                        paddingTop: 9,
+                      }}
+                    >
+                      {/* <Link href="/comp/signin">
+                    <a style={{ textDecoration: "none", color: "white" }}> */}
+                      Company Log In
+                      {/* </a> */}
+                      {/* </Link> */}
+                    </Button>
+                  </motion.div>
+                </ButtonBox>
+              </ButtonContainer>
+              <ButtonBox>
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -107,77 +179,27 @@ class Index extends Component {
                 >
                   {/* Take coding challenge anonymously */}
                 </motion.div>
+
               </Typography>
             </Box>
             <ButtonContainer>
               <ButtonBox>
-                <motion.div
-                  initial={{ y: 26 * 1.2, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
-                >
-                  <Button variant="contained" color="primary" align="center">
-                    <Link href="/appl/register">
-                      <a
-                        style={{
-                          textDecoration: "none",
-                          color: "black",
-                          fontFamily: "Josefin Sans",
-                          paddingTop: 3,
-                        }}
-                      >
-                        Sign Up
-                      </a>
-                    </Link>
-                  </Button>
-                </motion.div>
-              </ButtonBox>
-              <ButtonBox>
-                <motion.div
-                  initial={{ y: 26 * 1.2, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
-                >
-                  <Button variant="contained" color="primary">
-                    <Link href="/appl/SignIn">
-                      <a
-                        style={{
-                          textDecoration: "none",
-                          color: "black",
-                          fontFamily: "Josefin Sans",
-                          paddingTop: 3,
-                        }}
-                      >
-                        Log In
-                      </a>
-                    </Link>
-                  </Button>
-                </motion.div>
-              </ButtonBox>
-              <ButtonBox>
-                <motion.div
-                  initial={{ y: 26 * 1.2, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
-                >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    href="/comp/signin"
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      fontFamily: "Josefin Sans",
-                      paddingTop: 9,
-                    }}
-                  >
-                    {/* <Link href="/comp/signin">
-                    <a style={{ textDecoration: "none", color: "white" }}> */}
-                    Company Log In
-                    {/* </a> */}
-                    {/* </Link> */}
-                  </Button>
-                </motion.div>
+
+
+                <Button variant="contained" color="primary">
+                  <Link href="/appl/register">
+                    <a
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        fontFamily: "Josefin Sans",
+                        paddingTop: 3,
+                      }}
+                    >
+                      Get Started
+                    </a>
+                  </Link>
+                </Button>
               </ButtonBox>
             </ButtonContainer>
             <ButtonBox>
