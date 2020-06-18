@@ -111,20 +111,24 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
   return (
     <>
       <NavBar />
-      <Box m={3}>
-        <Button variant="contained" color="primary" onClick={goBackToDashboard}>
-          Back to dashboard
-        </Button>
-      </Box>
-      <Box align="center">
-        <motion.div
-          initial={{ y: 26 * 1.2, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
-        >
+      <motion.div
+        initial={{ y: 26 * 1.2, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+      >
+        <Box m={3}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={goBackToDashboard}
+          >
+            Back to dashboard
+          </Button>
+        </Box>
+        <Box ml={55}>
           <div>{requirement}</div>
-        </motion.div>
-      </Box>
+        </Box>
+      </motion.div>
       <Box ml={3}>
         <Typography variant="h6">Remaining Time: {counter}</Typography>
       </Box>
