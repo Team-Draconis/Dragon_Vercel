@@ -19,8 +19,13 @@ const CandidateSchema = new mongoose.Schema({
     type: String,
     required: [true, "Password is required"],
   },
+  last_login: String,
   quiz_tests: [
-    { quiz_detail: String, quiz_score: Number, quiz_submitted_at:{ type: Date, default: Date.now }  },
+    {
+      quiz_detail: String,
+      quiz_score: Number,
+      quiz_submitted_at: { type: Date, default: Date.now },
+    },
   ],
 
   coding_tests: {

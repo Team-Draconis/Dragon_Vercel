@@ -61,6 +61,7 @@ export default function SignIn() {
       body: JSON.stringify({
         candidate_email: email,
         candidate_password: password,
+        loginTime: Date().toString(),
       }),
     }).then((res) => {
       res.json().then((res) => {
