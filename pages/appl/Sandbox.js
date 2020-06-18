@@ -34,7 +34,9 @@ const Split_View = styled.div`
 export default function SandBox({ mode, goBackToDashboard, candidateID }) {
   const [code, setCode] = useState(defaultCode(mode));
   const [counter, setCounter] = useState(600);
+  const [title, setTitle] = useState("");
   const [requirement, setRequirement] = useState("");
+  const [userstory, setUserstory] = useState("");
 
   useEffect(() => {
     const timer =
@@ -43,11 +45,17 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
   }, [counter]);
 
   useEffect(() => {
-    setRequirement(
-      requirements(mode)
-        .split("\n")
-        .map((str, index) => <p key={index}>{str}</p>)
-    );
+    const criteria = requirements(mode)
+      .requirement.split("\n")
+      .map((str, index) => <p key={index}>{str}</p>);
+
+    const flow = requirements(mode)
+      .userstory.split("\n")
+      .map((str, index) => <p key={index}>{str}</p>);
+
+    setTitle(requirements(mode).title);
+    setRequirement(criteria);
+    setUserstory(flow);
   }, []);
 
   let editor = null;
@@ -108,6 +116,16 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
     // crear preview
   };
 
+  const titleStyle = {
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+  };
+
+  const subtitleStyle = {
+    fontSize: "1.2rem",
+    fontWeight: "bold",
+  };
+
   return (
     <>
       <NavBar />
@@ -126,7 +144,13 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           </Button>
         </Box>
         <Box ml={55}>
-          <div>{requirement}</div>
+          <div>
+            <p style={titleStyle}>{title}</p>
+            <p style={subtitleStyle}>Requirements</p>
+            <div>{requirement}</div>
+            <p style={subtitleStyle}>User story</p>
+            <div>{userstory}</div>
+          </div>
         </Box>
       </motion.div>
       <Box ml={3}>
@@ -143,22 +167,12 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           </div>
           <div className="preview" ref={el} />
         </div>
-        {/* Run test  It should be out side the <Box/>*/}
         <div
           ref={testTarget}
           id="test-target"
           style={{ display: "none" }}
         ></div>
         <div id="test-result" ref={result}></div>
-        {/* Run test */}
-        {/* <LegalPop
-          canID={candidateID}
-          canCode={code}
-          canMode={mode}
-          canCounter={`${Math.floor((600 - counter) / 60)}mins ${
-            (600 - counter) % 60
-          }secs`}
-        /> */}
         <Box display="flex" mt={2} mb={3}>
           <Box m={1} ml={1}>
             <Button variant="contained" color="primary" onClick={runCode}>
@@ -170,14 +184,9 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
               Restart
             </Button>
           </Box>
-          <Box m={1}>
-            {/* <Button variant="contained" color="primary" onClick={testOnBrowser}>
-              Run Test
-            </Button> */}
-          </Box>
+          <Box m={1}></Box>
           <Box mt={1} ml={3}></Box>
           <Box marginLeft="auto" mt={1} mr={1}>
-            {/* <LegalPop canID={candidateID} canCode={code} canMode={mode} /> */}
             <LegalPop
               canID={candidateID}
               canCode={code}
