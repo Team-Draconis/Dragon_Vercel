@@ -14,7 +14,6 @@ import _AddingCalculator from "../../../src/test/_AddingCalculator";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import _LoopOver from "../../../src/test/_LoopOver";
-import Router from "next/router";
 
 //Styling
 const App = styled.div`
