@@ -34,6 +34,8 @@ export default async (req, res) => {
             }
           }
         );
+        candidate.last_login = req.body.loginTime;
+        await candidate.save()
       } catch (error) {
         res.status(400).json({ success: false });
       }
