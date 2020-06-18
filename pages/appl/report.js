@@ -36,6 +36,8 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
         candidateInfo.coding_tests[view].length - 1
       ].coding_test_submitted_at;
 
+    const submitted_at_formatted = submitted_at.slice(0, 10);
+
     const duration =
       candidateInfo.coding_tests[view][
         candidateInfo.coding_tests[view].length - 1
@@ -76,7 +78,7 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
 
     return (
       <>
-        <p>This test was the latest, submitted at : {submitted_at}</p>
+        <p>This test was the latest, submitted at : {submitted_at_formatted}</p>
         <p>Candidate spent : {duration}</p>
         <div className="app">
           <div className="split-view">
@@ -107,6 +109,8 @@ export default function ReportToCandidate({
   const router = useRouter();
   const [view, setView] = useState("initial");
   const [errorMessage, setErrorMessage] = useState("");
+  const candidateCities = candidateInfo.candidate_city;
+  const candidate_Cities_formatted = candidateCities.join(", ");
 
   if (candidateInfo) {
     return (
@@ -115,8 +119,8 @@ export default function ReportToCandidate({
         <button onClick={() => goBackToDashboard()}>
           Go back to dashboard
         </button>
-        <p>Candidate Name : {candidateInfo.candidate_name}</p>
-        <p>Desired Location : {candidateInfo.candidate_city}</p>
+        <p>Candidate Nickname : {candidateInfo.candidate_name}</p>
+        <p>Desired Location : {candidate_Cities_formatted}</p>
         <p>Email : {candidateInfo.candidate_email}</p>
         <p>
           Quiz correct rates:{" "}

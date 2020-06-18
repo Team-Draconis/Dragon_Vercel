@@ -74,6 +74,29 @@ export default function CandidateDashboard({ candidateID }) {
     }
   }, []);
 
+  const handleRefresh = () => {
+    if (localStorage.getItem("candidatetoken") !== null) {
+      fetch(`/api/${router.query.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("candidatetoken"),
+        },
+      }).then((res) => {
+        res.json().then((res) => {
+          if (res.message) {
+            setErrorMessage(res.message);
+          } else {
+            setCandidateInfo(res.data);
+          }
+        });
+      });
+    } else {
+      //if there is no token , then force the candidate to sign in
+      Router.push("/appl/SignIn");
+    }
+  };
+
   const onAddCity = ({ target: { value } }) => {
     city = value;
   };
@@ -129,6 +152,8 @@ export default function CandidateDashboard({ candidateID }) {
   };
 
   if (candidateInfo) {
+    const candidateCities = candidateInfo.candidate_city;
+    const candidate_Cities_formatted = candidateCities.join(", ");
     if (view === "initial") {
       return (
         <div>
@@ -176,7 +201,7 @@ export default function CandidateDashboard({ candidateID }) {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
                 >
-                  {`You are interested in working in ${candidateInfo.candidate_city}`}
+                  {`You are interested in working in ${candidate_Cities_formatted}`}
                 </motion.div>
 
                 <motion.div
@@ -350,7 +375,13 @@ export default function CandidateDashboard({ candidateID }) {
     }
 
     if (view === "quiz") {
-      return <QuizApp goBackToDashboard={goBackToDashboard} id={candidateID} />;
+      return (
+        <QuizApp
+          goBackToDashboard={goBackToDashboard}
+          id={candidateID}
+          handleRefresh={handleRefresh}
+        />
+      );
     }
 
     if (view === "easy") {

@@ -24,7 +24,7 @@ import styles from "../styles/QuizApp.module.css";
  *
  */
 
-function QuizApp({ goBackToDashboard, id }) {
+function QuizApp({ goBackToDashboard, id, handleRefresh }) {
   //   const [quizResults, setQuizResults] = useState();
   //   const [selects, setSelects] = useState();
   console.log("####", id);
@@ -237,7 +237,13 @@ function QuizApp({ goBackToDashboard, id }) {
         <button className="btn btnPrimary" onClick={restart}>
           Restart
         </button>
-        <button className="btn btnPrimary" onClick={goBackToDashboard}>
+        <button
+          className="btn btnPrimary"
+          onClick={() => {
+            handleRefresh();
+            goBackToDashboard();
+          }}
+        >
           Back to dashboard
         </button>
         {/* <button onClick={calculation}>Submit Result</button> */}
