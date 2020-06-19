@@ -55,7 +55,8 @@ export default function End() {
             variant="contained"
             color="primary"
             onClick={() => {
-              Router.push(`/appl/dashboard/${candidateID}`);
+              setTimeout(Router.push(`/appl/dashboard/${candidateID}`), 2500);
+              // Router.push(`/appl/dashboard/${candidateID}`);
             }}
           >
             Go back to dashboard

@@ -25,7 +25,7 @@ export default function CandidateDashboard({ candidateID }) {
   const [view, setView] = useState("initial");
   const [candidateInfo, setCandidateInfo] = useState();
   const [errorMessage, setErrorMessage] = useState("");
-  // const [latesttesttime, setLatesttesttime] = useState("NA");
+  const [latesttesttime, setLatesttesttime] = useState("NA");
 
   //Declaring styled textfield
   const CssTextField = withStyles({
@@ -67,60 +67,55 @@ export default function CandidateDashboard({ candidateID }) {
             setErrorMessage(res.message);
           } else {
             setCandidateInfo(res.data);
-            //       if (
-            //         res.data.quiz_tests.length === 0 &&
-            //         res.data.coding_tests.easy.length === 0 &&
-            //         res.data.coding_tests.medium.length === 0 &&
-            //         res.data.coding_tests.hard.length === 0
-            //       ) {
-            //         return;
-            //       }
-            //       const all_latest_test_data = [];
-            //       if (res.data.quiz_tests.length !== 0) {
-            //         let latest_quiz_test_data =
-            //           res.data.quiz_tests[res.data.quiz_tests.length - 1]
-            //             .quiz_submitted_at;
-            //         all_latest_test_data.push(latest_quiz_test_data);
-            //       }
-            //       if (res.data.coding_tests.easy.length !== 0) {
-            //         let latest_easy_test_data =
-            //           res.data.coding_tests.easy[
-            //             res.data.coding_tests.easy.length - 1
-            //           ].coding_test_submitted_at;
-            //         all_latest_test_data.push(latest_easy_test_data);
-            //       }
-            //       if (res.data.coding_tests.medium.length !== 0) {
-            //         let latest_medium_test_data =
-            //           res.data.coding_tests.medium[
-            //             res.data.coding_tests.medium.length - 1
-            //           ].coding_test_submitted_at;
-            //         all_latest_test_data.push(latest_medium_test_data);
-            //       }
-            //       if (res.data.coding_tests.hard.length !== 0) {
-            //         let latest_hard_test_data =
-            //           res.data.coding_tests.hard[
-            //             res.data.coding_tests.hard.length - 1
-            //           ].coding_test_submitted_at;
-            //         all_latest_test_data.push(res.data.coding_tests.hard);
-            //       }
-            //       const result = all_latest_test_data.sort(function (a, b) {
-            //         var c = new Date(a);
-            //         var d = new Date(b);
-            //         return c - d;
-            //       });
-            //       console.log(result);
-            //       console.log(
-            //         `${result[result.length - 1].slice(0, 10)} ${result[
-            //           result.length - 1
-            //         ].slice(11, 19)}`
-            //       );
-            //       setLatesttesttime(
-            //         `${result[result.length - 1].slice(0, 10)} ${result[
-            //           result.length - 1
-            //         ].slice(11, 19)}`
-            //       );
-            //       console.log(latesttesttime);
-            //     }
+            if (
+              res.data.quiz_tests.length === 0 &&
+              res.data.coding_tests.easy.length === 0 &&
+              res.data.coding_tests.medium.length === 0 &&
+              res.data.coding_tests.hard.length === 0
+            ) {
+              return;
+            }
+            const all_latest_test_data = [];
+            if (res.data.quiz_tests.length !== 0) {
+              let latest_quiz_test_data =
+                res.data.quiz_tests[res.data.quiz_tests.length - 1]
+                  .quiz_submitted_at;
+              all_latest_test_data.push(latest_quiz_test_data);
+            }
+            if (res.data.coding_tests.easy.length !== 0) {
+              let latest_easy_test_data =
+                res.data.coding_tests.easy[
+                  res.data.coding_tests.easy.length - 1
+                ].coding_test_submitted_at;
+              all_latest_test_data.push(latest_easy_test_data);
+            }
+            if (res.data.coding_tests.medium.length !== 0) {
+              let latest_medium_test_data =
+                res.data.coding_tests.medium[
+                  res.data.coding_tests.medium.length - 1
+                ].coding_test_submitted_at;
+              all_latest_test_data.push(latest_medium_test_data);
+            }
+            if (res.data.coding_tests.hard.length !== 0) {
+              let latest_hard_test_data =
+                res.data.coding_tests.hard[
+                  res.data.coding_tests.hard.length - 1
+                ].coding_test_submitted_at;
+              all_latest_test_data.push(res.data.coding_tests.hard);
+            }
+            const result = all_latest_test_data.sort(function (a, b) {
+              var c = new Date(a);
+              var d = new Date(b);
+              return c - d;
+            });
+            console.log(result[result.length - 1]);
+            console.log(
+              `${result[result.length - 1][0].coding_test_submitted_at}`
+            );
+            setLatesttesttime(
+              `${result[result.length - 1][0].coding_test_submitted_at}`
+            );
+            console.log(latesttesttime);
           }
         });
       });
@@ -143,6 +138,7 @@ export default function CandidateDashboard({ candidateID }) {
           if (res.message) {
             setErrorMessage(res.message);
           } else {
+            console.log("#####AFTER REFERSHED", res.data);
             setCandidateInfo(res.data);
           }
         });
@@ -283,12 +279,12 @@ export default function CandidateDashboard({ candidateID }) {
                         ? candidateInfo.quiz_tests[
                             candidateInfo.quiz_tests.length - 1
                           ].quiz_score + "%"
-                        : "NA"
+                        : ""
                     }`}
                   </motion.div>
                 </Typography>
               </Box>
-              {/* <Box mt={3}>
+              <Box mt={3}>
                 <Typography
                   variant="h4"
                   component="h1"
@@ -300,10 +296,10 @@ export default function CandidateDashboard({ candidateID }) {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
                   >
-                    The last test was updated at {latesttesttime.slice(0, 10)}
+                    The last test was updated {latesttesttime.slice(0, 10)}
                   </motion.div>
                 </Typography>
-              </Box> */}
+              </Box>
               <Box align="center" mt={4}>
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}

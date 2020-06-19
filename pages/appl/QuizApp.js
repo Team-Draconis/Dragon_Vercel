@@ -239,7 +239,8 @@ function QuizApp({ goBackToDashboard, id, handleRefresh }) {
           className="btn btnPrimary"
           onClick={() => {
             handleRefresh();
-            goBackToDashboard();
+            setTimeout(goBackToDashboard, 2500);
+            // goBackToDashboard();
           }}
         >
           Back to dashboard
@@ -278,7 +279,6 @@ function QuizApp({ goBackToDashboard, id, handleRefresh }) {
           .results span.correct {
             color: #c8ffbb;
           }
-
           .results span.failed {
             color: #f27c7c;
           }
