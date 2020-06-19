@@ -137,12 +137,12 @@ export default function SandBox({
       <motion.div
         initial={{ y: 26 * 1.2, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+        transition={{ ease: "easeOut", duration: 1.5, delay: 0.4 }}
       >
         <Box m={3}>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={() => {
               handleRefresh();
               goBackToDashboard();
@@ -160,52 +160,53 @@ export default function SandBox({
             <div>{userstory}</div>
           </div>
         </Box>
-      </motion.div>
-      <Box ml={3}>
-        <Typography variant="h6">Remaining Time: {counter}</Typography>
-      </Box>
-      <div className="app">
-        <div className="split-view">
-          <div className="code-editor">
-            <textarea
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              ref={codeEditor}
-            />
-          </div>
-          <div className="preview" ref={el} />
-        </div>
-        <div
-          ref={testTarget}
-          id="test-target"
-          style={{ display: "none" }}
-        ></div>
-        <div id="test-result" ref={result}></div>
-        <Box display="flex" mt={2} mb={3}>
-          <Box m={1} ml={1}>
-            <Button variant="contained" color="primary" onClick={runCode}>
-              Run
-            </Button>
-          </Box>
-          <Box m={1}>
-            <Button variant="contained" color="primary" onClick={clear}>
-              Restart
-            </Button>
-          </Box>
-          <Box m={1}></Box>
-          <Box mt={1} ml={3}></Box>
-          <Box marginLeft="auto" mt={1} mr={1}>
-            <LegalPop
-              canID={candidateID}
-              canCode={code}
-              canMode={mode}
-              canCounter={`${Math.floor((600 - counter) / 60)}mins ${
-                (600 - counter) % 60
-              }secs`}
-            />
-          </Box>
+
+        <Box ml={3}>
+          <Typography variant="h6">Remaining Time: {counter}</Typography>
         </Box>
-      </div>
+        <div className="app">
+          <div className="split-view">
+            <div className="code-editor">
+              <textarea
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                ref={codeEditor}
+              />
+            </div>
+            <div className="preview" ref={el} />
+          </div>
+          <div
+            ref={testTarget}
+            id="test-target"
+            style={{ display: "none" }}
+          ></div>
+          <div id="test-result" ref={result} style={{ padding: "10px" }}></div>
+          <Box display="flex" mt={2} mb={3}>
+            <Box m={1} ml={1}>
+              <Button variant="contained" color="primary" onClick={runCode}>
+                Run
+              </Button>
+            </Box>
+            <Box m={1}>
+              <Button variant="contained" color="primary" onClick={clear}>
+                Restart
+              </Button>
+            </Box>
+            <Box m={1}></Box>
+            <Box mt={1} ml={3}></Box>
+            <Box marginLeft="auto" mt={1} mr={1}>
+              <LegalPop
+                canID={candidateID}
+                canCode={code}
+                canMode={mode}
+                canCounter={`${Math.floor((600 - counter) / 60)}mins ${
+                  (600 - counter) % 60
+                }secs`}
+              />
+            </Box>
+          </Box>
+        </div>
+      </motion.div>
     </>
   );
 }
