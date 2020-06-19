@@ -13,6 +13,8 @@ import defaultCode from "../../src/test/defaultCode";
 import _ToggleMessage from "../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../src/test/_AddingCalculator";
 import _LoopOver from "../../src/test/_LoopOver";
+import passIcon from "../../src/test/image/pass.png";
+import failIcon from "../../src/test/image/fail.png";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -100,12 +102,20 @@ export default function SandBox({
 
   const isAllPassed = () => {
     const container = document.createElement("div");
+    const icon = document.createElement("img");
+    const message = document.createElement("a");
 
     if (result.current.innerHTML.includes("Fail")) {
-      container.innerHTML = `Some requirements are missing. Try again!`;
+      icon.src = failIcon;
+      icon.style.width = "20px";
+      message.innerHTML = `Some requirements are missing. Try again!`;
     } else {
-      container.innerHTML = `Yay! You passed all test!!`;
+      icon.src = passIcon;
+      icon.style.width = "20px";
+      message.innerHTML = `Yay! You passed all test!!`;
     }
+    container.appendChild(icon);
+    container.appendChild(message);
     document.getElementById("test-result").appendChild(container);
   };
 
