@@ -26,6 +26,7 @@ export default function CandidateDashboard({ candidateID }) {
   const [view, setView] = useState("initial");
   const [candidateInfo, setCandidateInfo] = useState();
   const [errorMessage, setErrorMessage] = useState("");
+  const [latesttesttime, setLatesttesttime] = useState();
 
   //Declaring styled textfield
   const CssTextField = withStyles({
@@ -67,6 +68,51 @@ export default function CandidateDashboard({ candidateID }) {
             setErrorMessage(res.message);
           } else {
             setCandidateInfo(res.data);
+            if (
+              res.data.quiz_tests.length === 0 &&
+              res.data.coding_tests.easy.length === 0 &&
+              res.data.coding_tests.medium.length === 0 &&
+              res.data.coding_tests.hard.length === 0
+            ) {
+              return;
+            }
+            const all_latest_test_data = [];
+            if (res.data.quiz_tests.length !== 0) {
+              let latest_quiz_test_data =
+                res.data.quiz_tests[res.data.quiz_tests.length - 1]
+                  .quiz_submitted_at;
+              all_latest_test_data.push(latest_quiz_test_data);
+            }
+            if (res.data.coding_tests.easy.length !== 0) {
+              let latest_easy_test_data =
+                res.data.coding_tests.easy[
+                  res.data.coding_tests.easy.length - 1
+                ].coding_test_submitted_at;
+              all_latest_test_data.push(latest_easy_test_data);
+            }
+            if (res.data.coding_tests.medium.length !== 0) {
+              let latest_medium_test_data =
+                res.data.coding_tests.medium[
+                  res.data.coding_tests.medium.length - 1
+                ].coding_test_submitted_at;
+              all_latest_test_data.push(latest_medium_test_data);
+            }
+            if (res.data.coding_tests.hard.length !== 0) {
+              let latest_hard_test_data =
+                res.data.coding_tests.hard[
+                  res.data.coding_tests.hard.length - 1
+                ].coding_test_submitted_at;
+              all_latest_test_data.push(res.data.coding_tests.hard);
+            }
+            const result = all_latest_test_data.sort(function (a, b) {
+              var c = new Date(a);
+              var d = new Date(b);
+              return d - c;
+            });
+            console.log(result);
+            console.log(`${result[0]}`);
+            setLatesttesttime(`${result[0]}`);
+            // console.log(latesttesttime);
           }
         });
       });
@@ -75,6 +121,30 @@ export default function CandidateDashboard({ candidateID }) {
       Router.push("/appl/SignIn");
     }
   }, []);
+
+  const handleRefresh = () => {
+    if (localStorage.getItem("candidatetoken") !== null) {
+      fetch(`/api/${router.query.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("candidatetoken"),
+        },
+      }).then((res) => {
+        res.json().then((res) => {
+          if (res.message) {
+            setErrorMessage(res.message);
+          } else {
+            console.log("#####AFTER REFERSHED", res.data);
+            setCandidateInfo(res.data);
+          }
+        });
+      });
+    } else {
+      //if there is no token , then force the candidate to sign in
+      Router.push("/appl/SignIn");
+    }
+  };
 
   const onAddCity = ({ target: { value } }) => {
     city = value;
@@ -96,6 +166,7 @@ export default function CandidateDashboard({ candidateID }) {
     })
       .then((res) =>
         res.json().then((res) => {
+          //Please don't delete this console.log, since I don't know what to do with it , we can not return anything here including res.send()
           console.log("New City has been saved");
         })
       )
@@ -131,6 +202,9 @@ export default function CandidateDashboard({ candidateID }) {
   };
 
   if (candidateInfo) {
+    const candidateCities = candidateInfo.candidate_city;
+    const candidate_Cities_formatted = candidateCities.join(", ");
+
     if (view === "initial") {
       return (
         <div style={{ width: "100%" }}>
@@ -149,7 +223,7 @@ export default function CandidateDashboard({ candidateID }) {
                   />
                 </Link>
               </Box>
-              <Box mt={12}>
+              <Box m={(9, 4)}>
                 <Typography
                   variant="h3"
                   component="h1"
@@ -165,7 +239,7 @@ export default function CandidateDashboard({ candidateID }) {
                   </motion.div>
                 </Typography>
               </Box>
-              <Box mt={7}>
+              <Box mt={8}>
                 <Typography
                   variant="h4"
                   component="h1"
@@ -181,7 +255,79 @@ export default function CandidateDashboard({ candidateID }) {
                   </motion.div>
                 </Typography>
               </Box>
-              <Box mt={7}>
+
+              {candidateInfo.quiz_tests.length === 0 && !latesttesttime ? (
+                <Box m={(5, 5)}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
+                  >
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 0.6,
+                      }}
+                    >
+                      Thank you for signup,wanna take some test to shine your
+                      skills?!
+                    </motion.div>
+                  </Typography>
+                </Box>
+              ) : null}
+              {candidateInfo.quiz_tests.length !== 0 ? (
+                <Box m={(5, 5)}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
+                  >
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 0.6,
+                      }}
+                    >
+                      {`Recent Quiz Score: ${
+                        candidateInfo.quiz_tests[
+                          candidateInfo.quiz_tests.length - 1
+                        ].quiz_score + "%"
+                      }`}
+                    </motion.div>
+                  </Typography>
+                </Box>
+              ) : null}
+              {latesttesttime !== undefined ? (
+                <Box m={(5, 5)}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
+                  >
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 0.6,
+                      }}
+                    >
+                      The Last Test Was Updated {latesttesttime.slice(0, 10)}
+                    </motion.div>
+                  </Typography>
+                </Box>
+              ) : null}
+              <Box m={(5, 5)}>
                 <Typography
                   variant="h4"
                   component="h1"
@@ -193,33 +339,11 @@ export default function CandidateDashboard({ candidateID }) {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
-                    {`Recent Quiz Score: ${
-                      candidateInfo.quiz_tests.length !== 0
-                        ? candidateInfo.quiz_tests[
-                            candidateInfo.quiz_tests.length - 1
-                          ].quiz_score + "%"
-                        : "NA"
-                    }`}
+                    {`You Are Interested In Working In ${candidate_Cities_formatted}`}
                   </motion.div>
                 </Typography>
               </Box>
-              <Box mt={7}>
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  align="center"
-                  style={{ fontFamily: "Josefin Sans" }}
-                >
-                  <motion.div
-                    initial={{ y: 26 * 1.2, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
-                  >
-                    {`You are interested in working in ${candidateInfo.candidate_city}`}
-                  </motion.div>
-                </Typography>
-              </Box>
-              <Box align="center" mt={4}>
+              <Box align="center" m={(5, 5)}>
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -312,7 +436,7 @@ export default function CandidateDashboard({ candidateID }) {
                   </motion.div>
                 </Link>
               </Box>
-              <Box mt={15}>
+              <Box mt={9}>
                 <Typography
                   variant="h4"
                   component="h1"
@@ -344,20 +468,26 @@ export default function CandidateDashboard({ candidateID }) {
                     </Button>
                   </motion.div>
                 </Box>
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  align="center"
-                  style={{ fontFamily: "Josefin Sans" }}
-                >
-                  <motion.div
-                    initial={{ y: 26 * 1.2, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
+                <Box mt={5}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
                   >
-                    Coding Challenge
-                  </motion.div>
-                </Typography>
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 0.6,
+                      }}
+                    >
+                      Coding Challenge
+                    </motion.div>
+                  </Typography>
+                </Box>
                 <Box align="center" m={(4, 7)}>
                   <motion.div
                     initial={{ y: 26 * 1.2, opacity: 0 }}
@@ -407,7 +537,13 @@ export default function CandidateDashboard({ candidateID }) {
     }
 
     if (view === "quiz") {
-      return <QuizApp goBackToDashboard={goBackToDashboard} id={candidateID} />;
+      return (
+        <QuizApp
+          goBackToDashboard={goBackToDashboard}
+          id={candidateID}
+          handleRefresh={handleRefresh}
+        />
+      );
     }
 
     if (view === "easy") {
@@ -416,6 +552,7 @@ export default function CandidateDashboard({ candidateID }) {
           mode="easy"
           goBackToDashboard={goBackToDashboard}
           candidateID={candidateInfo._id}
+          handleRefresh={handleRefresh}
         />
       );
     }
@@ -425,6 +562,7 @@ export default function CandidateDashboard({ candidateID }) {
           mode="medium"
           goBackToDashboard={goBackToDashboard}
           candidateID={candidateInfo._id}
+          handleRefresh={handleRefresh}
         />
       );
     }
@@ -434,6 +572,7 @@ export default function CandidateDashboard({ candidateID }) {
           mode="hard"
           goBackToDashboard={goBackToDashboard}
           candidateID={candidateInfo._id}
+          handleRefresh={handleRefresh}
         />
       );
     }

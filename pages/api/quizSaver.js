@@ -6,17 +6,17 @@ import Candidate from "../../models/Candidate";
 dbConnect();
 
 export default async (req, res) => {
-    console.log("#####",req.body)
   const { method } = req;
   switch (method) {
     case "POST":
       try {
-        const testResult = { quiz_detail: "No Detail", quiz_score: req.body.score }
+        const testResult = {
+          quiz_detail: "No Detail",
+          quiz_score: req.body.score,
+        };
         const candidate = await Candidate.findById(req.body.id);
-        console.log("THE USE HAS BEEN FOUND")
-        candidate.quiz_tests.push(testResult)
+        candidate.quiz_tests.push(testResult);
         await candidate.save();
-        console.log("#####CANDIDATE GOT UPDATED",candidate)
         res.json(candidate);
       } catch (error) {
         res.status(400).json({

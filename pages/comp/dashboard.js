@@ -317,10 +317,18 @@ const Dashboard = () => {
               <TableBody>
                 {newResults.map((testResult) => (
                   <TableRow key={testResult._id}>
-                    <TableCell></TableCell>
+                    <TableCell>
+                      {`${testResult.last_login}`.slice(0, -30)}
+                    </TableCell>
                     <TableCell>{testResult.candidate_email}</TableCell>
-                    <TableCell>{testResult.candidate_city}</TableCell>
-                    <TableCell></TableCell>
+                    <TableCell>{testResult.candidate_city + "  "}</TableCell>
+                    <TableCell>
+                      {testResult.quiz_tests.length !== 0
+                        ? testResult.quiz_tests[
+                            testResult.quiz_tests.length - 1
+                          ].quiz_score + "%"
+                        : "NA"}
+                    </TableCell>
                     <TableCell align="right">
                       <Link href={`/comp/report/${testResult._id}`}>
                         <Button

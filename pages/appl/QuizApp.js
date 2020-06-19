@@ -24,10 +24,7 @@ import styles from "../styles/QuizApp.module.css";
  *
  */
 
-function QuizApp({ goBackToDashboard, id }) {
-  //   const [quizResults, setQuizResults] = useState();
-  //   const [selects, setSelects] = useState();
-  console.log("####", id);
+function QuizApp({ goBackToDashboard, id, handleRefresh }) {
   const questions = [
     {
       id: 1,
@@ -191,7 +188,8 @@ function QuizApp({ goBackToDashboard, id }) {
       }),
     })
       .then((res) => {
-        console.log("####SAVED THE RESULTS TO DB RES", res);
+        //Please don't delete this console.log, since I don't know what to do with it , we can not return anything here including res.send()
+        console.log("####SAVED THE RESULTS TO DB RES####");
       })
       .catch((error) => {
         console.log(error);
@@ -237,7 +235,14 @@ function QuizApp({ goBackToDashboard, id }) {
         <button className="btn btnPrimary" onClick={restart}>
           Restart
         </button>
-        <button className="btn btnPrimary" onClick={goBackToDashboard}>
+        <button
+          className="btn btnPrimary"
+          onClick={() => {
+            handleRefresh();
+            setTimeout(goBackToDashboard, 2500);
+            // goBackToDashboard();
+          }}
+        >
           Back to dashboard
         </button>
         {/* <button onClick={calculation}>Submit Result</button> */}
@@ -274,7 +279,6 @@ function QuizApp({ goBackToDashboard, id }) {
           .results span.correct {
             color: #c8ffbb;
           }
-
           .results span.failed {
             color: #f27c7c;
           }
