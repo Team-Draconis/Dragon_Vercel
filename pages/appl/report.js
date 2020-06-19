@@ -36,6 +36,8 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
         candidateInfo.coding_tests[view].length - 1
       ].coding_test_submitted_at;
 
+    const submitted_at_formatted = submitted_at.slice(0, 10);
+
     const duration =
       candidateInfo.coding_tests[view][
         candidateInfo.coding_tests[view].length - 1
@@ -76,7 +78,9 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
 
     return (
       <>
-        <p>This test was the latest, submitted at : {submitted_at}</p>
+        <p>
+          This test was the latest, submitted at : {submitted_at.slice(0, 10)}
+        </p>
         <p>Candidate spent : {duration}</p>
         <div className="app">
           <div className="split-view">
@@ -115,8 +119,13 @@ export default function ReportToCandidate({
         <button onClick={() => goBackToDashboard()}>
           Go back to dashboard
         </button>
-        <p>Candidate Name : {candidateInfo.candidate_name}</p>
-        <p>Desired Location : {candidateInfo.candidate_city}</p>
+        <p>Candidate Nickname : {candidateInfo.candidate_name}</p>
+        <p>
+          Desired Location :{" "}
+          {candidateInfo.candidate_city
+            ? candidateInfo.candidate_city.join(", ")
+            : ""}
+        </p>
         <p>Email : {candidateInfo.candidate_email}</p>
 
         <p>

@@ -19,7 +19,6 @@ export default function End() {
     verify(token, process.env.SECRET_TOKEN, async function (err, decoded) {
       // must have company token, candidate token could not get the data
       if (!err && decoded.sub) {
-        console.log(decoded.sub);
         setCandidateID(decoded.sub);
       }
     });
@@ -56,7 +55,8 @@ export default function End() {
             variant="contained"
             color="primary"
             onClick={() => {
-              Router.push(`/appl/dashboard/${candidateID}`);
+              setTimeout(Router.push(`/appl/dashboard/${candidateID}`), 2500);
+              // Router.push(`/appl/dashboard/${candidateID}`);
             }}
           >
             Go back to dashboard

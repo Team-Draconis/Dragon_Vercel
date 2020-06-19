@@ -31,7 +31,12 @@ const Split_View = styled.div`
   min-width: 600px;
 `;
 
-export default function SandBox({ mode, goBackToDashboard, candidateID }) {
+export default function SandBox({
+  mode,
+  goBackToDashboard,
+  candidateID,
+  handleRefresh,
+}) {
   const [code, setCode] = useState(defaultCode(mode));
   const [counter, setCounter] = useState(600);
   const [title, setTitle] = useState("");
@@ -138,7 +143,10 @@ export default function SandBox({ mode, goBackToDashboard, candidateID }) {
           <Button
             variant="contained"
             color="primary"
-            onClick={goBackToDashboard}
+            onClick={() => {
+              handleRefresh();
+              goBackToDashboard();
+            }}
           >
             Back to dashboard
           </Button>
