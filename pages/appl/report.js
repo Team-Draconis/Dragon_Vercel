@@ -10,6 +10,10 @@ import _ToggleMessage from "../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../src/test/_AddingCalculator";
 import { useRouter } from "next/router";
 import Router from "next/router";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import { motion } from "framer-motion";
 
 //Styling
 const App = styled.div`
@@ -112,9 +116,16 @@ export default function ReportToCandidate({
     return (
       <>
         <NavBar />
-        <button onClick={() => goBackToDashboard()}>
-          Go back to dashboard
-        </button>
+        <Box ml={2}>
+          <Button
+            variant="contained"
+            color="secondary"
+            align="center"
+            onClick={() => goBackToDashboard()}
+          >
+            Go back to dashboard
+          </Button>
+        </Box>
         <p>Candidate Name : {candidateInfo.candidate_name}</p>
         <p>Desired Location : {candidateInfo.candidate_city}</p>
         <p>Email : {candidateInfo.candidate_email}</p>

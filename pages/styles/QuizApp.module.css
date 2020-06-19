@@ -1,5 +1,5 @@
 .container {
-  background-color: black;
+  background-color: #121212;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -76,7 +76,7 @@ h2 {
 }
 
 .btnPrimary {
-    color: gray;
-    background-color: #ffc107;
-    font-weight: bold;
+  color: black;
+  background-color: #ffc107;
+  font-weight: bold;
 }

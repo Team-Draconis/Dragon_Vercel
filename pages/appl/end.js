@@ -27,7 +27,7 @@ export default function End() {
   return (
     <>
       {/* <NavBar /> */}
-      <Box mt={30} align="center">
+      <Box mt={35} align="center">
         <motion.h2
           initial={{ y: -250 }}
           animate={{ y: -10, fontSize: 120 }}
@@ -42,7 +42,7 @@ export default function End() {
           Thank You! 🐉
         </motion.h2>
       </Box>
-      <Box align="center" m={2}>
+      <Box align="center" m={5}>
         <motion.div
           initial={{ y: -200 }}
           animate={{ y: -100, fontSize: 120 }}
