@@ -25,7 +25,7 @@ export default function CandidateDashboard({ candidateID }) {
   const [view, setView] = useState("initial");
   const [candidateInfo, setCandidateInfo] = useState();
   const [errorMessage, setErrorMessage] = useState("");
-  const [latesttesttime, setLatesttesttime] = useState("NA");
+  const [latesttesttime, setLatesttesttime] = useState();
 
   //Declaring styled textfield
   const CssTextField = withStyles({
@@ -106,16 +106,12 @@ export default function CandidateDashboard({ candidateID }) {
             const result = all_latest_test_data.sort(function (a, b) {
               var c = new Date(a);
               var d = new Date(b);
-              return c - d;
+              return d - c;
             });
-            console.log(result[result.length - 1]);
-            console.log(
-              `${result[result.length - 1][0].coding_test_submitted_at}`
-            );
-            setLatesttesttime(
-              `${result[result.length - 1][0].coding_test_submitted_at}`
-            );
-            console.log(latesttesttime);
+            console.log(result);
+            console.log(`${result[0]}`);
+            setLatesttesttime(`${result[0]}`);
+            // console.log(latesttesttime);
           }
         });
       });
@@ -262,44 +258,77 @@ export default function CandidateDashboard({ candidateID }) {
                   </motion.div>
                 </Typography>
               </Box>
-              <Box mt={3}>
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  align="center"
-                  style={{ fontFamily: "Josefin Sans" }}
-                >
-                  <motion.div
-                    initial={{ y: 26 * 1.2, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
+              {candidateInfo.quiz_tests.length === 0 && !latesttesttime ? (
+                <Box mt={3}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
                   >
-                    {`Your recent quiz score is ${
-                      candidateInfo.quiz_tests.length !== 0
-                        ? candidateInfo.quiz_tests[
-                            candidateInfo.quiz_tests.length - 1
-                          ].quiz_score + "%"
-                        : ""
-                    }`}
-                  </motion.div>
-                </Typography>
-              </Box>
-              <Box mt={3}>
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  align="center"
-                  style={{ fontFamily: "Josefin Sans" }}
-                >
-                  <motion.div
-                    initial={{ y: 26 * 1.2, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 1.1,
+                      }}
+                    >
+                      Thank you for signup,wanna take some test to shine your
+                      skills?!
+                    </motion.div>
+                  </Typography>
+                </Box>
+              ) : null}
+              {candidateInfo.quiz_tests.length !== 0 ? (
+                <Box mt={3}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
                   >
-                    The last test was updated {latesttesttime.slice(0, 10)}
-                  </motion.div>
-                </Typography>
-              </Box>
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 1.1,
+                      }}
+                    >
+                      {`Your recent quiz score is ${
+                        candidateInfo.quiz_tests[
+                          candidateInfo.quiz_tests.length - 1
+                        ].quiz_score + "%"
+                      }`}
+                    </motion.div>
+                  </Typography>
+                </Box>
+              ) : null}
+              {latesttesttime !== undefined ? (
+                <Box mt={3}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
+                  >
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 1.1,
+                      }}
+                    >
+                      The last test was updated {latesttesttime.slice(0, 10)}
+                    </motion.div>
+                  </Typography>
+                </Box>
+              ) : null}
               <Box align="center" mt={4}>
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
