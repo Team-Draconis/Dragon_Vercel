@@ -66,6 +66,7 @@ export default function Register() {
         candidate_name: name,
         candidate_city: city,
         candidate_password: password,
+        loginTime: Date().toString(),
       }),
     })
       .then((res) =>
