@@ -13,6 +13,8 @@ import defaultCode from "../../src/test/defaultCode";
 import _ToggleMessage from "../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../src/test/_AddingCalculator";
 import _LoopOver from "../../src/test/_LoopOver";
+import passIcon from "../../src/test/image/pass.png";
+import failIcon from "../../src/test/image/fail.png";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -100,12 +102,20 @@ export default function SandBox({
 
   const isAllPassed = () => {
     const container = document.createElement("div");
+    const icon = document.createElement("img");
+    const message = document.createElement("a");
 
     if (result.current.innerHTML.includes("Fail")) {
-      container.innerHTML = `Some requirements are missing. Try again!`;
+      icon.src = failIcon;
+      icon.style.width = "20px";
+      message.innerHTML = `Some requirements are missing. Try again!`;
     } else {
-      container.innerHTML = `Yay! You passed all test!!`;
+      icon.src = passIcon;
+      icon.style.width = "20px";
+      message.innerHTML = `Yay! You passed all test!!`;
     }
+    container.appendChild(icon);
+    container.appendChild(message);
     document.getElementById("test-result").appendChild(container);
   };
 
@@ -137,12 +147,12 @@ export default function SandBox({
       <motion.div
         initial={{ y: 26 * 1.2, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+        transition={{ ease: "easeOut", duration: 1.5, delay: 0.4 }}
       >
         <Box m={3}>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={() => {
               handleRefresh();
               goBackToDashboard();
@@ -160,52 +170,53 @@ export default function SandBox({
             <div>{userstory}</div>
           </div>
         </Box>
-      </motion.div>
-      <Box ml={3}>
-        <Typography variant="h6">Remaining Time: {counter}</Typography>
-      </Box>
-      <div className="app">
-        <div className="split-view">
-          <div className="code-editor">
-            <textarea
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              ref={codeEditor}
-            />
-          </div>
-          <div className="preview" ref={el} />
-        </div>
-        <div
-          ref={testTarget}
-          id="test-target"
-          style={{ display: "none" }}
-        ></div>
-        <div id="test-result" ref={result}></div>
-        <Box display="flex" mt={2} mb={3}>
-          <Box m={1} ml={1}>
-            <Button variant="contained" color="primary" onClick={runCode}>
-              Run
-            </Button>
-          </Box>
-          <Box m={1}>
-            <Button variant="contained" color="primary" onClick={clear}>
-              Restart
-            </Button>
-          </Box>
-          <Box m={1}></Box>
-          <Box mt={1} ml={3}></Box>
-          <Box marginLeft="auto" mt={1} mr={1}>
-            <LegalPop
-              canID={candidateID}
-              canCode={code}
-              canMode={mode}
-              canCounter={`${Math.floor((600 - counter) / 60)}mins ${
-                (600 - counter) % 60
-              }secs`}
-            />
-          </Box>
+
+        <Box ml={3}>
+          <Typography variant="h6">Remaining Time: {counter}</Typography>
         </Box>
-      </div>
+        <div className="app">
+          <div className="split-view">
+            <div className="code-editor">
+              <textarea
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                ref={codeEditor}
+              />
+            </div>
+            <div className="preview" ref={el} />
+          </div>
+          <div
+            ref={testTarget}
+            id="test-target"
+            style={{ display: "none" }}
+          ></div>
+          <div id="test-result" ref={result} style={{ padding: "10px" }}></div>
+          <Box display="flex" mt={2} mb={3}>
+            <Box m={1} ml={1}>
+              <Button variant="contained" color="primary" onClick={runCode}>
+                Run
+              </Button>
+            </Box>
+            <Box m={1}>
+              <Button variant="contained" color="primary" onClick={clear}>
+                Restart
+              </Button>
+            </Box>
+            <Box m={1}></Box>
+            <Box mt={1} ml={3}></Box>
+            <Box marginLeft="auto" mt={1} mr={1}>
+              <LegalPop
+                canID={candidateID}
+                canCode={code}
+                canMode={mode}
+                canCounter={`${Math.floor((600 - counter) / 60)}mins ${
+                  (600 - counter) % 60
+                }secs`}
+              />
+            </Box>
+          </Box>
+        </div>
+      </motion.div>
     </>
   );
 }

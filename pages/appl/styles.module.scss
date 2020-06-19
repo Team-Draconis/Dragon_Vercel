@@ -5,6 +5,10 @@
     font-family: "Monaco", "Consolas", "sans";
   }
 
+  p {
+    color: black;
+  }
+
   .split-view {
     display: flex;
     width: 100%;
@@ -14,10 +18,11 @@
   div.preview {
     width: 50%;
     padding: 1em;
+    background-color: white;
     &:last-child {
-      border-top: solid 1px #ccc;
-      border-right: solid 1px #ccc;
-      border-bottom: solid 1px #ccc;
+      // border-top: solid 1px #ccc;
+      // border-right: solid 1px #ccc;
+      // border-bottom: solid 1px #ccc;
     }
     &:empty:before {
       content: "Nothing to render";

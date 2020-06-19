@@ -34,7 +34,7 @@ const BoxContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 50px;
+  margin-top: 0px;
   justify-content: center;
 `;
 
@@ -109,7 +109,7 @@ class Index extends Component {
                 </motion.div>
               </Typography>
             </Box>
-            <ButtonContainer>
+            <ButtonContainer style={{ marginTop: "20px" }}>
               <ButtonBox>
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
@@ -180,27 +180,51 @@ class Index extends Component {
                 </motion.div>
               </ButtonBox>
             </ButtonContainer>
-            <ButtonBox>
-              <motion.div
-                initial={{ y: 26 * 1.2, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
-              >
-                <Button variant="contained" color="secondary">
-                  <AnchorLink
-                    href="#detail"
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                      fontFamily: "Josefin Sans",
-                      paddingTop: 4,
-                    }}
-                  >
-                    How it works
-                  </AnchorLink>
-                </Button>
-              </motion.div>
-            </ButtonBox>
+            <ButtonContainer>
+              <ButtonBox>
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+                >
+                  <Button variant="contained" color="secondary">
+                    <AnchorLink
+                      href="#detail"
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        fontFamily: "Josefin Sans",
+                        paddingTop: 4,
+                      }}
+                    >
+                      How it works
+                    </AnchorLink>
+                  </Button>
+                </motion.div>
+              </ButtonBox>
+              <ButtonBox>
+                <motion.div
+                  initial={{ y: 26 * 1.2, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
+                >
+                  <Button variant="contained" color="secondary">
+                    <Link href="AboutUs">
+                      <a
+                        style={{
+                          textDecoration: "none",
+                          color: "white",
+                          fontFamily: "Josefin Sans",
+                          paddingTop: 4,
+                        }}
+                      >
+                        About Us
+                      </a>
+                    </Link>
+                  </Button>
+                </motion.div>
+              </ButtonBox>
+            </ButtonContainer>
           </BoxContainer>
           <Box>
             <motion.img
@@ -210,7 +234,7 @@ class Index extends Component {
               height="450"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ yoyo: Infinity, duration: 2.0, ease: "easeOut" }}
+              transition={{ yoyo: Infinity, duration: 1.0, ease: "easeOut" }}
             />
           </Box>
         </Container>
