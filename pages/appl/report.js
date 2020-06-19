@@ -19,6 +19,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import ThreeDotsWave from "../src/ThreeDotsWave";
 
 //Styling
 const App = styled.div`
@@ -224,6 +225,6 @@ export default function ReportToCandidate({
       </>
     );
   } else {
-    return <p>{errorMessage ? "Opps" : "It is loading"}</p>;
+    return <p>{errorMessage ? "Opps" : <ThreeDotsWave />}</p>;
   }
 }

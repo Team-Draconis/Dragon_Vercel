@@ -18,6 +18,7 @@ import { TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ReportToCandidate from "../report";
 import Link from "next/link";
+import ThreeDotsWave from "../../src/ThreeDotsWave";
 
 export default function CandidateDashboard({ candidateID }) {
   const router = useRouter();
@@ -590,7 +591,7 @@ export default function CandidateDashboard({ candidateID }) {
       <p>
         {errorMessage
           ? "Sorry you are not authenticated,please signin first"
-          : "It is loading"}
+          : <ThreeDotsWave />}
       </p>
     );
   }

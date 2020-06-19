@@ -24,6 +24,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import ThreeDotsWave from "../../src/ThreeDotsWave";
 
 //Styling
 const App = styled.div`
@@ -295,7 +296,7 @@ export default function Report({ candidateID }) {
       <p>
         {errorMessage
           ? "Sorry you are not authenticated,please signin first"
-          : "It is loading"}
+          : <ThreeDotsWave />}
       </p>
     );
   }
