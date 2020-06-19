@@ -78,7 +78,9 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
 
     return (
       <>
-        <p>This test was the latest, submitted at : {submitted_at_formatted}</p>
+        <p>
+          This test was the latest, submitted at : {submitted_at.slice(0, 10)}
+        </p>
         <p>Candidate spent : {duration}</p>
         <div className="app">
           <div className="split-view">
@@ -109,8 +111,6 @@ export default function ReportToCandidate({
   const router = useRouter();
   const [view, setView] = useState("initial");
   const [errorMessage, setErrorMessage] = useState("");
-  const candidateCities = candidateInfo.candidate_city;
-  const candidate_Cities_formatted = candidateCities.join(", ");
 
   if (candidateInfo) {
     return (
@@ -120,7 +120,12 @@ export default function ReportToCandidate({
           Go back to dashboard
         </button>
         <p>Candidate Nickname : {candidateInfo.candidate_name}</p>
-        <p>Desired Location : {candidate_Cities_formatted}</p>
+        <p>
+          Desired Location :{" "}
+          {candidateInfo.candidate_city
+            ? candidateInfo.candidate_city.join(", ")
+            : ""}
+        </p>
         <p>Email : {candidateInfo.candidate_email}</p>
 
         <p>
