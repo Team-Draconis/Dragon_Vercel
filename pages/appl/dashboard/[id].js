@@ -17,6 +17,7 @@ import Router from "next/router";
 import { TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ReportToCandidate from "../report";
+import Link from "next/link";
 
 export default function CandidateDashboard({ candidateID }) {
   const router = useRouter();
@@ -206,27 +207,39 @@ export default function CandidateDashboard({ candidateID }) {
 
     if (view === "initial") {
       return (
-        <div>
-          <NavBar />
-
+        <div style={{ width: "100%" }}>
+          {/* <NavBar /> */}
           <Box display="flex" flexDirection="row">
             {/* User status part */}
-            <Box mt={6} width="60%">
-              <Typography
-                variant="h3"
-                component="h1"
-                align="center"
-                style={{ fontFamily: "Josefin Sans" }}
-              >
-                <motion.div
-                  initial={{ y: 26 * 1.2, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
+            <Box width="60%" bgcolor="#222831">
+              <Box style={{ marginRight: "auto" }} m={2}>
+                <Link href="/">
+                  <motion.img
+                    src="/dragon.svg"
+                    height="60"
+                    width="65"
+                    style={{ cursor: "pointer" }}
+                    whileHover={{ scale: 1.2 }}
+                  />
+                </Link>
+              </Box>
+              <Box m={(9, 4)}>
+                <Typography
+                  variant="h3"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
                 >
-                  {`Hello ${candidateInfo.candidate_name} 🐲  Welcome to your dashboard`}
-                </motion.div>
-              </Typography>
-              <Box mt={3}>
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.6, delay: 0.1 }}
+                  >
+                    {`Welcome Back ${candidateInfo.candidate_name} 🐲`}
+                  </motion.div>
+                </Typography>
+              </Box>
+              <Box mt={8}>
                 <Typography
                   variant="h4"
                   component="h1"
@@ -236,30 +249,15 @@ export default function CandidateDashboard({ candidateID }) {
                   <motion.div
                     initial={{ y: 26 * 1.2, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.8 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
-                    {`Your email address is ${candidateInfo.candidate_email}`}
+                    {`Email Address: ${candidateInfo.candidate_email}`}
                   </motion.div>
                 </Typography>
               </Box>
-              <Box mt={3}>
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  align="center"
-                  style={{ fontFamily: "Josefin Sans" }}
-                >
-                  <motion.div
-                    initial={{ y: 26 * 1.2, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.1 }}
-                  >
-                    {`You are interested in working in ${candidate_Cities_formatted}`}
-                  </motion.div>
-                </Typography>
-              </Box>
+
               {candidateInfo.quiz_tests.length === 0 && !latesttesttime ? (
-                <Box mt={3}>
+                <Box m={(5, 5)}>
                   <Typography
                     variant="h4"
                     component="h1"
@@ -272,7 +270,7 @@ export default function CandidateDashboard({ candidateID }) {
                       transition={{
                         ease: "easeOut",
                         duration: 1.5,
-                        delay: 1.1,
+                        delay: 0.6,
                       }}
                     >
                       Thank you for signup,wanna take some test to shine your
@@ -282,7 +280,7 @@ export default function CandidateDashboard({ candidateID }) {
                 </Box>
               ) : null}
               {candidateInfo.quiz_tests.length !== 0 ? (
-                <Box mt={3}>
+                <Box m={(5, 5)}>
                   <Typography
                     variant="h4"
                     component="h1"
@@ -295,10 +293,10 @@ export default function CandidateDashboard({ candidateID }) {
                       transition={{
                         ease: "easeOut",
                         duration: 1.5,
-                        delay: 1.1,
+                        delay: 0.6,
                       }}
                     >
-                      {`Your recent quiz score is ${
+                      {`Recent Quiz Score: ${
                         candidateInfo.quiz_tests[
                           candidateInfo.quiz_tests.length - 1
                         ].quiz_score + "%"
@@ -308,7 +306,7 @@ export default function CandidateDashboard({ candidateID }) {
                 </Box>
               ) : null}
               {latesttesttime !== undefined ? (
-                <Box mt={3}>
+                <Box m={(5, 5)}>
                   <Typography
                     variant="h4"
                     component="h1"
@@ -321,19 +319,35 @@ export default function CandidateDashboard({ candidateID }) {
                       transition={{
                         ease: "easeOut",
                         duration: 1.5,
-                        delay: 1.1,
+                        delay: 0.6,
                       }}
                     >
-                      The last test was updated {latesttesttime.slice(0, 10)}
+                      The Last Test Was Updated {latesttesttime.slice(0, 10)}
                     </motion.div>
                   </Typography>
                 </Box>
               ) : null}
-              <Box align="center" mt={4}>
+              <Box m={(5, 5)}>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                >
+                  <motion.div
+                    initial={{ y: 26 * 1.2, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
+                  >
+                    {`You Are Interested In Working In ${candidate_Cities_formatted}`}
+                  </motion.div>
+                </Typography>
+              </Box>
+              <Box align="center" m={(5, 5)}>
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                 >
                   <Box display="flex" justifyContent="center">
                     <Box m={(0, 2)}>
@@ -383,7 +397,7 @@ export default function CandidateDashboard({ candidateID }) {
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5, delay: 1.4 }}
+                  transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                 >
                   <Box mt={4}>
                     <Button
@@ -407,7 +421,21 @@ export default function CandidateDashboard({ candidateID }) {
             </Box>
 
             {/* Coding test part */}
-            <Box width="40%" height="100vh">
+            <Box width="40%" height="100vh" bgcolor="#393e46">
+              <Box ml={60} mt={3}>
+                <Link href="/">
+                  <motion.div whileHover={{ scale: 1.2 }}>
+                    <Button
+                      color="inherit"
+                      onClick={() => {
+                        localStorage.clear();
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </motion.div>
+                </Link>
+              </Box>
               <Box mt={9}>
                 <Typography
                   variant="h4"
@@ -418,9 +446,9 @@ export default function CandidateDashboard({ candidateID }) {
                   <motion.div
                     initial={{ y: 26 * 1.2, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
-                    Test Your Skills
+                    Coding Quiz
                   </motion.div>
                 </Typography>
               </Box>
@@ -429,29 +457,49 @@ export default function CandidateDashboard({ candidateID }) {
                   <motion.div
                     initial={{ y: 26 * 1.2, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => setView("quiz")}
                     >
-                      Knowledge Test
+                      Start
                     </Button>
                   </motion.div>
+                </Box>
+                <Box mt={5}>
+                  <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    style={{ fontFamily: "Josefin Sans" }}
+                  >
+                    <motion.div
+                      initial={{ y: 26 * 1.2, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        ease: "easeOut",
+                        duration: 1.5,
+                        delay: 0.6,
+                      }}
+                    >
+                      Coding Challenge
+                    </motion.div>
+                  </Typography>
                 </Box>
                 <Box align="center" m={(4, 7)}>
                   <motion.div
                     initial={{ y: 26 * 1.2, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => setView("easy")}
                     >
-                      Easy Mode
+                      Start Easy Mode
                     </Button>
                   </motion.div>
                 </Box>
@@ -459,10 +507,10 @@ export default function CandidateDashboard({ candidateID }) {
                   <motion.div
                     initial={{ y: 26 * 1.2, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
                     <Button variant="contained" color="primary">
-                      Medium Mode
+                      Start Medium Mode
                     </Button>
                   </motion.div>
                 </Box>
@@ -470,14 +518,14 @@ export default function CandidateDashboard({ candidateID }) {
                   <motion.div
                     initial={{ y: 26 * 1.2, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ ease: "easeOut", duration: 1.5, delay: 1.7 }}
+                    transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => setView("hard")}
                     >
-                      Hard Mode
+                      Start Hard Mode
                     </Button>
                   </motion.div>
                 </Box>
