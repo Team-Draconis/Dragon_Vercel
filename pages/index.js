@@ -208,8 +208,8 @@ class Index extends Component {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
                 >
-                  <Button variant="contained" color="secondary">
-                    <Link href="AboutUs">
+                  <Button href="AboutUs" variant="contained" color="secondary">
+                    {/* <Link href="AboutUs">
                       <a
                         style={{
                           textDecoration: "none",
@@ -217,21 +217,10 @@ class Index extends Component {
                           fontFamily: "Josefin Sans",
                           paddingTop: 4,
                         }}
-                      >
-                        About Us
-                      </a>
-                      {/* <AnchorLink
-                      href="#detail"
-                      style={{
-                        textDecoration: "none",
-                        color: "white",
-                        fontFamily: "Josefin Sans",
-                        paddingTop: 4,
-                      }}
-                    >
-                      About Us
-                    </AnchorLink> */}
-                    </Link>
+                      > */}
+                    About Us
+                    {/* </a>
+                    </Link> */}
                   </Button>
                 </motion.div>
               </ButtonBox>
