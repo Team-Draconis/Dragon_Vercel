@@ -248,7 +248,7 @@ function QuizApp({ goBackToDashboard, id, handleRefresh }) {
         {/* <button onClick={calculation}>Submit Result</button> */}
         <style jsx global>{`
           .container {
-            background-color: #282c34;
+            background-color: #121212;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -268,7 +268,7 @@ function QuizApp({ goBackToDashboard, id, handleRefresh }) {
             cursor: pointer;
           }
           .btnPrimary {
-            color: gray;
+            color: black;
             background-color: #ffc107;
             font-weight: bold;
           }
