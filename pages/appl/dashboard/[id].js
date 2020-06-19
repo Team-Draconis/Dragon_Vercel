@@ -111,7 +111,13 @@ export default function CandidateDashboard({ candidateID }) {
             });
             console.log(result);
             console.log(`${result[0]}`);
-            setLatesttesttime(`${result[0]}`);
+            if (result.length !== 1) {
+              setLatesttesttime(`${result[0]}`);
+            }
+            if (result.length === 1) {
+              setLatesttesttime(`${result[0][0].coding_test_submitted_at}`);
+            }
+
             // console.log(latesttesttime);
           }
         });

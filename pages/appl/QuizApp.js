@@ -239,7 +239,7 @@ function QuizApp({ goBackToDashboard, id, handleRefresh }) {
           className="btn btnPrimary"
           onClick={() => {
             handleRefresh();
-            setTimeout(goBackToDashboard, 2500);
+            setTimeout(goBackToDashboard, 3000);
             // goBackToDashboard();
           }}
         >
