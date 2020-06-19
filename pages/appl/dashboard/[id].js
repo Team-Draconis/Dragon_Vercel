@@ -102,7 +102,7 @@ export default function CandidateDashboard({ candidateID }) {
                 res.data.coding_tests.hard[
                   res.data.coding_tests.hard.length - 1
                 ].coding_test_submitted_at;
-              all_latest_test_data.push(res.data.coding_tests.hard);
+              all_latest_test_data.push(latest_hard_test_data);
             }
             const result = all_latest_test_data.sort(function (a, b) {
               var c = new Date(a);
@@ -110,8 +110,9 @@ export default function CandidateDashboard({ candidateID }) {
               return d - c;
             });
             console.log(result);
-            console.log(`${result[0]}`);
+
             setLatesttesttime(`${result[0]}`);
+
             // console.log(latesttesttime);
           }
         });

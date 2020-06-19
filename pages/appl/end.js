@@ -55,7 +55,7 @@ export default function End() {
             variant="contained"
             color="primary"
             onClick={() => {
-              setTimeout(Router.push(`/appl/dashboard/${candidateID}`), 2500);
+              setTimeout(Router.push(`/appl/dashboard/${candidateID}`), 4000);
               // Router.push(`/appl/dashboard/${candidateID}`);
             }}
           >
