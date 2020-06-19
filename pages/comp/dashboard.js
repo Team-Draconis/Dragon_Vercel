@@ -14,6 +14,7 @@ import Box from "@material-ui/core/Box";
 import Router from "next/router";
 import { TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
   const useStyles = makeStyles((theme) => ({
@@ -104,13 +105,18 @@ const Dashboard = () => {
         <>
           <NavBar />
           {/* <div style={{ marginLeft: "50px", marginTop: "30px" }}> */}
-          <Box align="center" m={5}>
-            <h1>Coding Test Report</h1>
-            <Box display="flex" justifyContent="center">
-              <Box mt={3}>
-                {/* //please dont delete this */}
+          <motion.div
+            initial={{ y: 26 * 1.2, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ ease: "easeOut", duration: 1.5, delay: 0.4 }}
+          >
+            <Box align="center" m={5}>
+              <h1>Coding Test Report</h1>
+              <Box display="flex" justifyContent="center">
+                <Box mt={3}>
+                  {/* //please dont delete this */}
 
-                {/* <CssTextField
+                  {/* <CssTextField
                   onChange={(e) => onCityChange}
                   value={temp}
                   placeholder="Filter By City"
@@ -119,36 +125,36 @@ const Dashboard = () => {
                   }}
                   variant="outlined"
                 /> */}
-                <input
-                  type="text"
-                  onChange={onCityChange}
-                  value={temp}
-                  placeholder="Filter by city"
-                />
-              </Box>
-              <Box mt={2.2} ml={1}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  align="center"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
-              </Box>
-              <Box mt={2.2} ml={1}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  align="center"
-                  onClick={handleReset}
-                >
-                  Reset
-                </Button>
+                  <input
+                    type="text"
+                    onChange={onCityChange}
+                    value={temp}
+                    placeholder="Filter by city"
+                  />
+                </Box>
+                <Box mt={2.2} ml={1}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    align="center"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                </Box>
+                <Box mt={2.2} ml={1}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    align="center"
+                    onClick={handleReset}
+                  >
+                    Reset
+                  </Button>
+                </Box>
               </Box>
             </Box>
-          </Box>
-          {/* <div id="list">
+            {/* <div id="list">
             {candidates_Info.map((info) => {
               return (
                 <div key={info._id}>
@@ -180,63 +186,71 @@ const Dashboard = () => {
               );
             })}
           </div> */}
-          {/* </div> */}
-          <div>
-            <Table size="medium">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Last active at</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>City</TableCell>
-                  <TableCell>Score</TableCell>
-                  <TableCell align="right">View Test Detail</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {candidates_Info.map((info) => (
-                  <TableRow key={info._id}>
-                    <TableCell>{`${info.last_login}`.slice(0, -30)}</TableCell>
-                    <TableCell>{info.candidate_email}</TableCell>
-                    <TableCell>{info.candidate_city + "  "}</TableCell>
-                    <TableCell>
-                      {info.quiz_tests.length !== 0
-                        ? info.quiz_tests[info.quiz_tests.length - 1]
-                            .quiz_score + "%"
-                        : "NA"}
-                    </TableCell>
-                    <TableCell align="right">
-                      <Link href={`/comp/report/${info._id}`}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          align="center"
-                        >
-                          View Test Detail
-                        </Button>
-                      </Link>
-                    </TableCell>
+            {/* </div> */}
+            <div>
+              <Table size="medium">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Last active at</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>City</TableCell>
+                    <TableCell>Score</TableCell>
+                    <TableCell align="right">View Test Detail</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-          {/* <div className={classes.seeMore}>
+                </TableHead>
+                <TableBody>
+                  {candidates_Info.map((info) => (
+                    <TableRow key={info._id}>
+                      <TableCell>
+                        {`${info.last_login}`.slice(0, -30)}
+                      </TableCell>
+                      <TableCell>{info.candidate_email}</TableCell>
+                      <TableCell>{info.candidate_city + "  "}</TableCell>
+                      <TableCell>
+                        {info.quiz_tests.length !== 0
+                          ? info.quiz_tests[info.quiz_tests.length - 1]
+                              .quiz_score + "%"
+                          : "NA"}
+                      </TableCell>
+                      <TableCell align="right">
+                        <Link href={`/comp/report/${info._id}`}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            align="center"
+                          >
+                            View Test Detail
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+            {/* <div className={classes.seeMore}>
           <Link color="primary" href="#" onClick={preventDefault}>
             See more orders
           </Link>
         </div> */}
+          </motion.div>
         </>
       );
     } else {
       return (
         <>
           <NavBar />
-          <Box align="center" m={5}>
-            <h1>Coding Test Report</h1>
-            <Box display="flex" justifyContent="center">
-              <Box mt={3}>
-                {/* please dont delete this */}
-                {/* <CssTextField
+          <motion.div
+            initial={{ y: 26 * 1.2, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ ease: "easeOut", duration: 1.5, delay: 0.4 }}
+          >
+            <Box align="center" m={5}>
+              <h1>Coding Test Report</h1>
+              <Box display="flex" justifyContent="center">
+                <Box mt={3}>
+                  {/* please dont delete this */}
+                  {/* <CssTextField
                   onChange={onCityChange}
                   value={temp}
                   placeholder="Filter By City"
@@ -245,36 +259,36 @@ const Dashboard = () => {
                   }}
                   variant="outlined"
                 /> */}
-                <input
-                  type="text"
-                  onChange={onCityChange}
-                  value={temp}
-                  placeholder="Filter by city"
-                />
-              </Box>
-              <Box mt={2.2} ml={1}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  align="center"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
-              </Box>
-              <Box mt={2.2} ml={1}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  align="center"
-                  onClick={handleReset}
-                >
-                  Reset
-                </Button>
+                  <input
+                    type="text"
+                    onChange={onCityChange}
+                    value={temp}
+                    placeholder="Filter by city"
+                  />
+                </Box>
+                <Box mt={2.2} ml={1}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    align="center"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                </Box>
+                <Box mt={2.2} ml={1}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    align="center"
+                    onClick={handleReset}
+                  >
+                    Reset
+                  </Button>
+                </Box>
               </Box>
             </Box>
-          </Box>
-          {/* <div id="list">
+            {/* <div id="list">
             {newResults.map((testResult) => {
               return (
                 <div key={testResult._id}>
@@ -303,48 +317,49 @@ const Dashboard = () => {
               );
             })}
           </div> */}
-          <div>
-            <Table size="medium">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>City</TableCell>
-                  <TableCell>Score</TableCell>
-                  <TableCell align="right">View Test Detail</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {newResults.map((testResult) => (
-                  <TableRow key={testResult._id}>
-                    <TableCell>
-                      {`${testResult.last_login}`.slice(0, -30)}
-                    </TableCell>
-                    <TableCell>{testResult.candidate_email}</TableCell>
-                    <TableCell>{testResult.candidate_city + "  "}</TableCell>
-                    <TableCell>
-                      {testResult.quiz_tests.length !== 0
-                        ? testResult.quiz_tests[
-                            testResult.quiz_tests.length - 1
-                          ].quiz_score + "%"
-                        : "NA"}
-                    </TableCell>
-                    <TableCell align="right">
-                      <Link href={`/comp/report/${testResult._id}`}>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          align="center"
-                        >
-                          View Test Detail
-                        </Button>
-                      </Link>
-                    </TableCell>
+            <div>
+              <Table size="medium">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>City</TableCell>
+                    <TableCell>Score</TableCell>
+                    <TableCell align="right">View Test Detail</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+                </TableHead>
+                <TableBody>
+                  {newResults.map((testResult) => (
+                    <TableRow key={testResult._id}>
+                      <TableCell>
+                        {`${testResult.last_login}`.slice(0, -30)}
+                      </TableCell>
+                      <TableCell>{testResult.candidate_email}</TableCell>
+                      <TableCell>{testResult.candidate_city + "  "}</TableCell>
+                      <TableCell>
+                        {testResult.quiz_tests.length !== 0
+                          ? testResult.quiz_tests[
+                              testResult.quiz_tests.length - 1
+                            ].quiz_score + "%"
+                          : "NA"}
+                      </TableCell>
+                      <TableCell align="right">
+                        <Link href={`/comp/report/${testResult._id}`}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            align="center"
+                          >
+                            View Test Detail
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </motion.div>
         </>
       );
     }
