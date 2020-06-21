@@ -10,7 +10,8 @@ import Link from "@material-ui/core/Link";
 
 export default function AboutUs() {
   return (
-    <div>
+    <>
+      {/* logo */}
       <div>
         <Box display="flex" justifyContent="flex-start" m={2.1}>
           <Box style={{ marginRight: "auto" }}>
@@ -27,6 +28,73 @@ export default function AboutUs() {
         </Box>
       </div>
       <Container>
+        <motion.div
+          initial={{ y: 26 * 1.2, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
+        >
+          <Grid container spacing={1} align="center">
+            <Grid item xs={12} sm={6} md={6}>
+              <img
+                src="/Zowie_thumb.jpeg"
+                alt="Zowie Min"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <a href="https://www.linkedin.com/in/jiayi-min/">Zowie Min</a>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <img
+                src="Tam_thumb.jpeg"
+                alt="Tam Nguyen"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <a href="https://www.linkedin.com/in/tam-nguyen-70a7891a8/">
+                Tam Nugyen
+              </a>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <img
+                src="Shuntaro_thumb.jpg"
+                alt="Shuntaro Maekawa"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <a href="https://www.linkedin.com/in/shuntaro-maekawa/">
+                Shuntaro Maekawa
+              </a>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <img
+                src="Mako_thumb.jpg"
+                alt="Mako Kusuda"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <a href="https://www.linkedin.com/in/makokusuda/">Mako Kusudo</a>
+            </Grid>
+            <Grid item xs={12} sm={12} md={4}>
+              <img
+                src="CC-photo_thumb.jpg"
+                alt="Chip Crawford"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <a href="https://www.linkedin.com/in/chip-crawford-berkeley/">
+                Chip Crawford
+              </a>
+            </Grid>
+          </Grid>
+        </motion.div>
+        {/* story */}
         <Typography
           variant="body1"
           component="h1"
@@ -81,73 +149,7 @@ export default function AboutUs() {
             better way for people to showcase their talents!
           </motion.div>
         </Typography>
-        {/* <img src="/Zowie.jpeg" alt="Zowie Min" />
-      <img src="Tam.jpeg" alt="Tam Nguyen" />
-      <img src="Shuntaro.jpg" alt="Shuntaro Maekawa" />
-      <img src="Mako.jpg" alt="Mako Kusuda" />
-      <img src="CC-photo.jpg" alt="Chip Crawford" /> */}
-        {/* <Container> */}
-        <Grid container spacing={1} align="center">
-          <Grid item xs={12} sm={6} md={6}>
-            <img
-              src="/Zowie_thumb.jpeg"
-              alt="Zowie Min"
-              width="200"
-              height="230"
-              style={{ borderRadius: "50%" }}
-            />
-            <a href="https://www.linkedin.com/in/jiayi-min/">Zowie Min</a>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-            <img
-              src="Tam_thumb.jpeg"
-              alt="Tam Nguyen"
-              width="200"
-              height="230"
-              style={{ borderRadius: "50%" }}
-            />
-            <a href="https://www.linkedin.com/in/tam-nguyen-70a7891a8/">
-              Tam Nugyen
-            </a>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <img
-              src="Shuntaro_thumb.jpg"
-              alt="Shuntaro Maekawa"
-              width="200"
-              height="230"
-              style={{ borderRadius: "50%" }}
-            />
-            <a href="https://www.linkedin.com/in/shuntaro-maekawa/">
-              Shuntaro Maekawa
-            </a>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <img
-              src="Mako_thumb.jpg"
-              alt="Mako Kusuda"
-              width="200"
-              height="230"
-              style={{ borderRadius: "50%" }}
-            />
-            <a href="https://www.linkedin.com/in/makokusuda/">Mako Kusudo</a>
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <img
-              src="CC-photo_thumb.jpg"
-              alt="Chip Crawford"
-              width="200"
-              height="230"
-              style={{ borderRadius: "50%" }}
-            />
-            <a href="https://www.linkedin.com/in/chip-crawford-berkeley/">
-              Chip Crawford
-            </a>
-          </Grid>
-        </Grid>
       </Container>
-    </div>
+    </>
   );
 }
