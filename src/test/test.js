@@ -1,41 +1,62 @@
+import correctIcon from "./image/correct.png";
+import incorrectIcon from "./image/incorrect.png";
+
 export default function test(element, target, expected, description) {
-  if (target === "text") {
-    const container = document.createElement("div");
-    if (element === expected) {
-      container.innerHTML = `Pass - ${description}`;
-    } else {
-      container.innerHTML = `Fail - ${description}`;
-    }
+  const container = document.createElement("div");
+  const icon = document.createElement("img");
+  const message = document.createElement("a");
+
+  const pass = () => {
+    icon.src = correctIcon;
+    icon.style.width = "20px";
+    message.innerHTML = `Pass - ${description}`;
+  };
+
+  const fail = () => {
+    icon.src = incorrectIcon;
+    icon.style.width = "20px";
+    message.innerHTML = `Fail - ${description}`;
+  };
+
+  const append = () => {
+    container.appendChild(icon);
+    container.appendChild(message);
     document.getElementById("test-result").appendChild(container);
+  };
+
+  if (target === "text") {
+    if (element === expected) {
+      pass();
+    } else {
+      fail();
+    }
+    append();
   }
 
   if (target === "isDefined") {
-    const container = document.createElement("div");
     if (element) {
-      container.innerHTML = `Pass - ${description}`;
+      pass();
     } else {
-      container.innerHTML = `Fail - ${description}`;
+      fail();
     }
-    document.getElementById("test-result").appendChild(container);
+    append();
   }
 
   if (target === "isNotDefined") {
-    const container = document.createElement("div");
     if (!element) {
-      container.innerHTML = `Pass - ${description}`;
+      pass();
     } else {
-      container.innerHTML = `Fail - ${description}`;
+      fail();
     }
-    document.getElementById("test-result").appendChild(container);
+    append();
   }
 
   if (target === "length") {
-    const container = document.createElement("div");
     if (element.length === expected) {
-      container.innerHTML = `Pass - ${description}`;
+      pass();
     } else {
-      container.innerHTML = `Fail - ${description}`;
+      fail();
     }
-    document.getElementById("test-result").appendChild(container);
+    append();
   }
 }
