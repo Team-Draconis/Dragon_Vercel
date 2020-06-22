@@ -170,30 +170,9 @@ export default function AboutUs() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
             >
-              Coding Quiz
-              <a href="https://github.com/Team-Draconis/Dragon_Vercel">
-                {"Dragon Tester"}
-              </a>{" "}
-              was developed by{" "}
-              <a href="https://www.linkedin.com/in/makokusuda/">Mako Kusudo</a>,{" "}
-              <a href="https://www.linkedin.com/in/shuntaro-maekawa/">
-                Shuntaro Maekawa
-              </a>
-              , <a href="https://www.linkedin.com/in/jiayi-min/">Zowie Min</a>,{" "}
-              <a href="https://www.linkedin.com/in/tam-nguyen-70a7891a8/">
-                {" "}
-                Tam Nugyen
-              </a>{" "}
-              and{" "}
-              <a href="https://www.linkedin.com/in/chip-crawford-berkeley/">
-                {" "}
-                Chip Crawford
-              </a>{" "}
-              during their time at{" "}
-              <a href="https://www.codechrysalis.io/">
-                {" "}
-                Code Chrysalis Coding Boot Camp
-              </a>{" "}
+              "Dragon Tester" was developed by Mako Kusudo, Shuntaro
+              Maekawa, Zowie Min, Tam Nugyen and Chip Crawford during their
+              time at Code Chrysalis Coding Boot Camp
               in Tokyo, Japan. We were inspired by Zowie's experience as a
               recruiter to try to improve the experience for both the companies
               looking for talent and the talent themselves. Our goal was to

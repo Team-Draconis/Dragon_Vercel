@@ -25,31 +25,31 @@ Call +11 22 33 44 now!
 */
 
 import React from "react";
-class ToggleMessage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showNumber: false };
-  }
+  class ToggleMessage extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { showNumber: false };
+    }
 
-  render() {
-    return (
-      <div>
-        <a
-          href="#"
-          className="toggle"
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({ showNumber: !this.state.showNumber });
-          }}
-        >
-          Want to buy a new car?
-        </a>
-        {this.state.showNumber && (
-          <p className="phone-number">Call +11 22 33 44 now!</p>
-        )}
-      </div>
-    );
+    render() {
+      return (
+        <div>
+          <a
+            href="#"
+            className="toggle"
+            onClick={(e) => {
+              e.preventDefault();
+              this.setState({ showNumber: !this.state.showNumber });
+            }}
+          >
+            Want to buy a new car?
+          </a>
+          {this.state.showNumber && (
+            <p className="phone-number">Call +11 22 33 44 now!</p>
+          )}
+        </div>
+      );
+    }
   }
-}
 
 export default ToggleMessage;

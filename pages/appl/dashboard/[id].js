@@ -276,8 +276,8 @@ export default function CandidateDashboard({ candidateID }) {
                         delay: 0.6,
                       }}
                     >
-                      Thank you for signup,wanna take some test to shine your
-                      skills?!
+                      Thank you for signing up with Dragon Tester. Please try a
+                      test.
                     </motion.div>
                   </Typography>
                 </Box>
@@ -325,7 +325,8 @@ export default function CandidateDashboard({ candidateID }) {
                         delay: 0.6,
                       }}
                     >
-                      The Last Test Was Updated {latesttesttime.slice(0, 10)}
+                      The Last Test Was Updated At:{" "}
+                      {latesttesttime.slice(0, 10)}
                     </motion.div>
                   </Typography>
                 </Box>
@@ -342,7 +343,7 @@ export default function CandidateDashboard({ candidateID }) {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                   >
-                    {`You Are Interested In Working In ${candidate_Cities_formatted}`}
+                    {`You Are Interested In Working In: ${candidate_Cities_formatted}`}
                   </motion.div>
                 </Typography>
               </Box>
@@ -488,7 +489,7 @@ export default function CandidateDashboard({ candidateID }) {
                         delay: 0.6,
                       }}
                     >
-                      Coding Challenge
+                      Coding Challenges
                     </motion.div>
                   </Typography>
                 </Box>
