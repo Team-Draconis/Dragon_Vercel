@@ -97,8 +97,8 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
 
     return (
       <>
-        <p>This test was the latest, submitted at : {submitted_at_formatted}</p>
-        <p>Candidate spent : {duration}</p>
+        <p>This test is the most recent result, submitted at: {submitted_at_formatted}</p>
+        <p>Candidate spent: {duration}</p>
         <div className="app">
           <div className="split-view">
             <div className="code-editor">
