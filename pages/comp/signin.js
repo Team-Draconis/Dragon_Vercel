@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Router from "next/router";
 import NavBar from "../src/NavBar";
+import { motion } from "framer-motion";
 
 function Copyright() {
   return (
@@ -77,7 +78,19 @@ export default function SignIn() {
 
   return (
     <>
-      {/* <NavBar /> */}
+      <Box display="flex" justifyContent="flex-start" m={2.1}>
+        <Box style={{ marginRight: "auto" }}>
+          <Link href="/">
+            <motion.img
+              src="/dragon.svg"
+              height="60"
+              width="65"
+              style={{ cursor: "pointer" }}
+              whileHover={{ scale: 1.2 }}
+            />
+          </Link>
+        </Box>
+      </Box>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -97,10 +110,12 @@ export default function SignIn() {
               label="Company Name"
               name="email"
               autoComplete="email"
+              placeholder="Company name here"
               autoFocus
               value={name}
               onChange={(e) => setName(e.target.value)}
-              color="secondary"
+              color="primary"
+              style={{ backgroundColor: "#616161", borderRadius: 3 }}
             />
             <TextField
               variant="outlined"
@@ -111,10 +126,12 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              placeholder="Your password here"
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              color="secondary"
+              color="primary"
+              style={{ backgroundColor: "#616161", borderRadius: 3 }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="secondary" />}

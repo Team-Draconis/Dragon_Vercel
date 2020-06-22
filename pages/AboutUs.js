@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { Container } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
+import { BottomNavigation } from "@material-ui/core";
 
 export default function AboutUs() {
   return (
@@ -160,7 +161,7 @@ export default function AboutUs() {
         {/* story */}
         <Box mt={5}>
           <Typography
-            variant="body1"
+            variant="h6"
             component="h1"
             align="center"
             style={{ fontFamily: "Josefin Sans" }}
@@ -170,14 +171,14 @@ export default function AboutUs() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
             >
-              "Dragon Tester" was developed by Mako Kusudo, Shuntaro
-              Maekawa, Zowie Min, Tam Nugyen and Chip Crawford during their
-              time at Code Chrysalis Coding Boot Camp
-              in Tokyo, Japan. We were inspired by Zowie's experience as a
-              recruiter to try to improve the experience for both the companies
-              looking for talent and the talent themselves. Our goal was to
-              allow jobseekers to lead with their skills and connect them with
-              small to medium sized companies that may have been overlooked.
+              "Dragon Tester" was developed by Mako Kusudo, Shuntaro Maekawa,
+              Zowie Min, Tam Nugyen and Chip Crawford during their time at Code
+              Chrysalis Coding Boot Camp in Tokyo, Japan. We were inspired by
+              Zowie's experience as a recruiter to try to improve the experience
+              for both the companies looking for talent and the talent
+              themselves. Our goal was to allow jobseekers to lead with their
+              skills and connect them with small to medium sized companies that
+              may have been overlooked.
               <br />
               Our focus was on creating a stable platform and refining the
               skills we learned at Code Chrysalis. Mako was in charge of using
@@ -195,6 +196,9 @@ export default function AboutUs() {
           </Typography>
         </Box>
       </Container>
+      <BottomNavigation
+        style={{ backgroundColor: "#121212" }}
+      ></BottomNavigation>
     </>
   );
 }

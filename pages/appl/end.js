@@ -9,9 +9,30 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { verify } from "jsonwebtoken";
 import Router from "next/router";
+import { makeStyles } from "@material-ui/styles";
 
 export default function End() {
   const [candidateID, setCandidateID] = useState();
+
+  //responsive styling
+  const useStyles = makeStyles((theme) => ({
+    box: {
+      [theme.breakpoints.down("sm")]: {
+        marginTop: "120px",
+        fontSize: "3rem",
+        width: "80%",
+      },
+      [theme.breakpoints.up("md")]: {
+        marginTop: "200px",
+        marginBottom: 0,
+      },
+      [theme.breakpoints.up("lg")]: {
+        marginTop: "280px",
+        marginBottom: 0,
+        // background: "green",
+      },
+    },
+  }));
 
   useEffect(() => {
     const token = localStorage.getItem("candidatetoken");
@@ -23,11 +44,14 @@ export default function End() {
       }
     });
   }, []);
+
+  const classes = useStyles();
+
   return (
     <>
       {/* <NavBar /> */}
-      <Box mt={35} align="center">
-        <motion.h2
+      <Box align="center">
+        <motion.div
           initial={{ y: -250 }}
           animate={{ y: -10, fontSize: 120 }}
           transition={{
@@ -38,8 +62,8 @@ export default function End() {
             fontFamily: "Josefin Sans",
           }}
         >
-          Thank You! 🐉
-        </motion.h2>
+          <p className={classes.box}>Thank You! 🐉</p>
+        </motion.div>
       </Box>
       <Box align="center" m={5}>
         <motion.div

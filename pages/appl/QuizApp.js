@@ -298,7 +298,7 @@ function QuizApp({ goBackToDashboard, id, handleRefresh }) {
               variant="contained"
               color="primary"
               align="center"
-              className={styles.btnPrimary}
+              className="btnPrimary"
               onClick={next}
             >
               Confirm and Continue
