@@ -62,7 +62,7 @@ export default function legalPop(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText style={{ color: "black" }}>
-            By submitting this data you agree to the terms outlined . . .
+            By selecting agree you agree to submit your personal information to Dragon Tester and have your most recent test scores shared with companies seeking frontend engineers.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

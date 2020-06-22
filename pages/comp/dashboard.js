@@ -191,11 +191,11 @@ const Dashboard = () => {
               <Table size="medium">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Last active at</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>City</TableCell>
-                    <TableCell>Score</TableCell>
-                    <TableCell align="right">View Test Detail</TableCell>
+                    <TableCell>Last active at:</TableCell>
+                    <TableCell>Email:</TableCell>
+                    <TableCell>City:</TableCell>
+                    <TableCell>Score:</TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -205,7 +205,17 @@ const Dashboard = () => {
                         {`${info.last_login}`.slice(0, -30)}
                       </TableCell>
                       <TableCell>{info.candidate_email}</TableCell>
-                      <TableCell>{info.candidate_city + "  "}</TableCell>
+                      <TableCell>
+                        {info.candidate_city.map((el) => {
+                          if (
+                            info.candidate_city.indexOf(el) <
+                            info.candidate_city.length - 1
+                          ) {
+                            return el + ", ";
+                          }
+                          return el;
+                        })}
+                      </TableCell>
                       <TableCell>
                         {info.quiz_tests.length !== 0
                           ? info.quiz_tests[info.quiz_tests.length - 1]
@@ -219,7 +229,7 @@ const Dashboard = () => {
                             color="primary"
                             align="center"
                           >
-                            View Test Detail
+                            View Test Details
                           </Button>
                         </Link>
                       </TableCell>
@@ -325,7 +335,7 @@ const Dashboard = () => {
                     <TableCell>Email</TableCell>
                     <TableCell>City</TableCell>
                     <TableCell>Score</TableCell>
-                    <TableCell align="right">View Test Detail</TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -335,7 +345,17 @@ const Dashboard = () => {
                         {`${testResult.last_login}`.slice(0, -30)}
                       </TableCell>
                       <TableCell>{testResult.candidate_email}</TableCell>
-                      <TableCell>{testResult.candidate_city + "  "}</TableCell>
+                      <TableCell>
+                        {testResult.candidate_city.map((el) => {
+                          if (
+                            testResult.candidate_city.indexOf(el) <
+                            testResult.candidate_city.length - 1
+                          ) {
+                            return el + ", ";
+                          }
+                          return el;
+                        })}
+                      </TableCell>
                       <TableCell>
                         {testResult.quiz_tests.length !== 0
                           ? testResult.quiz_tests[
@@ -350,7 +370,7 @@ const Dashboard = () => {
                             color="primary"
                             align="center"
                           >
-                            View Test Detail
+                            View Test Details
                           </Button>
                         </Link>
                       </TableCell>

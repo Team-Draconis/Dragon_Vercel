@@ -469,11 +469,11 @@ export default function Index() {
           <Container id="detail">
             <TextBox>
               <Typography3 variant="h4" component="h1" align="center">
-                We bypass recruiters and algorithms which may introduce
-                unconscious bias and allow your skill to open doors. We retain
-                only your email address and location preference. Feel free to
-                take the tests multiple times and look for jobs across the
-                globe.
+                We bypass recruiters and algorithms allowing your skill to open
+                doors. Companies seeking frontend engineers will only be
+                presented with your test results and contact information. You
+                decide which cities you wish to work in allowing you to create a
+                worldwide, skills forward job search.
               </Typography3>
               <ButtonBox>
                 <Button variant="contained" color="primary">
