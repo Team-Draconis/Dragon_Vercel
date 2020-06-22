@@ -15,6 +15,7 @@ import Router from "next/router";
 import { TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { motion } from "framer-motion";
+import Grid from "@material-ui/core/Grid";
 
 const Dashboard = () => {
   const useStyles = makeStyles((theme) => ({
@@ -154,95 +155,74 @@ const Dashboard = () => {
                 </Box>
               </Box>
             </Box>
-            {/* <div id="list">
-            {candidates_Info.map((info) => {
-              return (
-                <div key={info._id}>
-                  <Card>
-                    <Card.Content>
-                      <Card.Header>
-                        <Link href={`/comp/report/${info._id}`}>
-                          <Button primary>View Test Detail</Button>
-                        </Link>
-                        <p>From {info.candidate_city}</p>
-                      </Card.Header>
-                    </Card.Content>
-                    <Card.Content extra>
-                      <p>From {info.city}</p>
-                    </Card.Content>
-                    <Card.Content extra>
-                      <Link href={`/comp/report/${info._id}`}>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          align="center"
-                        >
-                          View Test Detail
-                        </Button>
-                      </Link>
-                    </Card.Content>
-                  </Card>
+            <Grid container>
+              <Grid item item xs={12} sm={12} md={12}>
+                <div>
+                  <Table
+                    size="medium"
+                    style={{
+                      width: "100%",
+                      tableLayout: "fixed",
+                      wordBreak: "break-all",
+                      wordWrap: "break-all",
+                    }}
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Last active at:</TableCell>
+                        <TableCell>Email:</TableCell>
+                        <TableCell>City:</TableCell>
+                        <TableCell>Score:</TableCell>
+                        <TableCell align="right"></TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {candidates_Info.map((info) => (
+                        <TableRow key={info._id}>
+                          <TableCell>
+                            {`${info.last_login}`.slice(0, -30)}
+                          </TableCell>
+                          <TableCell>{info.candidate_email}</TableCell>
+                          <TableCell>
+                            {info.candidate_city.map((el) => {
+                              if (
+                                info.candidate_city.indexOf(el) <
+                                info.candidate_city.length - 1
+                              ) {
+                                return el + ", ";
+                              }
+                              return el;
+                            })}
+                          </TableCell>
+                          <TableCell>
+                            {info.quiz_tests.length !== 0
+                              ? info.quiz_tests[info.quiz_tests.length - 1]
+                                  .quiz_score + "%"
+                              : "NA"}
+                          </TableCell>
+                          <TableCell align="right">
+                            <Link href={`/comp/report/${info._id}`}>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                align="center"
+                              >
+                                View Test Details
+                              </Button>
+                            </Link>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </div>
-              );
-            })}
-          </div> */}
-            {/* </div> */}
-            <div>
-              <Table size="medium">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Last active at:</TableCell>
-                    <TableCell>Email:</TableCell>
-                    <TableCell>City:</TableCell>
-                    <TableCell>Score:</TableCell>
-                    <TableCell align="right"></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {candidates_Info.map((info) => (
-                    <TableRow key={info._id}>
-                      <TableCell>
-                        {`${info.last_login}`.slice(0, -30)}
-                      </TableCell>
-                      <TableCell>{info.candidate_email}</TableCell>
-                      <TableCell>
-                        {info.candidate_city.map((el) => {
-                          if (
-                            info.candidate_city.indexOf(el) <
-                            info.candidate_city.length - 1
-                          ) {
-                            return el + ", ";
-                          }
-                          return el;
-                        })}
-                      </TableCell>
-                      <TableCell>
-                        {info.quiz_tests.length !== 0
-                          ? info.quiz_tests[info.quiz_tests.length - 1]
-                              .quiz_score + "%"
-                          : "NA"}
-                      </TableCell>
-                      <TableCell align="right">
-                        <Link href={`/comp/report/${info._id}`}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            align="center"
-                          >
-                            View Test Details
-                          </Button>
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-            {/* <div className={classes.seeMore}>
+                {/* <div className={classes.seeMore}>
           <Link color="primary" href="#" onClick={preventDefault}>
             See more orders
           </Link>
         </div> */}
+              </Grid>
+            </Grid>
           </motion.div>
         </>
       );
