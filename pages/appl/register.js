@@ -208,25 +208,7 @@ export default function Register({ userSession }) {
               <span>Sign Up With Github</span>
             </GithubLoginButton>
           </Grid>
-          <Grid item xs={12}>
-            <GithubLoginButton onClick={() => signout({ callbackUrl: 'http://localhost:3000/'})}>
-              <span>Sign Out of Github</span>
-            </GithubLoginButton>
-          </Grid>
         </Grid>
-        <Grid>
-        <p>
-          {!session && <>
-            Not signed in <br/>
-            <a href="/api/auth/signin">Sign in</a>
-          </>}
-          {session && <>
-            Signed in as {session.user.name} <br/>
-            {console.log(session, "<--- this is the Session")}
-          </>}
-        </p>
-        </Grid>
-
       </div>
       
       <Box mt={5}>
