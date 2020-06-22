@@ -19,6 +19,23 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { motion } from "framer-motion";
+import { makeStyles } from "@material-ui/styles";
+
+//responsive styling
+const useStyles = makeStyles((theme) => ({
+  root: {
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "red",
+    },
+    [theme.breakpoints.up("md")]: {
+      backgroundColor: theme.palette.primary.main,
+    },
+    [theme.breakpoints.up("lg")]: {
+      backgroundColor: "green",
+      marginLeft: "555px",
+    },
+  },
+}));
 
 //Styling
 const App = styled.div`
@@ -141,6 +158,8 @@ export default function SandBox({
     fontWeight: "bold",
   };
 
+  const classes = useStyles();
+
   return (
     <>
       <NavBar />
@@ -161,8 +180,8 @@ export default function SandBox({
             Back to dashboard
           </Button>
         </Box>
-        <Box ml={55}>
-          <div>
+        <Box>
+          <div className={classes.root}>
             <p style={titleStyle}>{title}</p>
             <p style={subtitleStyle}>Requirements</p>
             <div>{requirement}</div>
