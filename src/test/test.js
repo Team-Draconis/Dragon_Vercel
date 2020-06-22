@@ -3,18 +3,22 @@ import incorrectIcon from "./image/incorrect.png";
 
 export default function test(element, target, expected, description) {
   const container = document.createElement("div");
+  container.setAttribute("class", "result-description");
   const icon = document.createElement("img");
   const message = document.createElement("a");
+  message.setAttribute("class", "result-message");
 
   const pass = () => {
     icon.src = correctIcon;
     icon.style.width = "20px";
+    icon.style.height = "21.05px";
     message.innerHTML = `Pass - ${description}`;
   };
 
   const fail = () => {
     icon.src = incorrectIcon;
     icon.style.width = "20px";
+    icon.style.height = "21.05px";
     message.innerHTML = `Fail - ${description}`;
   };
 

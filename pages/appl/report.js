@@ -8,6 +8,7 @@ import { createEditor } from "../../utils/editor";
 import styled from "styled-components";
 import _ToggleMessage from "../../src/test/_ToggleMessage";
 import _AddingCalculator from "../../src/test/_AddingCalculator";
+import _LoopOver from "../../src/test/_LoopOver";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import Typography from "@material-ui/core/Typography";
@@ -20,6 +21,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import ThreeDotsWave from "../src/ThreeDotsWave";
+import Grid from "@material-ui/core/Grid";
 
 //Styling
 const App = styled.div`
@@ -78,6 +80,9 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
       if (view === "medium") {
         _AddingCalculator();
       }
+      if (view === "hard") {
+        _LoopOver();
+      }
     };
 
     useEffect(() => {
@@ -89,16 +94,30 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
     return (
       <>
         <p>
-        This test is the most recent result, submitted at: {submitted_at.slice(0, 10)}
+          This test is the most recent result, submitted at:{" "}
+          {submitted_at.slice(0, 10)}
         </p>
         <p>Candidate spent: {duration}</p>
         <div className="app">
-          <div className="split-view">
-            <div className="code-editor">
+          {/* <div className="split-view"> */}
+          <Grid container align="center">
+            <Grid className="code-editor" item xs={12} sm={6} md={6}>
+              <textarea value={code} ref={codeEditor} />
+            </Grid>
+            <Grid
+              className="preview"
+              ref={el}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+            ></Grid>
+          </Grid>
+          {/* <div className="code-editor">
               <textarea value={code} ref={codeEditor} />
             </div>
-            <div className="preview" ref={el} />
-          </div>
+            <div className="preview" ref={el} /> */}
+          {/* </div> */}
           <div
             ref={testTarget}
             id="test-target"
