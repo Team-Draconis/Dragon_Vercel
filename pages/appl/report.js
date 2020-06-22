@@ -99,7 +99,6 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
         </p>
         <p>Candidate spent: {duration}</p>
         <div className="app">
-          {/* <div className="split-view"> */}
           <Grid container align="center">
             <Grid className="code-editor" item xs={12} sm={6} md={6}>
               <textarea value={code} ref={codeEditor} />
@@ -113,11 +112,6 @@ function CodeDisplaySandbox({ candidateInfo, view }) {
               md={6}
             ></Grid>
           </Grid>
-          {/* <div className="code-editor">
-              <textarea value={code} ref={codeEditor} />
-            </div>
-            <div className="preview" ref={el} /> */}
-          {/* </div> */}
           <div
             ref={testTarget}
             id="test-target"
@@ -188,49 +182,54 @@ export default function ReportToCandidate({
         </Box>
 
         {/* button */}
-        <Box position="flex" flexDirection="row" m={3}>
-          {candidateInfo.coding_tests.easy.length > 0 ? (
-            <Button
-              variant="contained"
-              color="primary"
-              align="center"
-              onClick={() => {
-                setView("easy");
-              }}
-              m={3}
-            >
-              Easy Mode Result
-            </Button>
-          ) : null}
+        <Grid container align="center">
+          <Grid item xs={10} sm={10} md={3}>
+            {candidateInfo.coding_tests.easy.length > 0 ? (
+              <Button
+                variant="contained"
+                color="primary"
+                align="center"
+                onClick={() => {
+                  setView("easy");
+                }}
+                style={{ marginTop: "4px", width: "90%" }}
+              >
+                Easy Mode Result
+              </Button>
+            ) : null}
+          </Grid>
 
-          {candidateInfo.coding_tests.medium.length > 0 ? (
-            <Button
-              variant="contained"
-              color="primary"
-              align="center"
-              onClick={() => {
-                setView("medium");
-              }}
-              style={{ margin: "10px" }}
-            >
-              Medium Mode Result
-            </Button>
-          ) : null}
+          <Grid item xs={10} sm={10} md={3}>
+            {candidateInfo.coding_tests.medium.length > 0 ? (
+              <Button
+                variant="contained"
+                color="primary"
+                align="center"
+                onClick={() => {
+                  setView("medium");
+                }}
+                style={{ marginTop: "4px", width: "90%" }}
+              >
+                Medium Mode Result
+              </Button>
+            ) : null}
+          </Grid>
 
-          {candidateInfo.coding_tests.hard.length > 0 ? (
-            <Button
-              variant="contained"
-              color="primary"
-              align="center"
-              onClick={() => {
-                setView("hard");
-              }}
-              style={{ margin: "10" }}
-            >
-              Hard Mode Result
-            </Button>
-          ) : null}
-        </Box>
+          <Grid item xs={10} sm={10} md={3}>
+            {candidateInfo.coding_tests.hard.length > 0 ? (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setView("hard");
+                }}
+                style={{ marginTop: "4px", width: "90%" }}
+              >
+                Hard Mode Result
+              </Button>
+            ) : null}
+          </Grid>
+        </Grid>
 
         {view === "easy" ? (
           <CodeDisplaySandbox view={view} candidateInfo={candidateInfo} />
