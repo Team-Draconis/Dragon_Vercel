@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import styles from "../styles/Navbar.module.css";
 import Box from "@material-ui/core/Box";
 import { motion } from "framer-motion";
+import { signout } from 'next-auth/client';
 
 export default function NavBar() {
   return (
@@ -32,6 +33,7 @@ export default function NavBar() {
                 color="inherit"
                 onClick={() => {
                   localStorage.clear();
+                  signout({ callbackUrl: 'http://localhost:3000/'});
                 }}
               >
                 Logout

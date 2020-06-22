@@ -14,6 +14,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Router from "next/router";
 import { motion } from "framer-motion";
+import { GithubLoginButton } from "react-social-login-buttons";
+import { useSession, signin } from 'next-auth/client';
 
 function Copyright() {
   return (
@@ -54,6 +56,12 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // --- Tam's Code Begin ---
+
+  const [ session, loading ] = useSession();
+
+  // --- Tam's Code End ---
+
   const handleLogin = (e) => {
     e.preventDefault();
     fetch("/api/candidateLogin", {
@@ -75,6 +83,65 @@ export default function SignIn() {
       });
     });
   };
+
+
+
+  const handleLoginWithGitHub = (session) => {
+
+    // console.log(session, "<--- session in handleLoginWithGithub");
+
+    fetch("https://api.github.com/user", {
+            headers: {
+                Authorization: `token ${session.account.accessToken}`
+            }
+    })
+      .then((res) => res.json())
+      .then((res) => { 
+      console.log(res, "WE TALKED TO THE GITHUB API AND IT'S A LEGIT TOKEN");
+      console.log(session, "WE STILL HAVE THE SESSION WITHIN THE PROMISE");
+        
+        let userObj = {
+          userEmail: session.user.email,
+          userGithubToken: session.account.accessToken,
+        }
+
+        if(res.id === session.account.id) {
+          return userObj;
+        } else {
+          return undefined;
+        }
+      }).then((res) => {
+        if(res === undefined) {
+          console.log("the token does not match the profile");
+          return;
+        }
+
+        console.log(res, "Bypassed Verification");
+        
+        fetch("/api/githubLogin", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            candidate_email: res.userEmail,
+            candidate_github_token: res.userGithubToken,
+            loginTime: Date().toString(),
+          }),
+        }).then((res) => {
+              res.json()
+            .then((res) => {
+              console.log(res, "<-- res");
+              console.log(res.authToken, "<-- res.authToken");
+                if (res.authToken) {
+                  localStorage.setItem("candidatetoken", res.authToken);
+                  if(res.githubToken === localStorage.GithubAccessToken){
+                    Router.push(`/appl/dashboard/${res.candidateID}`);}
+                } else {
+                  setErrorMessage("Please input correct email and password");
+                }
+          })})
+        }).catch((err) => console.log(err, "Not working Token"));
+  };
+
 
   return (
     <>
@@ -163,6 +230,32 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </form>
+          <Grid container>
+            <p>
+              {!session && <> 
+                <Grid item xs={12}>
+                  <GithubLoginButton onClick={() => {signin('github')}}>
+                    <span>Sign In With Github</span>
+                  </GithubLoginButton>
+                </Grid>
+              </>}
+              {session && <> 
+                Signed in as {session.user.name} <br/>
+                {console.log(session, "<--- this is the Session")}
+                {localStorage.setItem('GithubAccessToken',session.account.accessToken)}
+                <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={handleLoginWithGitHub(session)}
+                >
+                  Logged in and want to test
+                </Button>
+              </>
+              }
+            </p>
+          </Grid>
           <h2>{errorMessage}</h2>
         </div>
         <Box mt={8}>
