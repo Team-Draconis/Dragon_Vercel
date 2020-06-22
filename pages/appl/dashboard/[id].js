@@ -19,6 +19,7 @@ import { withStyles } from "@material-ui/core/styles";
 import ReportToCandidate from "../report";
 import Link from "next/link";
 import ThreeDotsWave from "../../src/ThreeDotsWave";
+import { makeStyles } from "@material-ui/styles";
 
 export default function CandidateDashboard({ candidateID }) {
   const router = useRouter();
@@ -28,6 +29,47 @@ export default function CandidateDashboard({ candidateID }) {
   const [candidateInfo, setCandidateInfo] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [latesttesttime, setLatesttesttime] = useState();
+
+  //responsive styling
+  const useStyles = makeStyles((theme) => ({
+    box: {
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+      },
+      [theme.breakpoints.up("md")]: {
+        backgroundColor: theme.palette.primary.main,
+      },
+      [theme.breakpoints.up("lg")]: {
+        backgroundColor: "green",
+        width: "60%",
+      },
+    },
+    container: {
+      [theme.breakpoints.down("sm")]: {
+        display: "flex",
+        flexDirection: "column",
+      },
+      [theme.breakpoints.up("md")]: {
+        backgroundColor: theme.palette.primary.main,
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "flex",
+        flexDirection: "row",
+      },
+    },
+    quiz: {
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+      },
+      [theme.breakpoints.up("md")]: {
+        backgroundColor: theme.palette.primary.main,
+      },
+      [theme.breakpoints.up("lg")]: {
+        width: "40%",
+        height: "100vh",
+      },
+    },
+  }));
 
   //Declaring styled textfield
   const CssTextField = withStyles({
@@ -203,6 +245,8 @@ export default function CandidateDashboard({ candidateID }) {
     setView("initial");
   };
 
+  const classes = useStyles();
+
   if (candidateInfo) {
     const candidateCities = candidateInfo.candidate_city;
     const candidate_Cities_formatted = candidateCities.join(", ");
@@ -211,9 +255,9 @@ export default function CandidateDashboard({ candidateID }) {
       return (
         <div style={{ width: "100%" }}>
           {/* <NavBar /> */}
-          <Box display="flex" flexDirection="row">
+          <Box className={classes.container}>
             {/* User status part */}
-            <Box width="60%" bgcolor="#222831">
+            <Box className={classes.box} bgcolor="#222831">
               <Box style={{ marginRight: "auto" }} m={2}>
                 <Link href="/">
                   <motion.img
@@ -424,7 +468,7 @@ export default function CandidateDashboard({ candidateID }) {
             </Box>
 
             {/* Coding test part */}
-            <Box width="40%" height="100vh" bgcolor="#393e46">
+            <Box className={classes.quiz} bgcolor="#393e46">
               <Box ml={60} mt={3}>
                 <Link href="/">
                   <motion.div whileHover={{ scale: 1.2 }}>
