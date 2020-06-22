@@ -37,10 +37,10 @@ export default function CandidateDashboard({ candidateID }) {
         width: "100%",
       },
       [theme.breakpoints.up("md")]: {
-        backgroundColor: theme.palette.primary.main,
+        width: "60%",
+        height: "100vh",
       },
       [theme.breakpoints.up("lg")]: {
-        backgroundColor: "green",
         width: "60%",
       },
     },
@@ -50,7 +50,8 @@ export default function CandidateDashboard({ candidateID }) {
         flexDirection: "column",
       },
       [theme.breakpoints.up("md")]: {
-        backgroundColor: theme.palette.primary.main,
+        display: "flex",
+        flexDirection: "row",
       },
       [theme.breakpoints.up("lg")]: {
         display: "flex",
@@ -62,11 +63,111 @@ export default function CandidateDashboard({ candidateID }) {
         width: "100%",
       },
       [theme.breakpoints.up("md")]: {
-        backgroundColor: theme.palette.primary.main,
+        width: "40%",
+        height: "100vh",
       },
       [theme.breakpoints.up("lg")]: {
         width: "40%",
         height: "100vh",
+      },
+    },
+    greeting: {
+      [theme.breakpoints.down("sm")]: {},
+      [theme.breakpoints.up("md")]: {
+        margin: "72px, 32px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        margin: "72px, 32px",
+      },
+    },
+    email: {
+      [theme.breakpoints.down("sm")]: {
+        margin: "20px",
+      },
+      [theme.breakpoints.up("md")]: {
+        margin: "44px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        margin: "64px",
+      },
+    },
+    text: {
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "20px",
+        margin: "30px",
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: "25px",
+        margin: "5px",
+      },
+      [theme.breakpoints.up("lg")]: {},
+    },
+    status: {
+      [theme.breakpoints.down("sm")]: {},
+      [theme.breakpoints.up("md")]: {
+        margin: "40px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        margin: "40px",
+      },
+    },
+    filter: {
+      [theme.breakpoints.down("sm")]: {
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+      },
+      [theme.breakpoints.up("md")]: {
+        display: "flex",
+        justifyContent: "center",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "flex",
+        justifyContent: "center",
+      },
+    },
+    textField: {
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+      },
+      [theme.breakpoints.up("md")]: {
+        margin: "16px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        margin: "16px",
+      },
+    },
+    cityButton: {
+      [theme.breakpoints.down("sm")]: {
+        margin: "10px",
+      },
+      [theme.breakpoints.up("md")]: {
+        marginTop: "34.4px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        marginTop: "34.4px",
+      },
+    },
+    viewProfile: {
+      [theme.breakpoints.down("sm")]: {
+        margin: "15px",
+      },
+      [theme.breakpoints.up("md")]: {
+        marginTop: "32px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        marginTop: "32px",
+      },
+    },
+    codingQuiz: {
+      [theme.breakpoints.down("sm")]: {
+        marginTop: "10px",
+      },
+      [theme.breakpoints.up("md")]: {
+        marginTop: "36px",
+      },
+      [theme.breakpoints.up("lg")]: {
+        marginTop: "36px",
       },
     },
   }));
@@ -269,7 +370,7 @@ export default function CandidateDashboard({ candidateID }) {
                   />
                 </Link>
               </Box>
-              <Box m={(9, 4)}>
+              <Box className={classes.greeting}>
                 <Typography
                   variant="h3"
                   component="h1"
@@ -285,8 +386,9 @@ export default function CandidateDashboard({ candidateID }) {
                   </motion.div>
                 </Typography>
               </Box>
-              <Box mt={8}>
+              <Box className={classes.email}>
                 <Typography
+                  className={classes.text}
                   variant="h4"
                   component="h1"
                   align="center"
@@ -303,8 +405,9 @@ export default function CandidateDashboard({ candidateID }) {
               </Box>
 
               {candidateInfo.quiz_tests.length === 0 && !latesttesttime ? (
-                <Box m={(5, 5)}>
+                <Box className={classes.status}>
                   <Typography
+                    className={classes.text}
                     variant="h4"
                     component="h1"
                     align="center"
@@ -326,8 +429,9 @@ export default function CandidateDashboard({ candidateID }) {
                 </Box>
               ) : null}
               {candidateInfo.quiz_tests.length !== 0 ? (
-                <Box m={(5, 5)}>
+                <Box className={classes.status}>
                   <Typography
+                    className={classes.text}
                     variant="h4"
                     component="h1"
                     align="center"
@@ -352,8 +456,9 @@ export default function CandidateDashboard({ candidateID }) {
                 </Box>
               ) : null}
               {latesttesttime !== undefined ? (
-                <Box m={(5, 5)}>
+                <Box className={classes.status}>
                   <Typography
+                    className={classes.text}
                     variant="h4"
                     component="h1"
                     align="center"
@@ -374,8 +479,9 @@ export default function CandidateDashboard({ candidateID }) {
                   </Typography>
                 </Box>
               ) : null}
-              <Box m={(5, 5)}>
+              <Box className={classes.status}>
                 <Typography
+                  className={classes.text}
                   variant="h4"
                   component="h1"
                   align="center"
@@ -390,14 +496,14 @@ export default function CandidateDashboard({ candidateID }) {
                   </motion.div>
                 </Typography>
               </Box>
-              <Box align="center" m={(5, 5)}>
+              <Box align="center" className={classes.status}>
                 <motion.div
                   initial={{ y: 26 * 1.2, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                 >
-                  <Box display="flex" justifyContent="center">
-                    <Box m={(0, 2)}>
+                  <Box className={classes.filter}>
+                    <Box className={classes.textField}>
                       <CssTextField
                         onChange={onAddCity}
                         value={temp}
@@ -408,7 +514,7 @@ export default function CandidateDashboard({ candidateID }) {
                         variant="outlined"
                       />
                     </Box>
-                    <Box mt={4.3}>
+                    <Box className={classes.cityButton}>
                       <Button
                         variant="contained"
                         color="secondary"
@@ -418,7 +524,7 @@ export default function CandidateDashboard({ candidateID }) {
                         Add
                       </Button>
                     </Box>
-                    <Box m={(0, 2)}>
+                    <Box className={classes.textField}>
                       <CssTextField
                         placeholder="Remove City"
                         inputProps={{
@@ -429,7 +535,7 @@ export default function CandidateDashboard({ candidateID }) {
                         value={temp}
                       />
                     </Box>
-                    <Box mt={4.3}>
+                    <Box className={classes.cityButton}>
                       <Button
                         variant="contained"
                         color="secondary"
@@ -446,7 +552,7 @@ export default function CandidateDashboard({ candidateID }) {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ease: "easeOut", duration: 1.5, delay: 0.6 }}
                 >
-                  <Box mt={4}>
+                  <Box className={classes.viewProfile}>
                     <Button
                       variant="contained"
                       color="secondary"
@@ -483,7 +589,7 @@ export default function CandidateDashboard({ candidateID }) {
                   </motion.div>
                 </Link>
               </Box>
-              <Box mt={9}>
+              <Box className={classes.codingQuiz}>
                 <Typography
                   variant="h4"
                   component="h1"
