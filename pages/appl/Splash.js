@@ -63,6 +63,7 @@ const Splash = ({ session }) => {
         candidate_name: session.user.name,
         candidate_city: city,
         candidate_password: session.account.accessToken,
+        candidate_githubId: session.account.id,
         loginTime: Date().toString(),
       }),
     })
@@ -89,6 +90,7 @@ const Splash = ({ session }) => {
         candidate_name: session.user.name,
         candidate_city: city,
         candidate_password: session.account.accessToken,
+        candidate_githubId: session.account.id,
         loginTime: Date().toString(),
       }),
     })

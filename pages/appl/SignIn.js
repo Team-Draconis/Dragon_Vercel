@@ -100,11 +100,22 @@ export default function SignIn() {
       .then((res) => { 
       console.log(res, "WE TALKED TO THE GITHUB API AND IT'S A LEGIT TOKEN");
       console.log(session, "WE STILL HAVE THE SESSION WITHIN THE PROMISE");
+
+      let userObj = {};
+
+      if(session.user.email !== null) {
         
-        let userObj = {
+        userObj = {
           userEmail: session.user.email,
           userGithubToken: session.account.accessToken,
         }
+
+      } else if(session.user.email === null) {
+        userObj = {
+          userId: session.account.id,
+          userGithubToken: session.account.accessToken,
+        }
+      }
 
         if(res.id === session.account.id) {
           return userObj;
@@ -124,6 +135,7 @@ export default function SignIn() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             candidate_email: res.userEmail,
+            candidate_githubId: res.userId,
             candidate_github_token: res.userGithubToken,
             loginTime: Date().toString(),
           }),
