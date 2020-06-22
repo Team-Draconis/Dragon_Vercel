@@ -225,6 +225,17 @@ export default function ReportToCandidate({
       </>
     );
   } else {
-    return <p>{errorMessage ? "Opps" : <ThreeDotsWave />}</p>;
+    return (
+      <Box
+        display="flex"
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        height="100vh"
+      >
+        <Box>{errorMessage ? "Opps" : <ThreeDotsWave />}</Box>
+      </Box>
+    );
   }
 }
