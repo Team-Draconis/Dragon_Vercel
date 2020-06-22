@@ -88,7 +88,7 @@ export default function CandidateDashboard({ candidateID }) {
         margin: "44px",
       },
       [theme.breakpoints.up("lg")]: {
-        margin: "64px",
+        marginTop: "64px",
       },
     },
     text: {
@@ -100,7 +100,9 @@ export default function CandidateDashboard({ candidateID }) {
         fontSize: "25px",
         margin: "5px",
       },
-      [theme.breakpoints.up("lg")]: {},
+      [theme.breakpoints.up("lg")]: {
+        fontSize: "35px",
+      },
     },
     status: {
       [theme.breakpoints.down("sm")]: {},
