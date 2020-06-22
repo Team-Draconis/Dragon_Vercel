@@ -293,11 +293,22 @@ export default function Report({ candidateID }) {
     );
   } else {
     return (
-      <p>
-        {errorMessage
-          ? "Sorry you are not authenticated,please signin first"
-          : <ThreeDotsWave />}
-      </p>
+      <Box
+        display="flex"
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        height="100vh"
+      >
+        <Box>
+          {errorMessage ? (
+            "Sorry you are not authenticated,please signin first"
+          ) : (
+            <ThreeDotsWave />
+          )}
+        </Box>
+      </Box>
     );
   }
 }
