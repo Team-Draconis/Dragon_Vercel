@@ -12,7 +12,6 @@ import { BottomNavigation } from "@material-ui/core";
 export default function AboutUs() {
   return (
     <>
-      {/* logo */}
       <div>
         <Box display="flex" justifyContent="flex-start" m={2.1}>
           <Box style={{ marginRight: "auto" }}>
@@ -88,7 +87,6 @@ export default function AboutUs() {
                 </Grid>
               </Link>
             </Grid>
-
             <Grid item xs={12} sm={6} md={4}>
               <Link href="https://www.linkedin.com/in/shuntaro-maekawa/">
                 <motion.img
