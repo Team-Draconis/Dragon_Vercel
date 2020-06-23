@@ -9,7 +9,7 @@ export default async (req, res) => {
   switch (method) {
     case "POST":
       try {
-        console.log(req.body, "REQ BODY IN GITHUBLOGIN");
+        // console.log(req.body, "REQ BODY IN GITHUBLOGIN");
 
         let candidate;
 
@@ -18,14 +18,14 @@ export default async (req, res) => {
             candidate_email: req.body.candidate_email,
           });
         } else {
-          console.log(req.body.candidate_githubId, "WITHIN ELSE STATEMENT REQ BODY GITHUB ID");
+          // console.log(req.body.candidate_githubId, "WITHIN ELSE STATEMENT REQ BODY GITHUB ID");
           candidate = await Candidate.findOne({
             candidate_githubId: req.body.candidate_githubId,
           });
-          console.log("IDENTIFIED WITH GITHUB ID");
+          // console.log("IDENTIFIED WITH GITHUB ID");
         }
 
-        console.log(candidate, "<--- CANDIDATE");
+        // console.log(candidate, "<--- CANDIDATE");
 
         candidate.last_login = req.body.loginTime;
         // candidate.password = req.body.candidate_password;

@@ -82,32 +82,35 @@ const Splash = ({ session }) => {
 
 	const handleRegisterWithEmail = (e) => {
     e.preventDefault();
-    fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        candidate_email: session.user.email,
-        candidate_name: session.user.name,
-        candidate_city: city,
-        candidate_password: session.account.accessToken,
-        candidate_githubId: session.account.id,
-        loginTime: Date().toString(),
-      }),
-    })
-      .then((res) =>
-        res.json().then((res) => {
-          if (res.authToken) {
-            localStorage.setItem("candidatetoken", res.authToken);
-            Router.push(`/appl/dashboard/${res.candidateID}`);
-          }
-        })
-      )
-      .catch((error) => {
-        console.log(error);
-      });
+
+    if(session) {
+      fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          candidate_email: session.user.email,
+          candidate_name: session.user.name,
+          candidate_city: city,
+          candidate_password: session.account.accessToken,
+          candidate_githubId: session.account.id,
+          loginTime: Date().toString(),
+        }),
+      })
+        .then((res) =>
+          res.json().then((res) => {
+            if (res.authToken) {
+              localStorage.setItem("candidatetoken", res.authToken);
+              Router.push(`/appl/dashboard/${res.candidateID}`);
+            }
+          })
+        )
+        .catch((error) => {
+          console.log(error);
+        });
+    }
 	};
 
-	console.log(session, "This is the session");
+	// console.log(session, "This is the session");
 	// console.log(session.user.name, "This is the name");
 	// console.log(session.user.email, "This is the user's email");
 	// console.log(session.account.accessToken, "This is the account access Token");

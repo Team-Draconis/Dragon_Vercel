@@ -98,8 +98,8 @@ export default function SignIn() {
     })
       .then((res) => res.json())
       .then((res) => { 
-      console.log(res, "WE TALKED TO THE GITHUB API AND IT'S A LEGIT TOKEN");
-      console.log(session, "WE STILL HAVE THE SESSION WITHIN THE PROMISE");
+      // console.log(res, "WE TALKED TO THE GITHUB API AND IT'S A LEGIT TOKEN");
+      // console.log(session, "WE STILL HAVE THE SESSION WITHIN THE PROMISE");
 
       let userObj = {};
 
@@ -261,7 +261,7 @@ if(!session) {
 if(session) {
   return (
     <> 
-      {console.log(session, "<--- this is the Session")}
+      {/* {console.log(session, "<--- this is the Session")} */}
       {localStorage.setItem('GithubAccessToken',session.account.accessToken)}
       {handleLoginWithGitHub(session)}
       <p></p>
