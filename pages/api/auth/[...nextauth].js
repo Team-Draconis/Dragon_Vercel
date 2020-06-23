@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
-// import dbConnect from "../../../utils/dbConnect";
 
 const options = {
   site: 'http://localhost:3000',
