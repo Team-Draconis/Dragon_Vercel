@@ -83,7 +83,7 @@ export default function AboutUs() {
                     align="center"
                     style={{ fontFamily: "Josefin Sans" }}
                   >
-                    Tam Nugyen
+                    Tam Nguyen
                   </Typography>
                 </Grid>
               </Link>
@@ -129,7 +129,7 @@ export default function AboutUs() {
                     align="center"
                     style={{ fontFamily: "Josefin Sans" }}
                   >
-                    Mako Kusudo
+                    Mako Kusuda
                   </Typography>
                 </Grid>
               </Link>
