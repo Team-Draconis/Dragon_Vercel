@@ -1,4 +1,4 @@
-// Shuntaro will update this page with meterial UI
+// Shuntaro will update this page with material UI
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import Avatar from "@material-ui/core/Avatar";
@@ -14,6 +14,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { GithubLoginButton, LinkedInLoginButton } from "react-social-login-buttons";
+import { useSession, signin, signout } from 'next-auth/client';
+
 import { motion } from "framer-motion";
 
 function Copyright() {
@@ -49,13 +52,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register() {
+export default function Register({ userSession }) {
   const classes = useStyles();
 
   const [email, setEmail] = useState("your email");
   const [city, setCity] = useState("your city");
   const [name, setName] = useState("your name");
   const [password, setPassword] = useState("your password");
+
+  // --- Tam's Code Start ---
+
+  const [ session, loading ] = useSession();
+
+  // --- Tam's Code End ---
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -183,6 +192,8 @@ export default function Register() {
             >
               Sign Up
             </Button>
+        </form>
+            
             <Grid container>
               <Grid item>
                 <Link href="/appl/SignIn" variant="body2" color="secondary">
@@ -190,7 +201,14 @@ export default function Register() {
                 </Link>
               </Grid>
             </Grid>
-          </form>
+
+            <Grid container>
+          <Grid item xs={12}>
+            <GithubLoginButton onClick={() => signin('github', { callbackUrl: 'http://localhost:3000/appl/Splash'})}>
+              <span>Sign Up With Github</span>
+            </GithubLoginButton>
+          </Grid>
+        </Grid>
         </div>
         <Box mt={5}>
           <Copyright />

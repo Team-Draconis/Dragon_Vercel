@@ -8,6 +8,8 @@ module.exports = withCss(
       SECRET_TOKEN: "dragons",
       SECRET_CANDIDATE: "authcandidate",
       SECRET_COMPANY: "authcompany",
+      GITHUB_CLIENT_ID: "92ee8233527f289507b9",
+      GITHUB_CLIENT_SECRET: "d52d6c53857e0490dbc0dbd276c9cb57a873bb3c",
     },
     webpack: (config) => {
       config.module.rules.push({

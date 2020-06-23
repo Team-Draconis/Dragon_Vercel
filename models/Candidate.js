@@ -17,6 +17,7 @@ const CandidateSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
+  candidate_githubId: Number,
   candidate_password: {
     type: String,
     required: [true, "Password is required"],

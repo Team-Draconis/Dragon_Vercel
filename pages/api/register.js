@@ -14,10 +14,11 @@ export default async (req, res) => {
       try {
         hash(req.body.candidate_password, 10, async function (err, hash) {
           req.body.candidate_password = hash;
-
+           
           const newCandidate = await Candidate.create(req.body);
-
+          // console.log(newCandidate, "New Candidate in Register.js");
           newCandidate.last_login = req.body.loginTime;
+
           await newCandidate.save();
           const claims = { sub: newCandidate._id };
           const jwt = sign(claims, process.env.SECRET_TOKEN, {

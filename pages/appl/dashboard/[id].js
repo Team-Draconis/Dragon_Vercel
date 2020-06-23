@@ -19,6 +19,7 @@ import { withStyles } from "@material-ui/core/styles";
 import ReportToCandidate from "../report";
 import Link from "next/link";
 import ThreeDotsWave from "../../src/ThreeDotsWave";
+import { signout } from 'next-auth/client';
 import { makeStyles } from "@material-ui/styles";
 
 export default function CandidateDashboard({ candidateID }) {
@@ -584,6 +585,7 @@ export default function CandidateDashboard({ candidateID }) {
                       color="inherit"
                       onClick={() => {
                         localStorage.clear();
+                        signout({ callbackUrl: 'http://localhost:3000/'});
                       }}
                     >
                       Logout
