@@ -50,7 +50,7 @@ export default async function _LoopOver() {
         if (result === 0) {
           container.innerHTML = `Pass - ${description}`;
         } else {
-          ontainer.innerHTML = `Fail - ${description}`;
+          container.innerHTML = `Fail - ${description}`;
         }
         document.getElementById("test-result").appendChild(container);
       } catch (error) {

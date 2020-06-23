@@ -16,17 +16,16 @@ const options = {
 
   callbacks: {
     redirect: async (url, baseUrl) => {
-      // set this as an ENV variable to take the user to splash page on AWS
 
-      console.log(url, "BEFORE THE CHANGE");
+      // console.log(url, "BEFORE THE CHANGE");
       
       return url.startsWith(baseUrl)
         ? Promise.resolve(url)
         : Promise.resolve(baseUrl)
     },
     session: async (session, token) => {
-      console.log(session, "<--- SESSION INFO")
-      console.log(token, "<--- TOKEN INFO");
+      // console.log(session, "<--- SESSION INFO")
+      // console.log(token, "<--- TOKEN INFO");
       return Promise.resolve(token)
     },
     jwt: async (token, oAuthProfile) => {
