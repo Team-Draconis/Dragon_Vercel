@@ -58,7 +58,10 @@ export default function AboutUs() {
                     variant="h5"
                     component="h1"
                     align="center"
-                    style={{ fontFamily: "Josefin Sans" }}
+                    style={{
+                      fontFamily: "Josefin Sans",
+                      textDecoration: "none",
+                    }}
                   >
                     Zowie Min
                   </Typography>
@@ -69,7 +72,7 @@ export default function AboutUs() {
               <Link href="https://www.linkedin.com/in/tam-nguyen-70a7891a8/">
                 <motion.img
                   whileHover={{ scale: 1.1 }}
-                  src="Tam_thumb.jpeg"
+                  src="TamNguyen.jpg"
                   alt="Tam Nguyen"
                   width="200"
                   height="230"
