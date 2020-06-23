@@ -8,8 +8,32 @@ import Avatar from "@material-ui/core/Avatar";
 import { Container } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
 import { BottomNavigation } from "@material-ui/core";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import { makeStyles } from "@material-ui/styles";
 
 export default function AboutUs() {
+  //responsive styling
+  const useStyles = makeStyles((theme) => ({
+    icon: {
+      color: "white",
+      "&:hover": {
+        color: "#0073b1",
+        backgroundColor: "white",
+      },
+      marginRight: "0.4rem",
+    },
+    icon2: {
+      color: "white",
+      "&:hover": {
+        color: "black",
+        backgroundColor: "white",
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
     <>
       <div>
@@ -42,117 +66,147 @@ export default function AboutUs() {
               Our Team
             </Typography>
           </Box>
-          <Grid container spacing={6} align="center">
+          <Grid container spacing={3} align="center">
             <Grid item xs={12} sm={6} md={6}>
-              <Link href="https://www.linkedin.com/in/jiayi-min/">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src="/Zowie_thumb.jpeg"
-                  alt="Zowie Min"
-                  width="200"
-                  height="230"
-                  style={{ borderRadius: "50%" }}
-                />
-                <Grid item md={6}>
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    align="center"
-                    style={{ fontFamily: "Josefin Sans" }}
-                  >
-                    Zowie Min
-                  </Typography>
-                </Grid>
-              </Link>
+              <img
+                src="/Zowie_thumb.jpg"
+                alt="Zowie Min"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <Grid item md={6}>
+                <Typography
+                  color="primary"
+                  variant="h5"
+                  component="h1"
+                  align="center"
+                  style={{
+                    fontFamily: "Josefin Sans",
+                  }}
+                >
+                  Zowie Min
+                </Typography>
+                <Link href="https://www.linkedin.com/in/jiayi-min/">
+                  <LinkedInIcon
+                    whileHover={{ scale: 1.3 }}
+                    className={classes.icon}
+                  />
+                </Link>
+                {"     "}{" "}
+                <Link href="https://github.com/Zowie0122">
+                  <GitHubIcon className={classes.icon2} />
+                </Link>
+              </Grid>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Link href="https://www.linkedin.com/in/tam-nguyen-70a7891a8/">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src="Tam_thumb.jpeg"
-                  alt="Tam Nguyen"
-                  width="200"
-                  height="230"
-                  style={{ borderRadius: "50%", cursor: "pointer" }}
-                />
-                <Grid item md={6}>
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    align="center"
-                    style={{ fontFamily: "Josefin Sans" }}
-                  >
-                    Tam Nguyen
-                  </Typography>
-                </Grid>
-              </Link>
+              <img
+                src="TamNguyen.jpg"
+                alt="Tam Nguyen"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <Grid item md={6}>
+                <Typography
+                  color="primary"
+                  variant="h5"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                >
+                  Tam Nguyen
+                </Typography>
+                <Link href="https://www.linkedin.com/in/tam-nguyen-70a7891a8/">
+                  <LinkedInIcon className={classes.icon} />
+                </Link>
+                {"  "}
+                <Link href="https://github.com/softwaredeveloptam">
+                  <GitHubIcon className={classes.icon2} />
+                </Link>
+              </Grid>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Link href="https://www.linkedin.com/in/shuntaro-maekawa/">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src="Shuntaro_thumb.jpg"
-                  alt="Shuntaro Maekawa"
-                  width="200"
-                  height="230"
-                  style={{ borderRadius: "50%", cursor: "pointer" }}
-                />
-                <Grid item md={8}>
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    align="center"
-                    style={{ fontFamily: "Josefin Sans" }}
-                  >
-                    Shuntaro Maekawa
-                  </Typography>
-                </Grid>
-              </Link>
+              <img
+                src="Shuntaro_thumb.jpg"
+                alt="Shuntaro Maekawa"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <Grid item md={8}>
+                <Typography
+                  variant="h5"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                  color="primary"
+                >
+                  Shuntaro Maekawa
+                </Typography>
+                <Link href="https://www.linkedin.com/in/shuntaro-maekawa/">
+                  <LinkedInIcon className={classes.icon} />
+                </Link>
+                {"  "}
+                <Link href="https://github.com/maegatro">
+                  <GitHubIcon className={classes.icon2} />
+                </Link>
+              </Grid>
             </Grid>
 
             <Grid item xs={12} sm={6} md={4}>
-              <Link href="https://www.linkedin.com/in/makokusuda/">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src="Mako_thumb.jpg"
-                  alt="Mako Kusuda"
-                  width="200"
-                  height="230"
-                  style={{ borderRadius: "50%", cursor: "pointer" }}
-                />
-                <Grid item md={6}>
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    align="center"
-                    style={{ fontFamily: "Josefin Sans" }}
-                  >
-                    Mako Kusuda
-                  </Typography>
-                </Grid>
-              </Link>
+              <img
+                src="Mako_thumb.jpg"
+                alt="Mako Kusuda"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <Grid item md={6}>
+                <Typography
+                  variant="h5"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                  color="primary"
+                >
+                  Mako Kusuda
+                </Typography>
+                <Link href="https://www.linkedin.com/in/makokusuda/">
+                  <LinkedInIcon className={classes.icon} />
+                </Link>
+                {"  "}
+                <Link href="https://github.com/makokusuda">
+                  <GitHubIcon className={classes.icon2} />
+                </Link>
+              </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={4}>
-              <Link href="https://www.linkedin.com/in/chip-crawford-berkeley/">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src="CC-photo_thumb.jpg"
-                  alt="Chip Crawford"
-                  width="200"
-                  height="230"
-                  style={{ borderRadius: "50%", cursor: "pointer" }}
-                />
-                <Grid item md={6}>
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    align="center"
-                    style={{ fontFamily: "Josefin Sans" }}
-                  >
-                    Chip Crawford
-                  </Typography>
-                </Grid>
-              </Link>
+              <img
+                src="CC-photo_thumb.jpg"
+                alt="Chip Crawford"
+                width="200"
+                height="230"
+                style={{ borderRadius: "50%" }}
+              />
+              <Grid item md={6}>
+                <Typography
+                  variant="h5"
+                  component="h1"
+                  align="center"
+                  style={{ fontFamily: "Josefin Sans" }}
+                  color="primary"
+                >
+                  Chip Crawford
+                </Typography>
+                <Link href="https://www.linkedin.com/in/chip-crawford-berkeley/">
+                  <LinkedInIcon className={classes.icon} />
+                </Link>
+                {"  "}
+                <Link href="https://github.com/cwcraw">
+                  <GitHubIcon className={classes.icon2} />
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         </motion.div>
