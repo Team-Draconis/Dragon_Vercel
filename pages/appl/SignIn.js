@@ -200,7 +200,7 @@ if(!session) {
               autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              color="secondary"
+              color="primary"
               placeholder="Your email here"
               style={{ backgroundColor: "#616161", borderRadius: 3 }}
             />
@@ -216,7 +216,7 @@ if(!session) {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              color="secondary"
+              color="primary"
               placeholder="Your password here"
               style={{ backgroundColor: "#616161", borderRadius: 3 }}
             />

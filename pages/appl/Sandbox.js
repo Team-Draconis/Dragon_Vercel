@@ -19,19 +19,36 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { motion } from "framer-motion";
+import { makeStyles } from "@material-ui/styles";
+import Grid from "@material-ui/core/Grid";
+
+//responsive styling
+const useStyles = makeStyles((theme) => ({
+  root: {
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "5%",
+    },
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "30%",
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: "30%",
+    },
+  },
+}));
 
 //Styling
-const App = styled.div`
-  box-sizing: border-box;
-  -webkit-fontsmoothing: antialiased;
-  font-family: "Monaco", "Consolas", "sans";
-`;
+// const App = styled.div`
+//   box-sizing: border-box;
+//   -webkit-fontsmoothing: antialiased;
+//   font-family: "Monaco", "Consolas", "sans";
+// `;
 
-const Split_View = styled.div`
-  display: flex;
-  width: 100%;
-  min-width: 600px;
-`;
+// const Split_View = styled.div`
+//   display: flex;
+//   width: 100%;
+//   min-width: 600px;
+// `;
 
 export default function SandBox({
   mode,
@@ -54,11 +71,19 @@ export default function SandBox({
   useEffect(() => {
     const criteria = requirements(mode)
       .requirement.split("\n")
-      .map((str, index) => <p key={index}>{str}</p>);
+      .map((str, index) => (
+        <li className="requirements" key={index}>
+          {str}
+        </li>
+      ));
 
     const flow = requirements(mode)
       .userstory.split("\n")
-      .map((str, index) => <p key={index}>{str}</p>);
+      .map((str, index) => (
+        <li className="user-story" key={index}>
+          {str}
+        </li>
+      ));
 
     setTitle(requirements(mode).title);
     setRequirement(criteria);
@@ -102,16 +127,20 @@ export default function SandBox({
 
   const isAllPassed = () => {
     const container = document.createElement("div");
+    container.setAttribute("class", "result-description");
     const icon = document.createElement("img");
     const message = document.createElement("a");
+    message.setAttribute("class", "result-message");
 
     if (result.current.innerHTML.includes("Fail")) {
       icon.src = failIcon;
       icon.style.width = "20px";
+      icon.style.height = "21.05px";
       message.innerHTML = `Some requirements are missing. Try again!`;
     } else {
       icon.src = passIcon;
       icon.style.width = "20px";
+      icon.style.height = "21.05px";
       message.innerHTML = `Yay! You passed all test!!`;
     }
     container.appendChild(icon);
@@ -141,6 +170,8 @@ export default function SandBox({
     fontWeight: "bold",
   };
 
+  const classes = useStyles();
+
   return (
     <>
       <NavBar />
@@ -161,13 +192,13 @@ export default function SandBox({
             Back to dashboard
           </Button>
         </Box>
-        <Box ml={55}>
-          <div>
+        <Box>
+          <div className={classes.root}>
             <p style={titleStyle}>{title}</p>
             <p style={subtitleStyle}>Requirements</p>
-            <div>{requirement}</div>
+            <ul>{requirement}</ul>
             <p style={subtitleStyle}>User story</p>
-            <div>{userstory}</div>
+            <ol>{userstory}</ol>
           </div>
         </Box>
 
@@ -175,16 +206,25 @@ export default function SandBox({
           <Typography variant="h6">Remaining Time: {counter}</Typography>
         </Box>
         <div className="app">
-          <div className="split-view">
-            <div className="code-editor">
+          {/* <div className="split-view"> */}
+          <Grid container align="center">
+            <Grid className="code-editor" item xs={12} sm={6} md={6}>
               <textarea
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 ref={codeEditor}
               />
-            </div>
-            <div className="preview" ref={el} />
-          </div>
+            </Grid>
+            <Grid
+              className="preview"
+              ref={el}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+            ></Grid>
+          </Grid>
+          {/* </div> */}
           <div
             ref={testTarget}
             id="test-target"

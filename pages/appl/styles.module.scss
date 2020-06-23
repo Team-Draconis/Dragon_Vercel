@@ -15,10 +15,12 @@
     min-width: 600px;
   }
 
-  div.preview {
-    width: 50%;
+  .preview {
     padding: 1em;
     background-color: white;
+    min-height: 10em;
+    text-align: left;
+    font-size: 14px;
     &:last-child {
       // border-top: solid 1px #ccc;
       // border-right: solid 1px #ccc;
@@ -31,7 +33,6 @@
   }
 
   .code-editor {
-    width: 50%;
     > textarea {
       padding: 1em;
       width: 100%;
@@ -45,4 +46,27 @@
       color: #74b9ff;
     }
   }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class="code-editor"] {
+    width: 100%;
+  }
+}
+
+.requirements {
+  list-style-type: disc;
+}
+
+.result-description {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.result-message {
+  margin-left: 5px;
+  line-height: 20px;
 }

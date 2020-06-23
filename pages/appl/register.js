@@ -14,9 +14,13 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+<<<<<<< HEAD
 import { GithubLoginButton, LinkedInLoginButton } from "react-social-login-buttons";
 import { useSession, signin, signout } from 'next-auth/client';
 
+=======
+import { motion } from "framer-motion";
+>>>>>>> e5c1e0de57569e52c3913b374ef66d09ffa6d3f4
 
 function Copyright() {
   return (
@@ -40,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -93,113 +97,95 @@ export default function Register({ userSession }) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={3}>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid> */}
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="name"
-                label="Name"
-                name="name"
-                color="secondary"
-                placeholder="Your name here"
-                // autoComplete="name"
-                // value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="city"
-                label="City"
-                name="city"
-                color="secondary"
-                placeholder="City you are interested in"
-                // autoComplete="city"
-                // value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                placeholder="Your email here"
-                id="email"
-                label="Email Address"
-                color="secondary"
-                // name="email"
-                // autoComplete="email"
-                // value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                color="secondary"
-                placeholder="Your password here"
-                // autoComplete="current-password"
-                // value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-            {/* <Grid item xs={12}>
+    <>
+      <Box display="flex" justifyContent="flex-start" m={2.1}>
+        <Box style={{ marginRight: "auto" }}>
+          <Link href="/">
+            <motion.img
+              src="/dragon.svg"
+              height="60"
+              width="65"
+              style={{ cursor: "pointer" }}
+              whileHover={{ scale: 1.2 }}
+            />
+          </Link>
+        </Box>
+      </Box>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <form className={classes.form} noValidate>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="name"
+                  label="Name"
+                  name="name"
+                  color="primary"
+                  placeholder="Your name here"
+                  onChange={(e) => setName(e.target.value)}
+                  style={{ backgroundColor: "#616161", borderRadius: 3 }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="city"
+                  label="City"
+                  name="city"
+                  color="primary"
+                  placeholder="City you are interested in"
+                  style={{ backgroundColor: "#616161", borderRadius: 3 }}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  placeholder="Your email here"
+                  id="email"
+                  label="Email Address"
+                  color="primary"
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{ backgroundColor: "#616161", borderRadius: 3 }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  color="primary"
+                  placeholder="Your password here"
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{ backgroundColor: "#616161", borderRadius: 3 }}
+                />
+              </Grid>
+              {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid> */}
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleRegister}
-          >
-            Sign Up
-          </Button>
-          <Grid container>
-            <Grid item>
-              <Link href="/appl/SignIn" variant="body2" color="secondary">
-                Already have an account? Log in
-              </Link>
             </Grid>
+<<<<<<< HEAD
           </Grid>
         </form>
         <Grid container>
@@ -215,5 +201,31 @@ export default function Register({ userSession }) {
         <Copyright />
       </Box>
     </Container>
+=======
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={handleRegister}
+            >
+              Sign Up
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link href="/appl/SignIn" variant="body2" color="secondary">
+                  Already have an account? Log in
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+      </Container>
+    </>
+>>>>>>> e5c1e0de57569e52c3913b374ef66d09ffa6d3f4
   );
 }
