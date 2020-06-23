@@ -136,12 +136,12 @@ export default function SandBox({
       icon.src = failIcon;
       icon.style.width = "20px";
       icon.style.height = "21.05px";
-      message.innerHTML = `Some requirements are missing. Try again!`;
+      message.innerHTML = `Some requirements are missing. Please, try again!`;
     } else {
       icon.src = passIcon;
       icon.style.width = "20px";
       icon.style.height = "21.05px";
-      message.innerHTML = `Yay! You passed all test!!`;
+      message.innerHTML = `Yay! You passed all the tests!`;
     }
     container.appendChild(icon);
     container.appendChild(message);
@@ -149,7 +149,7 @@ export default function SandBox({
   };
 
   const clear = () => {
-    // crear code editor
+    // clear code editor
     codeEditor.current.value = "";
     codeEditor.current.value = defaultCode(mode);
     setCode(defaultCode(mode));

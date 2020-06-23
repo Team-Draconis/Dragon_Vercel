@@ -1,0 +1,7 @@
+.icon {
+  color: white;
+}
+
+.icon:hover {
+  color: blue;
+}
