@@ -14,13 +14,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-<<<<<<< HEAD
 import { GithubLoginButton, LinkedInLoginButton } from "react-social-login-buttons";
 import { useSession, signin, signout } from 'next-auth/client';
 
-=======
 import { motion } from "framer-motion";
->>>>>>> e5c1e0de57569e52c3913b374ef66d09ffa6d3f4
 
 function Copyright() {
   return (
@@ -185,23 +182,6 @@ export default function Register({ userSession }) {
               />
             </Grid> */}
             </Grid>
-<<<<<<< HEAD
-          </Grid>
-        </form>
-        <Grid container>
-          <Grid item xs={12}>
-            <GithubLoginButton onClick={() => signin('github', { callbackUrl: 'http://localhost:3000/appl/Splash'})}>
-              <span>Sign Up With Github</span>
-            </GithubLoginButton>
-          </Grid>
-        </Grid>
-      </div>
-      
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
-=======
             <Button
               type="submit"
               fullWidth
@@ -212,6 +192,8 @@ export default function Register({ userSession }) {
             >
               Sign Up
             </Button>
+        </form>
+            
             <Grid container>
               <Grid item>
                 <Link href="/appl/SignIn" variant="body2" color="secondary">
@@ -219,13 +201,19 @@ export default function Register({ userSession }) {
                 </Link>
               </Grid>
             </Grid>
-          </form>
+
+            <Grid container>
+          <Grid item xs={12}>
+            <GithubLoginButton onClick={() => signin('github', { callbackUrl: 'http://localhost:3000/appl/Splash'})}>
+              <span>Sign Up With Github</span>
+            </GithubLoginButton>
+          </Grid>
+        </Grid>
         </div>
         <Box mt={5}>
           <Copyright />
         </Box>
       </Container>
     </>
->>>>>>> e5c1e0de57569e52c3913b374ef66d09ffa6d3f4
   );
 }

@@ -19,11 +19,8 @@ import { withStyles } from "@material-ui/core/styles";
 import ReportToCandidate from "../report";
 import Link from "next/link";
 import ThreeDotsWave from "../../src/ThreeDotsWave";
-<<<<<<< HEAD
 import { signout } from 'next-auth/client';
-=======
 import { makeStyles } from "@material-ui/styles";
->>>>>>> e5c1e0de57569e52c3913b374ef66d09ffa6d3f4
 
 export default function CandidateDashboard({ candidateID }) {
   const router = useRouter();
