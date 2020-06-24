@@ -255,11 +255,8 @@ export default function CandidateDashboard({ candidateID }) {
               var d = new Date(b);
               return d - c;
             });
-            console.log(result);
 
             setLatesttesttime(`${result[0]}`);
-
-            // console.log(latesttesttime);
           }
         });
       });
@@ -282,7 +279,6 @@ export default function CandidateDashboard({ candidateID }) {
           if (res.message) {
             setErrorMessage(res.message);
           } else {
-            console.log("#####AFTER REFERSHED", res.data);
             setCandidateInfo(res.data);
           }
         });
