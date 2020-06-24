@@ -200,10 +200,12 @@ const Typography3 = styled.div`
     margin: 25px;
   }
   ${(props) => props.theme.breakpoints.up("md")} {
-    font-size: 32px;
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   ${(props) => props.theme.breakpoints.up("lg")} {
-    font-size: 32px;
+    font-size: 36px;
+    margin-bottom: 35px;
   }
 `;
 
@@ -333,13 +335,13 @@ export default function Index() {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
                     >
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        align="center"
-                        fullWidth
-                      >
-                        <Link href="/appl/register">
+                      <Link href="/appl/register">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          align="center"
+                          fullWidth
+                        >
                           <a
                             style={{
                               textDecoration: "none",
@@ -350,8 +352,8 @@ export default function Index() {
                           >
                             Sign Up
                           </a>
-                        </Link>
-                      </Button>
+                        </Button>
+                      </Link>
                     </motion.div>
                   </ButtonBox>
                   <ButtonBox>
@@ -360,8 +362,8 @@ export default function Index() {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ ease: "easeOut", duration: 1.5, delay: 1 }}
                     >
-                      <Button variant="contained" color="primary" fullWidth>
-                        <Link href="/appl/SignIn">
+                      <Link href="/appl/SignIn">
+                        <Button variant="contained" color="primary" fullWidth>
                           <a
                             style={{
                               textDecoration: "none",
@@ -372,8 +374,8 @@ export default function Index() {
                           >
                             Log In
                           </a>
-                        </Link>
-                      </Button>
+                        </Button>
+                      </Link>
                     </motion.div>
                   </ButtonBox>
                   <ButtonBox>
