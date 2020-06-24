@@ -17,7 +17,6 @@ h2 {
 
 @media screen and (max-width: 600px) {
   .container {
-    color: red;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -47,7 +46,6 @@ h2 {
 }
 @media screen and (min-width: 601px) and (max-width: 1279px) {
   .container {
-    background-color: green;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

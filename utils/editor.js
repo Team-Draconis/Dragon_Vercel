@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import ObjPath from "object-path";
-
+import incorrectIcon from "../src/test/image/incorrect.png";
 import * as Acorn from "acorn";
 
 import { generate as generateJs } from "escodegen";
@@ -76,8 +76,20 @@ export function createEditor(domElement, moduleResolver = () => null) {
       try {
         this.compile(code)(React, render, require, useState);
       } catch (error) {
+        // const container = document.createElement("div");
+        // container.innerHTML = `Fail - Error happens. Click "Run" button and please check error message on the code editor.`;
+        // document.getElementById("test-result").appendChild(container);
         const container = document.createElement("div");
-        container.innerHTML = `Fail - Error happens. Click "Run" button and please check error message on the code editor.`;
+        container.setAttribute("class", "result-description");
+        const icon = document.createElement("img");
+        const message = document.createElement("a");
+        message.setAttribute("class", "result-message");
+        icon.src = incorrectIcon;
+        icon.style.width = "20px";
+        icon.style.height = "21.05px";
+        message.innerHTML = `Fail - Please check error message on the code editor.`;
+        container.appendChild(icon);
+        container.appendChild(message);
         document.getElementById("test-result").appendChild(container);
       }
     },

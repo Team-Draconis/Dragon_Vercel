@@ -277,6 +277,79 @@ const Splash = () => {
           </Container>
         </>
       );
+    } else if (session.user.email) {
+      return (
+        <>
+          <div>
+            <Box display="flex" justifyContent="flex-start" m={2.1}>
+              <Box style={{ marginRight: "auto" }}>
+                <Link href="/">
+                  <motion.img
+                    src="/dragon.svg"
+                    height="60"
+                    width="65"
+                    style={{ cursor: "pointer" }}
+                    whileHover={{ scale: 1.2 }}
+                  />
+                </Link>
+              </Box>
+            </Box>
+          </div>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography
+                component="h1"
+                variant="h5"
+                style={{ fontFamily: "Josefin Sans" }}
+              >
+                Registration
+              </Typography>
+              <h3>
+                Please enter a city you would like to work in so recruiters may
+                contact you.
+              </h3>
+              <form className={classes.form} noValidate>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="city"
+                    label="City"
+                    name="city"
+                    color="secondary"
+                    placeholder="City you are interested in"
+                    // autoComplete="city"
+                    // value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </Grid>
+
+                <Link href="info">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={handleRegisterWithEmail}
+                  >
+                    Submit
+                  </Button>
+                </Link>
+              </form>
+              <h2>{errorMessage}</h2>
+            </div>
+            <Box mt={8}>
+              <Copyright />
+            </Box>
+          </Container>
+        </>
+      );
     }
   } else {
     return <p></p>;
