@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Router from "next/router";
 import { motion } from "framer-motion";
-import { getSession } from 'next-auth/client';
+import { getSession } from "next-auth/client";
 
 function Copyright() {
   return (
@@ -47,11 +47,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Splash = ({ session }) => {
+const Splash = () => {
   const classes = useStyles();
-	const [email, setEmail] = useState("");
-	const [city, setCity] = useState("your city");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("your city");
   const [errorMessage, setErrorMessage] = useState("");
+  const [session, setSession] = useState();
+
+  useEffect(async (context) => {
+    const ses = await getSession(context);
+    setSession(ses);
+  }, []);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -78,9 +84,9 @@ const Splash = ({ session }) => {
       .catch((error) => {
         console.log(error);
       });
-	};
+  };
 
-	const handleRegisterWithEmail = (e) => {
+  const handleRegisterWithEmail = (e) => {
     e.preventDefault();
 
     fetch("/api/register", {
@@ -103,185 +109,178 @@ const Splash = ({ session }) => {
           }
         })
       )
-        .catch((error) => {
-          console.log(error);
-        });
-	};
-
-	// console.log(session, "This is the session");
-	// console.log(session.user.name, "This is the name");
-	// console.log(session.user.email, "This is the user's email");
-	// console.log(session.account.accessToken, "This is the account access Token");
-
-	if (!session.user.email) {
-   return (
-     <>
-      <div>
-        <Box display="flex" justifyContent="flex-start" m={2.1}>
-          <Box style={{ marginRight: "auto" }}>
-            <Link href="/">
-              <motion.img
-                src="/dragon.svg"
-                height="60"
-                width="65"
-                style={{ cursor: "pointer" }}
-                whileHover={{ scale: 1.2 }}
-              />
-            </Link>
-          </Box>
-        </Box>
-      </div>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography
-            component="h1"
-            variant="h5"
-            style={{ fontFamily: "Josefin Sans" }}
-          >
-            Registration
-          </Typography>
-          <h3>Please enter an e-mail address and city you would like to work in so recruiters may contact you.</h3>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              color="secondary"
-              placeholder="Your email here"
-              style={{ borderRadius: 3 }}
-            />
-
-						<Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="city"
-                label="City"
-                name="city"
-                color="secondary"
-                placeholder="City you are interested in"
-                // autoComplete="city"
-                // value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </Grid>
-    
-            <Link href="info">
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={handleRegister}
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  if (session) {
+    if (!session.user.email) {
+      return (
+        <>
+          <div>
+            <Box display="flex" justifyContent="flex-start" m={2.1}>
+              <Box style={{ marginRight: "auto" }}>
+                <Link href="/">
+                  <motion.img
+                    src="/dragon.svg"
+                    height="60"
+                    width="65"
+                    style={{ cursor: "pointer" }}
+                    whileHover={{ scale: 1.2 }}
+                  />
+                </Link>
+              </Box>
+            </Box>
+          </div>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography
+                component="h1"
+                variant="h5"
+                style={{ fontFamily: "Josefin Sans" }}
               >
-                Submit
-              </Button>
-            </Link>
-          </form>
-          <h2>{errorMessage}</h2>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
-    </>
-		);
-	} else if (session.user.email) {
+                Registration
+              </Typography>
+              <h3>
+                Please enter an e-mail address and city you would like to work
+                in so recruiters may contact you.
+              </h3>
+              <form className={classes.form} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  color="secondary"
+                  placeholder="Your email here"
+                  style={{ borderRadius: 3 }}
+                />
 
-		return (
-			<>
-				<div>
-					<Box display="flex" justifyContent="flex-start" m={2.1}>
-						<Box style={{ marginRight: "auto" }}>
-							<Link href="/">
-								<motion.img
-									src="/dragon.svg"
-									height="60"
-									width="65"
-									style={{ cursor: "pointer" }}
-									whileHover={{ scale: 1.2 }}
-								/>
-							</Link>
-						</Box>
-					</Box>
-				</div>
-				<Container component="main" maxWidth="xs">
-					<CssBaseline />
-					<div className={classes.paper}>
-						<Avatar className={classes.avatar}>
-							<LockOutlinedIcon />
-						</Avatar>
-						<Typography
-							component="h1"
-							variant="h5"
-							style={{ fontFamily: "Josefin Sans" }}
-						>
-							Registration
-						</Typography>
-						<h3>Please enter a city you would like to work in so recruiters may contact you.</h3>
-						<form className={classes.form} noValidate>
-							<Grid item xs={12}>
-								<TextField
-									variant="outlined"
-									required
-									fullWidth
-									id="city"
-									label="City"
-									name="city"
-									color="secondary"
-									placeholder="City you are interested in"
-									// autoComplete="city"
-									// value={city}
-									onChange={(e) => setCity(e.target.value)}
-								/>
-							</Grid>
-			
-							<Link href="info">
-								<Button
-									type="button"
-									fullWidth
-									variant="contained"
-									color="primary"
-									className={classes.submit}
-									onClick={handleRegisterWithEmail}
-								>
-									Submit
-								</Button>
-							</Link>
-						</form>
-						<h2>{errorMessage}</h2>
-					</div>
-					<Box mt={8}>
-						<Copyright />
-					</Box>
-				</Container>
-			</>
-		);
-	} else {
-		return (
-		  <p>404 does not belong here</p>
-		);
-	}
-}
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="city"
+                    label="City"
+                    name="city"
+                    color="secondary"
+                    placeholder="City you are interested in"
+                    // autoComplete="city"
+                    // value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </Grid>
 
-Splash.getInitialProps = async (context) => {
-		return {
-			session: await getSession(context)
-		}
-}
+                <Link href="info">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={handleRegister}
+                  >
+                    Submit
+                  </Button>
+                </Link>
+              </form>
+              <h2>{errorMessage}</h2>
+            </div>
+            <Box mt={8}>
+              <Copyright />
+            </Box>
+          </Container>
+        </>
+      );
+    } else if (session.user.email) {
+      return (
+        <>
+          <div>
+            <Box display="flex" justifyContent="flex-start" m={2.1}>
+              <Box style={{ marginRight: "auto" }}>
+                <Link href="/">
+                  <motion.img
+                    src="/dragon.svg"
+                    height="60"
+                    width="65"
+                    style={{ cursor: "pointer" }}
+                    whileHover={{ scale: 1.2 }}
+                  />
+                </Link>
+              </Box>
+            </Box>
+          </div>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography
+                component="h1"
+                variant="h5"
+                style={{ fontFamily: "Josefin Sans" }}
+              >
+                Registration
+              </Typography>
+              <h3>
+                Please enter a city you would like to work in so recruiters may
+                contact you.
+              </h3>
+              <form className={classes.form} noValidate>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="city"
+                    label="City"
+                    name="city"
+                    color="secondary"
+                    placeholder="City you are interested in"
+                    // autoComplete="city"
+                    // value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </Grid>
+
+                <Link href="info">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={handleRegisterWithEmail}
+                  >
+                    Submit
+                  </Button>
+                </Link>
+              </form>
+              <h2>{errorMessage}</h2>
+            </div>
+            <Box mt={8}>
+              <Copyright />
+            </Box>
+          </Container>
+        </>
+      );
+    }
+  } else {
+    return <p></p>;
+  }
+};
 
 export default Splash;
